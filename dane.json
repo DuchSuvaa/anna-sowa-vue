@@ -1,0 +1,834 @@
+[
+  {
+    "title": "Krawall",
+    "year": "2015/2016",
+    "media-type": "audio",
+    "music-type": "Orchestral",
+    "link": "https://annasowa.pl/audio/krawall-2015-2016/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1610064036,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Second time...",
+    "year": "2014",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/second-time-2014/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757543,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "An...",
+    "year": "2015",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/an-2015/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757586,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Seh, do, yek...!",
+    "year": "2018",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/seh-do-yek-2018/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757689,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Lass mich heraus!",
+    "year": "2018",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/lass-mich-heraus-2018/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757718,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Message for the Year of the Metal Rat II",
+    "year": "",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/message-for-the-year-of-the-metal-rat-ii/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1610064771,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Faster",
+    "year": "2020",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/faster-2020-semi-improwizowany-utwor-na-zespol-i-elektronike/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757944,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude I",
+    "year": "2021",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/729/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636651488,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude II",
+    "year": "2021",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/reed-interlude-ii-2021/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636651197,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude III",
+    "year": "2021",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/reed-interlude-iii-2021/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636651019,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "smar II",
+    "year": "2021",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/smar-ii/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1670862457,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Diversions\"",
+    "year": "2022",
+    "media-type": "audio",
+    "music-type": "Orchestral",
+    "link": "https://annasowa.pl/audio/diversions/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1679395066,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Minimal Movement",
+    "year": "2022",
+    "media-type": "audio",
+    "music-type": "Chamber",
+    "link": "https://annasowa.pl/audio/minimal-movement-2022/",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1679564768,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Second time...",
+    "year": "2014",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/319502183",
+    "info": "for two accordions",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757543,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Seh, do, yek...!",
+    "year": "2018",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/319487355",
+    "info": "for violin, accordion and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757689,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "...nA",
+    "year": "2016",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/226037939",
+    "info": "for electronics, video and dancers",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757622,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Étouffé - trailer",
+    "year": "2019",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/352295340",
+    "info": "for accordion, violin and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1609862250,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Étouffé",
+    "year": "2019",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/355506179",
+    "info": "for accordion, violin and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757755,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "smar",
+    "year": "2019",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/387055165",
+    "info": "soprano saxophone, double bass, electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757843,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Setz Dich bitte hin",
+    "year": "2019",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/395661238",
+    "info": "ensemble - clarinet, trombone, saxophone, drums (two performers), accordion, viola, double bass, synthesizer",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757874,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Faster",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/355506179",
+    "info": "semi improvised piece for ensemble and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757944,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Faster (version for sax, perc, acc, vln)",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/496218369",
+    "info": "semi improvised piece for sax, perc, acc, vln and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1609864551,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Piece for Saxophone and Violin Player",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/496218369",
+    "info": "two performers",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608758009,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Concert for accordion duo and string orchestra",
+    "year": "2018",
+    "media-type": "video",
+    "music-type": "Orchestral",
+    "link": "https://www.youtube.com/embed/8N7ve5KJTs8",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757461,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Dwelling",
+    "year": "2017",
+    "media-type": "video",
+    "music-type": "Installation",
+    "link": "https://player.vimeo.com/video/232945899",
+    "info": "in cooperation with Xiaole Zhang",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757155,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Erwartung",
+    "year": "2017",
+    "media-type": "video",
+    "music-type": "Installation",
+    "link": "https://player.vimeo.com/video/287883234",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608757199,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "«IT'S ONLY THE END OF THE WORLD« (excerpt)",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/512447675",
+    "info": "musictheather for 7 performers, electronic and video",
+    "description": "",
+    "timestamp": {
+      "seconds": 1613384694,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Message for the Year of the Metal Rat II - version with viola",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/574821756?badge=0&autopause=0&player_id=0&app_id=58479",
+    "info": "for ensemble and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1626259845,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Piece for Saxophone and Violin Player",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/574831348?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for two performers",
+    "description": "",
+    "timestamp": {
+      "seconds": 1608758009,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Z rodziną najlepiej wychodzi się na zdjęciu/ Auf Fotos sieht die Familie am besten aus\"",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/574865952?badge=0&autopause=0&player_id=0&app_id=58479",
+    "info": "for 9 snare drums and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1626263151,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Stillness is the Move",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/575053743?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for archicorgano, e- guitar, perc., two performers",
+    "description": "",
+    "timestamp": {
+      "seconds": 1628581639,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Message for the Year of the Metal Rat II - version with two snare drums",
+    "year": "2020",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/578029513?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for ensemble and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1626959303,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Close Up - instrumental theatre",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/585232568?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for accordion, violin and electronic",
+    "description": "",
+    "timestamp": {
+      "seconds": 1628582071,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude IV",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/640905205?h=3f3855f8bd&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder",
+    "info": "for 3 oboe reeds",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636649309,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"cognition\"",
+    "year": "2023/2024",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/922082577?h=d28e237443",
+    "info": "instrumental theater, perf. KlangLab",
+    "description": "",
+    "timestamp": {
+      "seconds": 1734629015,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude III",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/640905205?h=3f3855f8bd&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder",
+    "info": "for 2 English Horn reeds, electronics, video",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636651019,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude II",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/640903237?h=dbc4224b4f&amp;badge=0&amp;autopause=0&amp;player_id",
+    "info": "for English Horn reed, electronics, video",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636651197,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Reed Interlude I",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/644881600?h=96b5f423f5&amp;badge=0&amp;autopause=0&amp;player_id",
+    "info": "for electronics and video",
+    "description": "",
+    "timestamp": {
+      "seconds": 1636651488,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Le registre symbolique\"",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/673514501?h=fd45861c84&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for 7 performers, electronics, lights and video",
+    "description": "",
+    "timestamp": {
+      "seconds": 1643973372,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "backstage - opera Silenzio/Silence",
+    "year": "2021/2022",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/689683062?h=2b05e26e7d&badge=0&autopause=0&player_id=0&app_id=58479",
+    "info": "",
+    "description": "",
+    "timestamp": {
+      "seconds": 1647610497,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "inside outside",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Installation",
+    "link": "https://player.vimeo.com/video/732005175?h=4be41e18e9",
+    "info": "12-channel sound installation",
+    "description": "",
+    "timestamp": {
+      "seconds": 1658391652,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "LEIBER. Eine Nichtkammeroper Trailer",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/746348708?h=530c2041be&",
+    "info": "Bruchwerk Theater",
+    "description": "",
+    "timestamp": {
+      "seconds": 1662321702,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "Dance ex machina, part II",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/746568286?h=3a78e17253&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for a pianist, dancer and electronics",
+    "description": "",
+    "timestamp": {
+      "seconds": 1662451749,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "smar II",
+    "year": "2021",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/776237053?h=f1b6aff4e4&badge=0&autopause=0&player_id=0&app_id=58479",
+    "info": "for electric guitar, double bass and electronics",
+    "description": "",
+    "timestamp": {
+      "seconds": 1670862457,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Playing in Green\"",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/781549529?h=e98c09b2cc&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=",
+    "info": "for 5 saxophone mouthpieces, 2 saxophone necks and electronics",
+    "description": "",
+    "timestamp": {
+      "seconds": 1671184867,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Land und Blut\" (2022)",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/809472554?h=37e5c6e968&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "audio-visual piece. Anna Sowa -music, Gohar Sargsyan - video",
+    "description": "",
+    "timestamp": {
+      "seconds": 1679228083,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"The Polish Chair\" (2022)",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/809468272?h=b4e874487c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for electric string quartet, electronic and video by Aleksandra Chciuk",
+    "description": "",
+    "timestamp": {
+      "seconds": 1670847913,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Diversions\"",
+    "year": "2022",
+    "media-type": "video",
+    "music-type": "Orchestral",
+    "link": "https://player.vimeo.com/video/823653001?h=6b44c3a2b1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for orchestra, electronics and Grosse Méta-Maxi-Maxi-Utopia by Jean Tinguely",
+    "description": "",
+    "timestamp": {
+      "seconds": 1679395066,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"The Suspense\"",
+    "year": "2022/2023",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/823811570?h=f2152b5fc7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+    "info": "for 8 performers and instruments",
+    "description": "",
+    "timestamp": {
+      "seconds": 1734628280,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"ELOI\"",
+    "year": "2023",
+    "media-type": "video",
+    "music-type": "Installation",
+    "link": "https://player.vimeo.com/video/825930344?h=8830056009&badge=0&autopause=0&player_id=0&app_id=58479/embed\" allow=",
+    "info": "Anna Sowa + Robin Michel",
+    "description": "",
+    "timestamp": {
+      "seconds": 1684238077,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Unspoken\"",
+    "year": "2024",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/968063741?h=efa30/iframe>",
+    "info": "for ensemble and electronics",
+    "description": "",
+    "timestamp": {
+      "seconds": 1734639123,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Rebirth\" for solo flute performer",
+    "year": "(2023/2024)",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1006713040?h=420b37520f",
+    "info": "in collaboration with  Phoebe Bognár",
+    "description": "",
+    "timestamp": {
+      "seconds": 1725883272,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Nach dem Foto feiern wir weiter\"",
+    "year": "2023",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1007643210?h=783b871ca9",
+    "info": "for ensemble",
+    "description": "",
+    "timestamp": {
+      "seconds": 1725884296,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"minimalANIMAL\" (2024) for accordion and electronics",
+    "year": "2024",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1027670811?badge=0&autopause=0&player_id=0&app_id=58479",
+    "info": "Margherita Berlanda - accordion",
+    "description": "",
+    "timestamp": {
+      "seconds": 1731078630,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Bamboo Shoots\"",
+    "year": "2024",
+    "media-type": "video",
+    "music-type": "Installation",
+    "link": "https://player.vimeo.com/video/1042890453?h=cde898be04",
+    "info": "Creation/ Performance: Anna Sowa, Robin Michel, Mao Zhu, Li Kun",
+    "description": "",
+    "timestamp": {
+      "seconds": 1735557620,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Lubricant\" for amplified bass flute and percussion",
+    "year": "2024",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1083302297?h=788627ebc7",
+    "info": "Phoebe Bognár, Mikołaj Rytowski",
+    "description": "",
+    "timestamp": {
+      "seconds": 1746982241,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "minimalANIMAL I for accordion and electronics, miniamalANIMAL II for three accordion reeds, electr",
+    "year": "2024/2025",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1128869689?h=f38a5fb840",
+    "info": "Margherita Berlanda - accordion",
+    "description": "",
+    "timestamp": {
+      "seconds": 1760970398,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Otwarta na 18 ścian\"",
+    "year": "2025",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1137631151?h=f373cf2027",
+    "info": "composition for tenement house, violin, cello, electronics, video, dancer. Composers: Anna Sowa, Kuba Krzewiński, Aleksandra Chciuk",
+    "description": "",
+    "timestamp": {
+      "seconds": 1763043950,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Escape Spaces\"",
+    "year": "2024",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1138410726?h=477aab195f",
+    "info": "3rd movement, Performed by Maria Muñoz Lopez, Cris Arcos Cano",
+    "description": "",
+    "timestamp": {
+      "seconds": 1763548426,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Escape Spaces\"",
+    "year": "2024",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1138408851?h=896c2411ff",
+    "info": "2nd movement,  \"Kitchen\" Teaser, Performed by Anna Sowa, Zaca Maia",
+    "description": "",
+    "timestamp": {
+      "seconds": 1763548426,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Escape Spaces\"",
+    "year": "",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1138259156?h=fa82dec2d6",
+    "info": "1st movement \"Garden\" Teaser, Performed by Tatiana Timonina",
+    "description": "",
+    "timestamp": {
+      "seconds": 1763548426,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Recognition\"",
+    "year": "2025",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1138418454?h=e13be5a1d7",
+    "info": "collaboration with the audio-visual artist Matheus Leston, Performed by KlangLab",
+    "description": "",
+    "timestamp": {
+      "seconds": 1763549443,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Out of tune\" (2025) for two amplified acoustic guitars and electronics",
+    "year": "",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1144479565?h=427295594d",
+    "info": "Performed by Duo Doppio: Jinhee Kim, Damiano Pisanello",
+    "description": "",
+    "timestamp": {
+      "seconds": 1739262169,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "title": "\"Entrecôte\" - for four voices and electronics",
+    "year": "2025",
+    "media-type": "video",
+    "music-type": "Chamber",
+    "link": "https://player.vimeo.com/video/1166967872?h=9a68529297",
+    "info": "Performed by Neue Vokalsolisten Stuttgart",
+    "description": "",
+    "timestamp": {
+      "seconds": 1771690953,
+      "nanoseconds": 0
+    }
+  }
+]
