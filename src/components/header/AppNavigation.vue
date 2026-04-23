@@ -1,6 +1,9 @@
 <template>
   <nav>
+    <RouterLink to="/compositions">Compositions</RouterLink>
+    <RouterLink to="/news">News</RouterLink>
     <RouterLink to="/works">Works</RouterLink>
+    <RouterLink to="/media">Media</RouterLink>
     <RouterLink to="/login">Login</RouterLink>
     <RouterLink to="/admin">Admin</RouterLink>
   </nav>
