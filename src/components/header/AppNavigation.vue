@@ -33,4 +33,12 @@ nav {
     }
   }
 }
+
+@media (max-width: 1100px) {
+  nav {
+    a {
+      margin-right: 0;
+    }
+  }
+}
 </style>
