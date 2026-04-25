@@ -1,15 +1,16 @@
 <template>
   <nav>
-    <RouterLink to="/compositions">Compositions</RouterLink>
-    <RouterLink to="/news">News</RouterLink>
-    <RouterLink to="/works">Works</RouterLink>
-    <RouterLink to="/media">Media</RouterLink>
-    <RouterLink to="/login">Login</RouterLink>
-    <RouterLink to="/admin">Admin</RouterLink>
+    <RouterLink to="/compositions">{{ t('nav.compositions') }}</RouterLink>
+    <RouterLink to="/news">{{ t('nav.news') }}</RouterLink>
+    <RouterLink to="/works">{{ t('nav.works') }}</RouterLink>
+    <RouterLink to="/media">{{ t('nav.media') }}</RouterLink>
   </nav>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 </script>
 

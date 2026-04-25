@@ -28,6 +28,7 @@ import HeaderUtils from './HeaderUtils.vue'
 import HamburgerIcon from '../icons/HamburgerIcon.vue'
 
 const isMenuOpen = ref(false)
+
 </script>
 
 <style lang="scss" scoped>
