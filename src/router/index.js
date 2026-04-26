@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/HomePage.vue'
+import BioPage from '../views/BioPage.vue'
 import CompositionsPage from '../views/CompositionsPage.vue'
 import NewsPage from '../views/NewsPage.vue'
 import MediaPage from '../views/MediaPage.vue'
@@ -31,6 +32,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/biography',
+    name: 'Biography',
+    component: BioPage
   },
   {
     path: '/compositions',
