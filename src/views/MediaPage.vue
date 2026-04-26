@@ -1,15 +1,17 @@
 <template>
   <section id="media">
-    <ul class="media-list" v-if="media && media.length">
-      <li v-for="item in media" :key="item.id">
-        <h2>{{ item.mediumText?.[locale] }}</h2>
-        <a :href="item.mediumLink" target="_blank" v-if="item.mediumLink">
-          Link
-        </a>
-      </li>
-    </ul>
-    <p v-else>No media found</p>
-    <button v-if="hasMore && media.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+    <div class="content">
+      <ul class="media-list" v-if="media && media.length">
+        <li v-for="item in media" :key="item.id">
+          <h2>{{ item.mediumText?.[locale] }}</h2>
+          <a :href="item.mediumLink" target="_blank" v-if="item.mediumLink">
+            Link
+          </a>
+        </li>
+      </ul>
+      <p v-else>No media found</p>
+      <button v-if="hasMore && media.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+    </div>
   </section>
 </template>
 
@@ -41,19 +43,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.load-more-btn {
-  display: block;
-  margin: 2rem auto;
-  padding: 10px 20px;
-  background-color: var(--color-text, #333);
-  color: var(--color-bg, #fff);
-  border: 1px solid var(--color-border, #333);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  
-  &:hover {
-    opacity: 0.8;
-  }
+#media {
+  background-image: url('../public/bg-media.jpg');
 }
 </style>

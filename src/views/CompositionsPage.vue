@@ -1,14 +1,16 @@
 <template>
   <section id="compositions">
-    <ul class="compositions-list" v-if="compositions && compositions.length">
-      <li v-for="composition in compositions" :key="composition.id">
-        <h2>{{ composition.name?.[locale] }}</h2>
-        <p>{{ composition.year }}</p>
-        <p>{{ composition.instrumentation?.[locale] }}</p>
-      </li>
-    </ul>
-    <p v-else>No compositions found</p>
-    <button v-if="hasMore && compositions.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+    <div class="content">
+      <ul class="compositions-list" v-if="compositions && compositions.length">
+        <li v-for="composition in compositions" :key="composition.id">
+          <h2>{{ composition.name?.[locale] }}</h2>
+          <p>{{ composition.year }}</p>
+          <p>{{ composition.instrumentation?.[locale] }}</p>
+        </li>
+      </ul>
+      <p v-else>No compositions found</p>
+      <button v-if="hasMore && compositions.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+    </div>
   </section>
 </template>
 
@@ -40,19 +42,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.load-more-btn {
-  display: block;
-  margin: 2rem auto;
-  padding: 10px 20px;
-  background-color: var(--color-text, #333);
-  color: var(--color-bg, #fff);
-  border: 1px solid var(--color-border, #333);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  
-  &:hover {
-    opacity: 0.8;
-  }
+#compositions {
+  background-image: url('../public/bg-compositions.jpg');
 }
 </style>

@@ -1,15 +1,17 @@
 <template>
   <section id="news">
-    <ul class="news-list" v-if="news && news.length">
-      <li v-for="item in news" :key="item.id">
-        <h2>{{ item.time?.[locale] }}</h2>
-        <p>{{ item.venue?.[locale] }}</p>
-        <p>{{ item.description?.[locale] }}</p>
-        <p>{{ item.performed?.[locale] }}</p>
-      </li>
-    </ul>
-    <p v-else>No news found</p>
-    <button v-if="hasMore && news.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+    <div class="content">
+      <ul class="news-list" v-if="news && news.length">
+        <li v-for="item in news" :key="item.id">
+          <h2>{{ item.time?.[locale] }}</h2>
+          <p>{{ item.venue?.[locale] }}</p>
+          <p>{{ item.description?.[locale] }}</p>
+          <p>{{ item.performed?.[locale] }}</p>
+        </li>
+      </ul>
+      <p v-else>No news found</p>
+      <button v-if="hasMore && news.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+    </div>
   </section>
 </template>
 
@@ -41,19 +43,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.load-more-btn {
-  display: block;
-  margin: 2rem auto;
-  padding: 10px 20px;
-  background-color: var(--color-text, #333);
-  color: var(--color-bg, #fff);
-  border: 1px solid var(--color-border, #333);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  
-  &:hover {
-    opacity: 0.8;
-  }
+#news {
+  background-image: url('../public/bg-news.jpg');
 }
 </style>

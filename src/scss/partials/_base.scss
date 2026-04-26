@@ -69,3 +69,37 @@ input[type="password"] {
     outline: none;
   }
 }
+
+section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  .content {
+    padding: 4rem 8rem;
+    height: 80vh;
+    width: 90vw;
+    margin: auto;
+    max-width: 124rem;
+    background-color: rgba(255,255,255,.8);
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+.load-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 10px 20px;
+  background-color: var(--color-text, #333);
+  color: var(--color-bg, #fff);
+  border: 1px solid var(--color-border, #333);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
