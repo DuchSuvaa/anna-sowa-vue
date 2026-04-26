@@ -13,4 +13,9 @@
 
 header {
   flex-shrink: 0;
+  height: $header-height;
+}
+
+section {
+  height: calc(100vh - $header-height);
 }

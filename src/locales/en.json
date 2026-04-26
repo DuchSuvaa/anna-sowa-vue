@@ -6,5 +6,10 @@
     "media": "Media",
     "works": "Works",
     "gallery": "Gallery"
+  },
+  "home": {
+    "composer": "Composer",
+    "photographer": "photo: Michał Mikulski",
+    "button-more": "More..."
   }
 }

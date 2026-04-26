@@ -6,5 +6,10 @@
     "media": "Media",
     "works": "Prace",
     "gallery": "Galeria"
+  },
+  "home": {
+    "composer": "Kompozytorka",
+    "photographer": "foto: Michał Mikulski",
+    "button-more": "Więcej..."
   }
 }

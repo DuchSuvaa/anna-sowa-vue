@@ -34,8 +34,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/biography',
-    name: 'Biography',
+    path: '/bio',
+    name: 'Bio',
     component: BioPage
   },
   {
