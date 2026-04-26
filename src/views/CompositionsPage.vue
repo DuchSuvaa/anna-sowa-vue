@@ -9,7 +9,7 @@
         </li>
       </ul>
       <p v-else>No compositions found</p>
-      <button v-if="hasMore && compositions.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+      <button v-if="hasMore && compositions.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }}</button>
     </div>
   </section>
 </template>

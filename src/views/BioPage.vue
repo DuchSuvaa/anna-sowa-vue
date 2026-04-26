@@ -29,7 +29,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 #biography {
-  background-image: url('../public/bg-bio.jpg');
+  background-image: url('/bg-bio.jpg');
 }
 
 .bio-sections {

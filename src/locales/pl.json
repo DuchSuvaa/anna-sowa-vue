@@ -1,4 +1,7 @@
 {
+  "general": {
+    "load-more": "Załaduj więcej"
+  },
   "nav": {
     "bio": "Bio",
     "compositions": "Kompozycje",

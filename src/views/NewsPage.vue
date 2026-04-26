@@ -10,7 +10,7 @@
         </li>
       </ul>
       <p v-else>No news found</p>
-      <button v-if="hasMore && news.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+      <button v-if="hasMore && news.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
     </div>
   </section>
 </template>

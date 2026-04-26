@@ -9,7 +9,7 @@
         </div>
       </div>
       <p v-else>No works found</p>
-      <button v-if="hasMore && works.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
+      <button v-if="hasMore && works.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
     </div>
   </section>
 </template>
