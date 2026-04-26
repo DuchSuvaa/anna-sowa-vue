@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import router from '../router/index.js'
 import { db, auth } from '../firebase/config.js'
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, query, orderBy, limit, startAfter } from 'firebase/firestore'
 
 export const useStore = defineStore('main', () => {
   // State
@@ -65,7 +65,42 @@ export const useStore = defineStore('main', () => {
     return processedDocs
   }
 
+  const getPaginatedCollection = async (colName: string, lastVisibleDoc: any = null, limitCount: number = 10, sortField: string | null = 'timestamp', sortDir: 'asc' | 'desc' = 'desc', ...otherLevels: any[]) => {
+    const processedDocs: any[] = []
+    let lastVisible = null
+    try {
+      let q
+      const collectionRef = collection(db, colName, ...otherLevels)
+      
+      let queryConstraints = []
+      if (sortField) {
+        queryConstraints.push(orderBy(sortField, sortDir))
+      }
+      
+      if (lastVisibleDoc) {
+        queryConstraints.push(startAfter(lastVisibleDoc))
+      }
+      
+      queryConstraints.push(limit(limitCount))
+      
+      q = query(collectionRef, ...queryConstraints)
+      
+      const documentSnapshots = await getDocs(q)
+      
+      documentSnapshots.forEach(doc => {
+        processedDocs.push({ ...(doc.data() as object), id: doc.id })
+      })
+      
+      if (documentSnapshots.docs.length > 0) {
+        lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
+      }
+    } catch (err) {
+      setError(err)
+    }
+    return { docs: processedDocs, lastVisible }
+  }
+
   return {
-    error, notification, things, user, setError, setNotification, login, logout, getDocument, getCollection
+    error, notification, things, user, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection
   }
 })

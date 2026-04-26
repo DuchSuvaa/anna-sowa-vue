@@ -9,6 +9,7 @@
       </li>
     </ul>
     <p v-else>No news found</p>
+    <button v-if="hasMore && news.length" @click="loadMore" class="load-more-btn">Załaduj więcej</button>
   </section>
 </template>
 
@@ -20,12 +21,39 @@ import { useI18n } from 'vue-i18n'
 const { locale } = useI18n()
 const store = useStore()
 const news = ref([])
+const lastDoc = ref(null)
+const hasMore = ref(true)
+
+const loadMore = async () => {
+  const result = await store.getPaginatedCollection('news', lastDoc.value, 10, 'timestamp')
+  if (result.docs.length > 0) {
+    news.value.push(...result.docs)
+    lastDoc.value = result.lastVisible
+  }
+  if (result.docs.length < 10) {
+    hasMore.value = false
+  }
+}
 
 onMounted(async () => {
-  news.value = await store.getCollection('news')
+  await loadMore()
 })
 </script>
 
 <style lang="scss" scoped>
-
+.load-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 10px 20px;
+  background-color: var(--color-text, #333);
+  color: var(--color-bg, #fff);
+  border: 1px solid var(--color-border, #333);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
 </style>
