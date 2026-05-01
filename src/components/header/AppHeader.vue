@@ -84,7 +84,7 @@ header {
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   header {
     .hamburger {
       display: flex;

@@ -1,6 +1,10 @@
 <template>
   <section id="home">
-    <div class="home__slider">
+    <div 
+      class="home__slider"
+      @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd"
+    >
       <div 
         class="slider__track" 
         :style="{ transform: `translateX(-${current * 100}%)` }"
@@ -10,7 +14,7 @@
             <div class="welcome-content">
               <h1>Anna Sowa</h1>
               <p>{{ t('home.composer') }}</p>
-              <div>
+              <div class="social-links">
                 <a href="https://www.facebook.com/anna.sowa.39" target="_blank">
                   <FacebookIcon type="filled" />
                 </a>
@@ -30,7 +34,7 @@
                   <SoundCloudIcon class="icon-enlarged" type="filled" />
                 </a>
               </div>
-              <span>{{ t('home.photographer') }}</span>
+              <span class="photographer-note">{{ t('home.photographer') }}</span>
             </div>
           </template>
         </SliderItem>
@@ -42,6 +46,16 @@
       <button v-if="current < slides.length - 1" class="arrow arrow-right" @click="next">
         &#8594;
       </button>
+
+      <div class="slider-dots">
+        <span 
+          v-for="(_, index) in slides" 
+          :key="index"
+          class="dot"
+          :class="{ active: current === index }"
+          @click="current = index"
+        ></span>
+      </div>
     </div>
   </section>
 </template>
@@ -68,19 +82,48 @@ const next = () => {
 const prev = () => {
   if (current.value > 0) current.value--
 }
+
+// Swipe handling logic
+const touchStartX = ref(0)
+const touchEndX = ref(0)
+
+const handleTouchStart = (e) => {
+  touchStartX.value = e.changedTouches[0].screenX
+}
+
+const handleTouchEnd = (e) => {
+  touchEndX.value = e.changedTouches[0].screenX
+  handleSwipe()
+}
+
+const handleSwipe = () => {
+  const swipeThreshold = 50
+  const diff = touchStartX.value - touchEndX.value
+  
+  if (Math.abs(diff) > swipeThreshold) {
+    if (diff > 0) {
+      next()
+    } else {
+      prev()
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .home__slider {
   height: calc(100vh - $header-height);
   width: 100%;
-  overflow: hidden;;
+  overflow: hidden;
+  position: relative;
+
   .slider__track {
     display: flex;
     height: 100%;
     width: 100%;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   .arrow {
     position: absolute;
     top: 50%;
@@ -99,12 +142,38 @@ const prev = () => {
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
+
     &:hover {
       background: rgba(255, 255, 255, 0.4);
       transform: translateY(-50%) scale(1.1);
     }
+
     &-left { left: 2rem; }
     &-right { right: 2rem; }
+  }
+
+  .slider-dots {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 1.5rem;
+    z-index: 10;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.active {
+        background: white;
+        transform: scale(1.3);
+      }
+    }
   }
 }
 
@@ -112,40 +181,107 @@ const prev = () => {
   color: white;
   text-align: left;
   position: absolute;
-  bottom: 0;
+  bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
   max-width: 1240px;
-  margin-bottom: 2rem;
   z-index: 5;
 
   h1 {
     font-size: 7rem;
     margin: 0;
     font-weight: 400;
+    line-height: 1;
   }
+
   p {
     font-size: 3.5rem;
     letter-spacing: 0.5rem;
-    margin: -1.5rem 0 1.5rem;
+    margin: 0 0 1.5rem;
+    line-height: 1;
   }
-  div {
+
+  .social-links {
     font-size: 4rem;
+    display: flex;
+    align-items: center;
+
     a {
       color: $white;
       margin-right: 2rem;
       transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+
       &:hover {
         opacity: 0.7;
       }
+
       .icon-enlarged {
         font-size: 5.2rem;
-        margin-bottom: -0.6rem;
       }
+
       &:last-child {
         margin-right: 0;
       }
+    }
+  }
+
+  .photographer-note {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 1000px) {
+  .home__slider {
+    .arrow {
+      display: none;
+    }
+
+    .slider-dots {
+      display: flex;
+    }
+  }
+
+  .welcome-content {
+    bottom: 6rem;
+    width: 95%;
+
+    h1 {
+      font-size: 4.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 2rem;
+      letter-spacing: 0.2rem;
+      margin: 0 0 2rem;
+    }
+
+    .social-links {
+      font-size: 2.2rem;
+      a {
+        margin: 0 0.8rem;
+        .icon-enlarged {
+          font-size: 2.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-content {
+    h1 {
+      font-size: 2.8rem;
+    }
+    p {
+      font-size: 1.3rem;
+      letter-spacing: 0.1rem;
     }
   }
 }
