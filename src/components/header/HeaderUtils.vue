@@ -51,14 +51,14 @@ div.social {
     }
     &:last-child {
       margin-right: 0;
-      padding-bottom: 5px;
+      padding-bottom: 0.5rem;
     }
     &:nth-child(3) {
       width: 2.8rem;
     }
   }
   a:last-child {
-    width: 32px;
+    width: 3.2rem;
   }
   a:hover {
     img {
@@ -66,8 +66,8 @@ div.social {
     }
   }
   .lang {
-    height: 30px;
-    width: 27px;
+    height: 3rem;
+    width: 2.7rem;
     overflow: hidden;
     position: relative;
     cursor: pointer;
@@ -87,7 +87,7 @@ div.social {
   }
   .lang:hover {
     > div {
-      bottom: -26px;
+      bottom: -2.6rem;
     }
   }
 }

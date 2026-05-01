@@ -40,7 +40,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 #works {
-  background-image: url('../public/bg-works.jpg');
+  background-image: url('/bg-works.jpg');
   .content {
     div {
       h2 {

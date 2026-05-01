@@ -162,8 +162,8 @@ const handleSwipe = () => {
     z-index: 10;
 
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 1rem;
+      height: 1rem;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.4);
       cursor: pointer;
@@ -185,7 +185,7 @@ const handleSwipe = () => {
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
-  max-width: 1240px;
+  max-width: 124rem;
   z-index: 5;
 
   h1 {
@@ -236,7 +236,7 @@ const handleSwipe = () => {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 100rem) {
   .home__slider {
     .arrow {
       display: none;
@@ -274,7 +274,7 @@ const handleSwipe = () => {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 48rem) {
   .welcome-content {
     h1 {
       font-size: 2.8rem;

@@ -36,9 +36,9 @@ header {
   width: 100%;
   > div {
     width: 90%;
-    max-width: 1240px;
+    max-width: 124rem;
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 1rem 0;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -84,7 +84,7 @@ header {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 100rem) {
   header {
     .hamburger {
       display: flex;
@@ -110,7 +110,7 @@ header {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(-20px);
+      transform: translateY(-2rem);
       transition: all 0.3s ease-in-out;
       
       &.is-open {

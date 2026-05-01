@@ -1,6 +1,11 @@
 <template>
   <section id="compositions">
     <div class="content">
+      <div class="sort-controls" v-if="compositions && compositions.length">
+        <button class="sort-btn" @click="toggleSort">
+          Sort: {{ sortDirection === 'asc' ? 'Latest first' : 'Oldest first' }}
+        </button>
+      </div>
       <ul class="compositions-list" v-if="compositions && compositions.length">
         <li v-for="composition in compositions" :key="composition.id">
           <h2>{{ composition.name?.[locale] }}</h2>
@@ -24,9 +29,18 @@ const store = useStore()
 const compositions = ref([])
 const lastDoc = ref(null)
 const hasMore = ref(true)
+const sortDirection = ref('asc')
+
+const toggleSort = async () => {
+  sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
+  compositions.value = []
+  lastDoc.value = null
+  hasMore.value = true
+  await loadMore()
+}
 
 const loadMore = async () => {
-  const result = await store.getPaginatedCollection('compositions', lastDoc.value, 10, 'timestamp')
+  const result = await store.getPaginatedCollection('compositions', lastDoc.value, 10, 'order', sortDirection.value)
   if (result.docs.length > 0) {
     compositions.value.push(...result.docs)
     lastDoc.value = result.lastVisible
@@ -43,6 +57,27 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 #compositions {
-  background-image: url('../public/bg-compositions.jpg');
+  background-image: url('/bg-compositions.jpg');
+}
+
+.sort-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+  
+  .sort-btn {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+    }
+  }
 }
 </style>

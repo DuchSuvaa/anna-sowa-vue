@@ -36,7 +36,7 @@ nav {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 100rem) {
   nav {
     a {
       margin-right: 0;

@@ -40,7 +40,7 @@ const bgImage = computed(() => `url('/bg-${props.name}.jpg')`)
     a {
       display: block;
       height: 6rem;
-      width: 200px;
+      width: 20rem;
       border-radius: 3px;
       border: 1px solid transparent;
       background-color: #9d6044;
