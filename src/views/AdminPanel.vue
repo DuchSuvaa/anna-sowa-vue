@@ -24,7 +24,13 @@
       <main class="main-content">
         <!-- Drill-down Edit Mode -->
         <div v-if="editingItem" class="edit-view">
+          <AdminGalleryEditor 
+            v-if="currentCollectionId === 'galleries'"
+            :item="editingItem" 
+            @back="editingItem = null" 
+          />
           <AdminEditor 
+            v-else
             :item="editingItem" 
             :collectionName="currentCollectionId" 
             @back="editingItem = null" 
@@ -55,6 +61,7 @@ import { ref, computed, watch } from 'vue'
 import { useStore } from '../pinia/store'
 import AdminListItems from '../components/admin/AdminListItems.vue'
 import AdminEditor from '../components/admin/AdminEditor.vue'
+import AdminGalleryEditor from '../components/admin/AdminGalleryEditor.vue'
 
 const store = useStore()
 const currentView = ref('settings')
@@ -72,7 +79,8 @@ const navItems = [
   { id: 'compositions', label: 'Compositions', collection: true },
   { id: 'news', label: 'News', collection: true },
   { id: 'media', label: 'Media', collection: true },
-  { id: 'works', label: 'Works', collection: true }
+  { id: 'works', label: 'Works', collection: true },
+  { id: 'galleries', label: 'Galleries', collection: true }
 ]
 
 const currentNavItem = computed(() => navItems.find(item => item.id === currentView.value))

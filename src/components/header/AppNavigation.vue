@@ -5,6 +5,7 @@
     <RouterLink to="/news">{{ t('nav.news') }}</RouterLink>
     <RouterLink to="/media">{{ t('nav.media') }}</RouterLink>
     <RouterLink to="/works">{{ t('nav.works') }}</RouterLink>
+    <RouterLink to="/gallery">{{ t('nav.gallery') }}</RouterLink>
   </nav>
 </template>
 

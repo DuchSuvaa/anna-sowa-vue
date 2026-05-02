@@ -72,7 +72,7 @@ import SoundCloudIcon from '../components/icons/SoundCloud.vue'
 
 const { t } = useI18n()
 
-const slides = ref([ 'home', 'bio', 'compositions', 'news', 'media', 'works' ])
+const slides = ref([ 'home', 'bio', 'compositions', 'news', 'media', 'works', 'gallery' ])
 const current = ref(0)
 
 const next = () => {

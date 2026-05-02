@@ -5,6 +5,8 @@ import CompositionsPage from '../views/CompositionsPage.vue'
 import NewsPage from '../views/NewsPage.vue'
 import MediaPage from '../views/MediaPage.vue'
 import WorksPage from '../views/WorksPage.vue'
+import GalleryPage from '../views/GalleryPage.vue'
+import GalleryAlbumPage from '../views/GalleryAlbumPage.vue'
 import Login from '../views/LoginPage.vue'
 import Admin from '../views/AdminPanel.vue'
 import { auth } from '../firebase/config.js'
@@ -57,6 +59,16 @@ const routes = [
     path: '/works',
     name: 'Works',
     component: WorksPage
+  },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: GalleryPage
+  },
+  {
+    path: '/gallery/:id',
+    name: 'GalleryAlbum',
+    component: GalleryAlbumPage
   },
   {
     path: '/login',

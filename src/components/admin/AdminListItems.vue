@@ -1,6 +1,9 @@
 <template>
   <div class="admin-list">
-    <h2>{{ title }}</h2>
+    <div class="list-title-bar">
+      <h2>{{ title }}</h2>
+      <button class="add-new-btn" @click="$emit('edit-item', {})">+ Add New</button>
+    </div>
     <div v-if="loading">Loading...</div>
     <div v-else-if="items.length === 0">No items found.</div>
     <div v-else>
@@ -114,17 +117,34 @@ const onDragEnd = async () => {
 <style lang="scss" scoped>
 .admin-list {
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  height: 100%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  overflow-y: auto;
-  
-  h2 {
-    margin-top: 0;
+    
+  .list-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
-    font-size: 2.4rem;
-    color: #333;
+    
+    h2 {
+      margin: 0;
+      font-size: 2.4rem;
+      color: #333;
+    }
+
+    .add-new-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
   }
 }
 

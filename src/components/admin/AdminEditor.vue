@@ -68,7 +68,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { db } from '../../firebase/config'
-import { doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc, collection, setDoc } from 'firebase/firestore'
 
 const props = defineProps({
   item: {
@@ -210,10 +210,17 @@ const goBack = () => {
 const saveChanges = async () => {
   saving.value = true
   try {
-    const docRef = doc(db, props.collectionName, props.item.id)
+    let docRef
+    const isNew = !props.item.id
     
-    // Create an update object reflecting only what changed, 
-    // or just pass the full editData without the id
+    if (isNew) {
+      docRef = doc(collection(db, props.collectionName))
+      editData.value.id = docRef.id
+      editData.value.order = 999 // Default to end of list
+    } else {
+      docRef = doc(db, props.collectionName, props.item.id)
+    }
+    
     const payload = { ...editData.value }
     delete payload.id
     
@@ -230,10 +237,14 @@ const saveChanges = async () => {
         payload.title = payload.name || payload.title
     }
 
-    await updateDoc(docRef, payload)
+    if (isNew) {
+      await setDoc(docRef, payload)
+    } else {
+      await updateDoc(docRef, payload)
+    }
     
     // Update local state to avoid reload issues
-    Object.assign(props.item, payload)
+    Object.assign(props.item, editData.value)
     originalDataString = JSON.stringify(editData.value)
     
     alert('Changes saved successfully!')
@@ -250,10 +261,6 @@ const saveChanges = async () => {
 <style lang="scss" scoped>
 .admin-editor {
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  height: 100%;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
