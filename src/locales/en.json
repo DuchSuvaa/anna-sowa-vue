@@ -58,6 +58,7 @@
       "time": "Time",
       "venue": "Venue",
       "description": "Description",
+      "header": "Heading",
       "performed": "Performed by",
       "title": "Title",
       "content": "Content",

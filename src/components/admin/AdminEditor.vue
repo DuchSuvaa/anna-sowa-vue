@@ -27,6 +27,8 @@
             class="form-control"
             :class="{ 'is-invalid': errors[field.key] }"
           />
+
+          <p v-if="field.help" class="help-text">{{ field.help }}</p>
           
           <!-- Textarea -->
           <textarea 
@@ -113,12 +115,14 @@ let originalDataString = ''
 // Definition of form fields per collection
 const schemas = computed(() => ({
   biography: [
-    { key: 'en.title', label: `${t('admin.fields.title')} (EN)`, type: 'text', required: true },
-    { key: 'pl.title', label: `${t('admin.fields.title')} (PL)`, type: 'text', required: true },
+    { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
+    { key: 'en.header', label: `${t('admin.fields.header')} (EN)`, type: 'text', required: true },
+    { key: 'pl.header', label: `${t('admin.fields.header')} (PL)`, type: 'text', required: true },
     { key: 'en.text', label: `${t('admin.fields.content')} (EN)`, type: 'text-array', required: true },
     { key: 'pl.text', label: `${t('admin.fields.content')} (PL)`, type: 'text-array', required: true },
   ],
   compositions: [
+    { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'name.en', label: `${t('admin.fields.name')} (EN)`, type: 'text', required: true },
     { key: 'name.pl', label: `${t('admin.fields.name')} (PL)`, type: 'text', required: true },
     { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
@@ -127,6 +131,7 @@ const schemas = computed(() => ({
     { key: 'type', label: t('admin.fields.type'), type: 'select', options: ['Orchestral', 'Chamber', 'Solo', 'Installations', 'Dance', 'Children'], required: true },
   ],
   news: [
+    { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'time.en', label: `${t('admin.fields.time')} (EN)`, type: 'text' },
     { key: 'time.pl', label: `${t('admin.fields.time')} (PL)`, type: 'text' },
     { key: 'venue.en', label: `${t('admin.fields.venue')} (EN)`, type: 'text' },
@@ -137,11 +142,13 @@ const schemas = computed(() => ({
     { key: 'performed.pl', label: `${t('admin.fields.performed')} (PL)`, type: 'textarea' },
   ],
   media: [
+    { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'mediumText.en', label: `${t('admin.fields.mediumText')} (EN)`, type: 'text', required: true },
     { key: 'mediumText.pl', label: `${t('admin.fields.mediumText')} (PL)`, type: 'text', required: true },
     { key: 'mediumLink', label: t('admin.fields.link'), type: 'text', pattern: 'url' }
   ],
   works: [
+    { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'name', label: t('admin.fields.name'), type: 'text', required: true },
     { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
     { key: 'media-type', label: t('admin.fields.media-type'), type: 'select', options: ['audio', 'video'], required: true },
@@ -167,7 +174,18 @@ function cloneDeep(obj) {
 }
 
 onMounted(() => {
-  editData.value = cloneDeep(props.item)
+  const data = cloneDeep(props.item)
+  
+  // Ensure title/identifier exists for all collections
+  if (!data.title) {
+    if (props.collectionName === 'biography') data.title = getNested(data, 'en.header') || getNested(data, 'en.title')
+    else if (props.collectionName === 'compositions') data.title = getNested(data, 'name.en')
+    else if (props.collectionName === 'news') data.title = getNested(data, 'description.en')
+    else if (props.collectionName === 'media') data.title = getNested(data, 'mediumText.en')
+    else if (props.collectionName === 'works') data.title = data.name
+  }
+
+  editData.value = data
   originalDataString = JSON.stringify(editData.value)
 })
 
@@ -307,18 +325,8 @@ const saveChanges = async () => {
     const payload = { ...editData.value }
     delete payload.id
     
-    // We update the universal title too so Admin panel stays in sync!
-    if (props.collectionName === 'biography') {
-        payload.title = getNested(payload, 'en.title') || payload.title
-    } else if (props.collectionName === 'compositions') {
-        payload.title = getNested(payload, 'name.en') || payload.title
-    } else if (props.collectionName === 'news') {
-        payload.title = getNested(payload, 'description.en') || payload.title
-    } else if (props.collectionName === 'media') {
-        payload.title = getNested(payload, 'mediumText.en') || payload.title
-    } else if (props.collectionName === 'works') {
-        payload.title = payload.name || payload.title
-    }
+    // title/identifier is now part of the payload from schemas, 
+    // so it doesn't need to be manually assigned here anymore.
 
     if (isNew) {
       await setDoc(docRef, payload)
@@ -415,6 +423,12 @@ const saveChanges = async () => {
     font-weight: 600;
     color: #444;
     font-size: 1.5rem;
+  }
+  
+  .help-text {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
   }
 }
 

@@ -3,7 +3,7 @@
     <div class="content">
       <div v-if="sections.length" class="bio-sections">
         <div v-for="section in sections" :key="section.id" class="bio-section">
-          <h2>{{ section[locale]?.title }}</h2>
+          <h2>{{ section[locale]?.header }}</h2>
           <p v-for="(para, i) in section[locale]?.text" :key="i">{{ para }}</p>
         </div>
       </div>
