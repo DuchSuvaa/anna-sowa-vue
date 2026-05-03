@@ -125,6 +125,10 @@ const handleKeydown = (e) => {
 </script>
 
 <style lang="scss" scoped>
+.gallery-album-page {
+  background-image: url('/bg-gallery.jpg');
+}
+
 .header-nav {
   margin-bottom: 2rem;
 }
@@ -147,12 +151,14 @@ const handleKeydown = (e) => {
 
 /* CSS Masonry */
 .masonry-grid {
-  column-count: 1;
-  column-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
   padding-bottom: 4rem;
+  align-items: start;
   
-  @media (min-width: 600px) { column-count: 2; }
-  @media (min-width: 1000px) { column-count: 3; }
+  @media (min-width: 600px) { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1000px) { grid-template-columns: repeat(3, 1fr); }
 }
 
 .masonry-item {
