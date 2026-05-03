@@ -2,15 +2,15 @@
   <div class="admin-editor">
     <div class="editor-header">
       <button class="back-btn" @click="goBack">
-        <span class="arrow">←</span> Back to list
+        <span class="arrow">←</span> {{ $t('admin.back-to-list') }}
       </button>
-      <h2>Editing: {{ item.title || item.name || 'Post' }}</h2>
+      <h2>{{ $t('admin.editing') }}: {{ item.title || item.name || 'Post' }}</h2>
     </div>
 
     <div class="editor-content">
       <!-- Read-only Timestamp Display -->
       <div class="meta-info" v-if="item.timestamp">
-        <p class="timestamp">Date added: {{ formatDate(item.timestamp) }}</p>
+        <p class="timestamp">{{ $t('admin.date-added') }}: {{ formatDate(item.timestamp) }}</p>
       </div>
 
       <form @submit.prevent="saveChanges" class="edit-form" v-if="currentSchema">
@@ -44,16 +44,16 @@
                 class="form-control"
                 rows="4"
               ></textarea>
-              <button type="button" class="action-btn remove-btn" @click="removeArrayItem(field.key, index)">Remove Paragraph</button>
+              <button type="button" class="action-btn remove-btn" @click="removeArrayItem(field.key, index)">{{ $t('admin.remove-paragraph') }}</button>
             </div>
-            <button type="button" class="action-btn add-btn" @click="addArrayItem(field.key)">+ Add another paragraph</button>
+            <button type="button" class="action-btn add-btn" @click="addArrayItem(field.key)">+ {{ $t('admin.add-another') }}</button>
           </div>
         </div>
 
         <div class="editor-actions">
-          <button type="button" class="cancel-btn" @click="goBack">Cancel</button>
+          <button type="button" class="cancel-btn" @click="goBack">{{ $t('admin.cancel') }}</button>
           <button type="submit" class="save-btn" :disabled="saving">
-            {{ saving ? 'Saving...' : 'Save Changes' }}
+            {{ saving ? $t('admin.saving') : $t('admin.save-changes') }}
           </button>
         </div>
       </form>
@@ -67,6 +67,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { db } from '../../firebase/config'
 import { doc, updateDoc, collection, setDoc } from 'firebase/firestore'
 
@@ -83,53 +84,54 @@ const props = defineProps({
 
 const emit = defineEmits(['back'])
 
+const { t } = useI18n()
 const saving = ref(false)
 const editData = ref({})
 let originalDataString = ''
 
 // Definition of form fields per collection
-const schemas = {
+const schemas = computed(() => ({
   biography: [
-    { key: 'en.title', label: 'Title (EN)', type: 'text' },
-    { key: 'pl.title', label: 'Title (PL)', type: 'text' },
-    { key: 'en.text', label: 'Content Paragraphs (EN)', type: 'text-array' },
-    { key: 'pl.text', label: 'Content Paragraphs (PL)', type: 'text-array' },
+    { key: 'en.title', label: `${t('admin.fields.title')} (EN)`, type: 'text' },
+    { key: 'pl.title', label: `${t('admin.fields.title')} (PL)`, type: 'text' },
+    { key: 'en.text', label: `${t('admin.fields.content')} (EN)`, type: 'text-array' },
+    { key: 'pl.text', label: `${t('admin.fields.content')} (PL)`, type: 'text-array' },
   ],
   compositions: [
-    { key: 'name.en', label: 'Name (EN)', type: 'text' },
-    { key: 'name.pl', label: 'Name (PL)', type: 'text' },
-    { key: 'year', label: 'Year', type: 'text' },
-    { key: 'instrumentation.en', label: 'Instrumentation (EN)', type: 'text' },
-    { key: 'instrumentation.pl', label: 'Instrumentation (PL)', type: 'text' },
-    { key: 'type', label: 'Type', type: 'text' },
+    { key: 'name.en', label: `${t('admin.fields.name')} (EN)`, type: 'text' },
+    { key: 'name.pl', label: `${t('admin.fields.name')} (PL)`, type: 'text' },
+    { key: 'year', label: t('admin.fields.year'), type: 'text' },
+    { key: 'instrumentation.en', label: `${t('admin.fields.instrumentation')} (EN)`, type: 'text' },
+    { key: 'instrumentation.pl', label: `${t('admin.fields.instrumentation')} (PL)`, type: 'text' },
+    { key: 'type', label: t('admin.fields.type'), type: 'text' },
   ],
   news: [
-    { key: 'time.en', label: 'Time (EN)', type: 'text' },
-    { key: 'time.pl', label: 'Time (PL)', type: 'text' },
-    { key: 'venue.en', label: 'Venue (EN)', type: 'text' },
-    { key: 'venue.pl', label: 'Venue (PL)', type: 'text' },
-    { key: 'description.en', label: 'Description (EN)', type: 'textarea' },
-    { key: 'description.pl', label: 'Description (PL)', type: 'textarea' },
-    { key: 'performed.en', label: 'Performed By (EN)', type: 'textarea' },
-    { key: 'performed.pl', label: 'Performed By (PL)', type: 'textarea' },
+    { key: 'time.en', label: `${t('admin.fields.time')} (EN)`, type: 'text' },
+    { key: 'time.pl', label: `${t('admin.fields.time')} (PL)`, type: 'text' },
+    { key: 'venue.en', label: `${t('admin.fields.venue')} (EN)`, type: 'text' },
+    { key: 'venue.pl', label: `${t('admin.fields.venue')} (PL)`, type: 'text' },
+    { key: 'description.en', label: `${t('admin.fields.description')} (EN)`, type: 'textarea' },
+    { key: 'description.pl', label: `${t('admin.fields.description')} (PL)`, type: 'textarea' },
+    { key: 'performed.en', label: `${t('admin.fields.performed')} (EN)`, type: 'textarea' },
+    { key: 'performed.pl', label: `${t('admin.fields.performed')} (PL)`, type: 'textarea' },
   ],
   media: [
-    { key: 'mediumText.en', label: 'Medium Text (EN)', type: 'text' },
-    { key: 'mediumText.pl', label: 'Medium Text (PL)', type: 'text' },
-    { key: 'mediumLink', label: 'Link', type: 'text' }
+    { key: 'mediumText.en', label: `${t('admin.fields.mediumText')} (EN)`, type: 'text' },
+    { key: 'mediumText.pl', label: `${t('admin.fields.mediumText')} (PL)`, type: 'text' },
+    { key: 'mediumLink', label: t('admin.fields.link'), type: 'text' }
   ],
   works: [
-    { key: 'name', label: 'Name', type: 'text' },
-    { key: 'year', label: 'Year', type: 'text' },
-    { key: 'media-type', label: 'Media Type', type: 'text' },
-    { key: 'music-type', label: 'Music Type', type: 'text' },
-    { key: 'link', label: 'Link', type: 'text' },
-    { key: 'info', label: 'Info', type: 'textarea' },
-    { key: 'description', label: 'Description', type: 'textarea' },
+    { key: 'name', label: t('admin.fields.name'), type: 'text' },
+    { key: 'year', label: t('admin.fields.year'), type: 'text' },
+    { key: 'media-type', label: t('admin.fields.media-type'), type: 'text' },
+    { key: 'music-type', label: t('admin.fields.music-type'), type: 'text' },
+    { key: 'link', label: t('admin.fields.link'), type: 'text' },
+    { key: 'info', label: t('admin.fields.info'), type: 'textarea' },
+    { key: 'description', label: t('admin.fields.description'), type: 'textarea' },
   ]
-}
+}))
 
-const currentSchema = computed(() => schemas[props.collectionName])
+const currentSchema = computed(() => schemas.value[props.collectionName])
 
 // Deep Clone to avoid mutating props directly
 function cloneDeep(obj) {
@@ -200,7 +202,7 @@ const formatDate = (ts) => {
 const goBack = () => {
   const isDirty = JSON.stringify(editData.value) !== originalDataString
   if (isDirty) {
-    if (!confirm('You have unsaved changes. Are you sure you want to discard them and go back?')) {
+    if (!confirm(t('admin.unsaved-changes'))) {
       return
     }
   }
@@ -247,11 +249,11 @@ const saveChanges = async () => {
     Object.assign(props.item, editData.value)
     originalDataString = JSON.stringify(editData.value)
     
-    alert('Changes saved successfully!')
+    alert(t('admin.save-success'))
     emit('back')
   } catch (error) {
     console.error("Error saving document: ", error)
-    alert("There was an error saving changes.")
+    alert(t('admin.save-error'))
   } finally {
     saving.value = false
   }

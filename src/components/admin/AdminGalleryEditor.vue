@@ -2,34 +2,34 @@
   <div class="admin-editor">
     <div class="editor-header">
       <button class="back-btn" @click="goBack">
-        <span class="arrow">←</span> Back to list
+        <span class="arrow">←</span> {{ $t('admin.back-to-list') }}
       </button>
-      <h2>Editing Gallery: {{ editData.title || editData.name?.en || 'New Gallery' }}</h2>
+      <h2>{{ $t('admin.editing-gallery') }}: {{ editData.title || editData.name?.en || ($t('admin.add-new') + ' ' + $t('sections.gallery')) }}</h2>
     </div>
 
     <div class="editor-content">
       <form @submit.prevent="saveChanges" class="edit-form">
         <div class="form-group">
-          <label>Title / Identifier</label>
+          <label>{{ $t('admin.fields.identifier') }}</label>
           <input type="text" v-model="editData.title" class="form-control" required />
-          <p class="help-text">Internal identifier, used for sorting and admin display.</p>
+          <p class="help-text">{{ $t('admin.fields.identifier-help') }}</p>
         </div>
         
         <div class="form-group">
-          <label>Name (EN)</label>
+          <label>{{ $t('admin.fields.name-en') }}</label>
           <input type="text" v-model="editData.name.en" class="form-control" required />
         </div>
 
         <div class="form-group">
-          <label>Name (PL)</label>
+          <label>{{ $t('admin.fields.name-pl') }}</label>
           <input type="text" v-model="editData.name.pl" class="form-control" required />
         </div>
 
         <div class="gallery-manager">
-          <h3>Photos ({{ editData.photos.length }})</h3>
+          <h3>{{ $t('admin.photos') }} ({{ editData.photos.length }})</h3>
           
           <button type="button" class="action-btn add-btn" @click="openWidget">
-            Upload / Add Photos
+            {{ $t('admin.upload-photos') }}
           </button>
 
           <draggable
@@ -58,7 +58,7 @@
                     >
                       {{ editData.coverPhotoId === element.public_id ? '★' : '☆' }}
                     </button>
-                    <button type="button" class="remove-btn" @click="removePhoto(index, element.public_id)">Remove</button>
+                    <button type="button" class="remove-btn" @click="removePhoto(index, element.public_id)">{{ $t('admin.remove') }}</button>
                   </div>
                 </div>
               </div>
@@ -67,9 +67,9 @@
         </div>
 
         <div class="editor-actions">
-          <button type="button" class="cancel-btn" @click="goBack">Cancel</button>
+          <button type="button" class="cancel-btn" @click="goBack">{{ $t('admin.cancel') }}</button>
           <button type="submit" class="save-btn" :disabled="saving">
-            {{ saving ? 'Saving...' : 'Save Gallery' }}
+            {{ saving ? $t('admin.saving') : $t('admin.save-gallery') }}
           </button>
         </div>
       </form>
@@ -79,6 +79,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
 import { db } from '../../firebase/config'
 import { doc, updateDoc, setDoc, collection } from 'firebase/firestore'
@@ -92,6 +93,7 @@ const props = defineProps({
 
 const emit = defineEmits(['back'])
 
+const { t } = useI18n()
 const saving = ref(false)
 const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
 const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
@@ -151,7 +153,7 @@ const getThumbnail = (publicId) => {
 }
 
 const removePhoto = (index, publicId) => {
-  if(confirm("Are you sure you want to remove this photo from the gallery?")) {
+  if(confirm(t('admin.remove-photo-confirm'))) {
     editData.value.photos.splice(index, 1)
     if (editData.value.coverPhotoId === publicId) {
       editData.value.coverPhotoId = null
@@ -170,7 +172,7 @@ const setAsCover = (publicId) => {
 const goBack = () => {
   const isDirty = JSON.stringify(editData.value) !== originalDataString
   if (isDirty) {
-    if (!confirm('You have unsaved changes. Are you sure you want to discard them and go back?')) {
+    if (!confirm(t('admin.unsaved-changes'))) {
       return
     }
   }
@@ -211,11 +213,11 @@ const saveChanges = async () => {
     Object.assign(props.item, editData.value)
     originalDataString = JSON.stringify(editData.value)
     
-    alert('Gallery saved successfully!')
+    alert(t('admin.save-success'))
     emit('back')
   } catch (error) {
     console.error("Error saving document: ", error)
-    alert("There was an error saving the gallery.")
+    alert(t('admin.save-error'))
   } finally {
     saving.value = false
   }

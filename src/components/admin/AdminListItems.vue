@@ -2,15 +2,15 @@
   <div class="admin-list">
     <div class="list-title-bar">
       <h2>{{ title }}</h2>
-      <button class="add-new-btn" @click="$emit('edit-item', {})">+ Add New</button>
+      <button class="add-new-btn" @click="$emit('edit-item', {})">+ {{ $t('admin.add-new') }}</button>
     </div>
-    <div v-if="loading">Loading...</div>
-    <div v-else-if="items.length === 0">No items found.</div>
+    <div v-if="loading">{{ $t('admin.loading') }}</div>
+    <div v-else-if="items.length === 0">{{ $t('admin.no-items') }}</div>
     <div v-else>
       <div class="list-header">
-        <span class="drag-handle-header">Reorder</span>
-        <span class="item-title-header">Title / Identifier</span>
-        <span class="actions-header">Actions</span>
+        <span class="drag-handle-header">{{ $t('admin.move') }}</span>
+        <span class="item-title-header">{{ $t('admin.title') }}</span>
+        <span class="actions-header">{{ $t('admin.actions') }}</span>
       </div>
       <draggable
         v-model="items"
@@ -55,7 +55,7 @@ const props = defineProps({
 
 const emit = defineEmits(['edit-item'])
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const items = ref([])
 const loading = ref(true)
 
@@ -94,12 +94,12 @@ const getIdentifier = (item) => {
 }
 
 const deleteItem = async (item) => {
-  if (confirm(`Are you sure you want to delete "${getIdentifier(item)}"?`)) {
+  if (confirm(t('admin.delete-confirm') + ` "${getIdentifier(item)}"?`)) {
     try {
       await deleteDoc(doc(db, props.collectionName, item.id))
       // Local update
       items.value = items.value.filter(i => i.id !== item.id)
-      alert('Item deleted successfully')
+      alert(t('admin.item-deleted'))
     } catch (error) {
       console.error('Error deleting item:', error)
       alert('Error deleting item')
@@ -108,7 +108,7 @@ const deleteItem = async (item) => {
 }
 
 const onDragEnd = async () => {
-  const confirmed = window.confirm('Czy chcesz zapisać nową kolejność?')
+  const confirmed = window.confirm(t('admin.order-question'))
   if (!confirmed) {
     loadItems()
     return
@@ -126,7 +126,7 @@ const onDragEnd = async () => {
     })
     
     await batch.commit()
-    alert('Kolejność została pomyślnie zaktualizowana!')
+    alert(t('admin.order-success'))
     console.log('Order updated successfully')
   } catch (error) {
     console.error('Error updating order:', error)

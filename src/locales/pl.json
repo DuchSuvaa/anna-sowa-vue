@@ -2,7 +2,7 @@
   "general": {
     "load-more": "Załaduj więcej"
   },
-  "nav": {
+  "sections": {
     "bio": "Bio",
     "compositions": "Kompozycje",
     "news": "Aktualności",
@@ -14,5 +14,58 @@
     "composer": "Kompozytorka",
     "photographer": "foto: Michał Mikulski",
     "button-more": "Więcej..."
+  },
+  "admin": {
+    "admin-panel": "Panel Admina",
+    "settings": "Ustawienia",
+    "logout": "Wyloguj",
+    "title": "Tytuł",
+    "move": "Przesuń",
+    "actions": "Akcje",
+    "saving": "Zapisywanie...",
+    "save-changes": "Zapisz zmiany",
+    "cancel": "Anuluj",
+    "add-another": "Dodaj kolejny",
+    "remove-paragraph": "Usuń akapit",
+    "add-new": "Dodaj nowy",
+    "back-to-list": "Powrót do listy",
+    "date-added": "Data dodania",
+    "editing": "Edycja",
+    "loading": "Ładowanie...",
+    "no-items": "Nie znaleziono elementów.",
+    "order-question": "Czy chcesz zapisać nową kolejność?",
+    "order-success": "Kolejność została pomyślnie zaktualizowana!",
+    "delete-confirm": "Czy na pewno chcesz usunąć",
+    "item-deleted": "Element został pomyślnie usunięty",
+    "unsaved-changes": "Masz niezapisane zmiany. Czy na pewno chcesz je odrzucić i wrócić?",
+    "save-success": "Zmiany zostały pomyślnie zapisane!",
+    "save-error": "Wystąpił błąd podczas zapisywania zmian.",
+    "editing-gallery": "Edycja galerii",
+    "photos": "Zdjęcia",
+    "upload-photos": "Prześlij / Dodaj zdjęcia",
+    "remove": "Usuń",
+    "save-gallery": "Zapisz galerię",
+    "remove-photo-confirm": "Czy na pewno chcesz usunąć to zdjęcie z galerii?",
+    "fields": {
+      "time": "Czas",
+      "venue": "Miejsce",
+      "description": "Opis",
+      "performed": "Wykonanie",
+      "title": "Tytuł",
+      "content": "Treść",
+      "name": "Nazwa",
+      "year": "Rok",
+      "instrumentation": "Instrumentacja",
+      "type": "Typ",
+      "mediumText": "Tekst",
+      "link": "Link",
+      "music-type": "Typ muzyki",
+      "media-type": "Typ mediów",
+      "info": "Informacje",
+      "identifier": "Tytuł / Identyfikator",
+      "identifier-help": "Wewnętrzny identyfikator, używany do sortowania i wyświetlania w panelu.",
+      "name-en": "Nazwa (EN)",
+      "name-pl": "Nazwa (PL)"
+    }
   }
 }

@@ -3,7 +3,7 @@
     <div class="admin-layout">
       <!-- Sidebar Navigation -->
       <aside class="sidebar">
-        <h2 class="sidebar-title">Admin Panel</h2>
+        <h2 class="sidebar-title">{{ $t('admin.admin-panel') }}</h2>
         <ul class="nav-list">
           <li 
             v-for="navItem in navItems" 
@@ -16,7 +16,7 @@
           </li>
         </ul>
         <div class="sidebar-bottom">
-          <button class="logout-btn" @click="logout">Logout</button>
+          <button class="logout-btn" @click="logout">{{ $t('admin.logout') }}</button>
         </div>
       </aside>
 
@@ -59,11 +59,13 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useStore } from '../pinia/store'
+import { useI18n } from 'vue-i18n'
 import AdminListItems from '../components/admin/AdminListItems.vue'
 import AdminEditor from '../components/admin/AdminEditor.vue'
 import AdminGalleryEditor from '../components/admin/AdminGalleryEditor.vue'
 
 const store = useStore()
+const { t } = useI18n()
 const currentView = ref('settings')
 const editingItem = ref(null)
 
@@ -73,17 +75,17 @@ watch(currentView, () => {
 })
 
 // Updated order based on user feedback
-const navItems = [
-  { id: 'settings', label: 'Settings', collection: false },
-  { id: 'biography', label: 'Bio', collection: true },
-  { id: 'compositions', label: 'Compositions', collection: true },
-  { id: 'news', label: 'News', collection: true },
-  { id: 'media', label: 'Media', collection: true },
-  { id: 'works', label: 'Works', collection: true },
-  { id: 'galleries', label: 'Galleries', collection: true }
-]
+const navItems = computed(() => [
+  { id: 'settings', label: t('admin.settings'), collection: false },
+  { id: 'biography', label: t('sections.bio'), collection: true },
+  { id: 'compositions', label: t('sections.compositions'), collection: true },
+  { id: 'news', label: t('sections.news'), collection: true },
+  { id: 'media', label: t('sections.media'), collection: true },
+  { id: 'works', label: t('sections.works'), collection: true },
+  { id: 'galleries', label: t('sections.gallery'), collection: true }
+])
 
-const currentNavItem = computed(() => navItems.find(item => item.id === currentView.value))
+const currentNavItem = computed(() => navItems.value.find(item => item.id === currentView.value))
 const currentCollectionId = computed(() => currentNavItem.value?.id)
 const currentCollectionTitle = computed(() => currentNavItem.value?.label)
 

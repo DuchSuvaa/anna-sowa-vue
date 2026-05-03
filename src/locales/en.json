@@ -2,7 +2,7 @@
   "general": {
     "load-more": "Load more"
   },
-  "nav": {
+  "sections": {
     "bio": "Bio",
     "compositions": "Compositions",
     "news": "News",
@@ -14,5 +14,58 @@
     "composer": "Composer",
     "photographer": "photo: Michał Mikulski",
     "button-more": "More..."
+  },
+  "admin": {
+    "admin-panel": "Admin Panel",
+    "logout": "Logout",
+    "title": "Title",
+    "move": "Move",
+    "actions": "Actions",
+    "saving": "Saving...",
+    "save-changes": "Save changes",
+    "cancel": "Cancel",
+    "add-another": "Add another",
+    "remove-paragraph": "Remove paragraph",
+    "add-new": "Add new",
+    "back-to-list": "Back to list",
+    "date-added": "Date added",
+    "editing": "Editing",
+    "settings": "Settings",
+    "loading": "Loading...",
+    "no-items": "No items found.",
+    "order-question": "Do you want to save the new order?",
+    "order-success": "Order updated successfully!",
+    "delete-confirm": "Are you sure you want to delete",
+    "item-deleted": "Item deleted successfully",
+    "unsaved-changes": "You have saved changes. Are you sure you want to discard them and go back?",
+    "save-success": "Changes saved successfully!",
+    "save-error": "There was an error saving changes.",
+    "editing-gallery": "Editing Gallery",
+    "photos": "Photos",
+    "upload-photos": "Upload / Add Photos",
+    "remove": "Remove",
+    "save-gallery": "Save Gallery",
+    "remove-photo-confirm": "Are you sure you want to remove this photo from the gallery?",
+    "fields": {
+      "time": "Time",
+      "venue": "Venue",
+      "description": "Description",
+      "performed": "Performed by",
+      "title": "Title",
+      "content": "Content",
+      "name": "Name",
+      "year": "Year",
+      "instrumentation": "Instrumentation",
+      "type": "Type",
+      "mediumText": "Text",
+      "link": "Link",
+      "music-type": "Music Type",
+      "media-type": "Media Type",
+      "info": "Info",
+      "identifier": "Title / Identifier",
+      "identifier-help": "Internal identifier, used for sorting and admin display.",
+      "name-en": "Name (EN)",
+      "name-pl": "Name (PL)"
+    }
   }
 }

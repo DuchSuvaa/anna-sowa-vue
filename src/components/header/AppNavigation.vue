@@ -1,11 +1,11 @@
 <template>
   <nav>
-    <RouterLink to="/bio">{{ t('nav.bio') }}</RouterLink>
-    <RouterLink to="/compositions">{{ t('nav.compositions') }}</RouterLink>
-    <RouterLink to="/news">{{ t('nav.news') }}</RouterLink>
-    <RouterLink to="/media">{{ t('nav.media') }}</RouterLink>
-    <RouterLink to="/works">{{ t('nav.works') }}</RouterLink>
-    <RouterLink to="/gallery">{{ t('nav.gallery') }}</RouterLink>
+    <RouterLink to="/bio">{{ t('sections.bio') }}</RouterLink>
+    <RouterLink to="/compositions">{{ t('sections.compositions') }}</RouterLink>
+    <RouterLink to="/news">{{ t('sections.news') }}</RouterLink>
+    <RouterLink to="/media">{{ t('sections.media') }}</RouterLink>
+    <RouterLink to="/works">{{ t('sections.works') }}</RouterLink>
+    <RouterLink to="/gallery">{{ t('sections.gallery') }}</RouterLink>
   </nav>
 </template>
 
