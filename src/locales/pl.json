@@ -42,6 +42,12 @@
     "unsaved-changes": "Masz niezapisane zmiany. Czy na pewno chcesz je odrzucić i wrócić?",
     "save-success": "Zmiany zostały pomyślnie zapisane!",
     "save-error": "Wystąpił błąd podczas zapisywania zmian.",
+    "select-option": "Wybierz opcję...",
+    "validation": {
+      "required": "To pole jest wymagane",
+      "invalid-url": "Podaj poprawny adres URL (np. https://strona.pl)",
+      "invalid-number": "Podaj poprawną liczbę (np. 2024)"
+    },
     "editing-gallery": "Edycja galerii",
     "photos": "Zdjęcia",
     "upload-photos": "Prześlij / Dodaj zdjęcia",

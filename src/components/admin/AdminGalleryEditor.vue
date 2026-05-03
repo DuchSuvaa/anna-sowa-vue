@@ -14,18 +14,39 @@
       <form @submit.prevent="saveChanges" class="edit-form">
         <div class="form-group">
           <label>{{ $t('admin.fields.identifier') }}</label>
-          <input type="text" v-model="editData.title" class="form-control" required />
+          <input 
+            type="text" 
+            v-model="editData.title" 
+            class="form-control" 
+            :class="{ 'is-invalid': errors.title }"
+            @blur="validateField('title')"
+          />
+          <span v-if="errors.title" class="error-msg">{{ errors.title }}</span>
           <p class="help-text">{{ $t('admin.fields.identifier-help') }}</p>
         </div>
         
         <div class="form-group">
           <label>{{ $t('admin.fields.name-en') }}</label>
-          <input type="text" v-model="editData.name.en" class="form-control" required />
+          <input 
+            type="text" 
+            v-model="editData.name.en" 
+            class="form-control" 
+            :class="{ 'is-invalid': errors.nameEn }"
+            @blur="validateField('nameEn')"
+          />
+          <span v-if="errors.nameEn" class="error-msg">{{ errors.nameEn }}</span>
         </div>
 
         <div class="form-group">
           <label>{{ $t('admin.fields.name-pl') }}</label>
-          <input type="text" v-model="editData.name.pl" class="form-control" required />
+          <input 
+            type="text" 
+            v-model="editData.name.pl" 
+            class="form-control" 
+            :class="{ 'is-invalid': errors.namePl }"
+            @blur="validateField('namePl')"
+          />
+          <span v-if="errors.namePl" class="error-msg">{{ errors.namePl }}</span>
         </div>
 
         <div class="gallery-manager">
@@ -151,6 +172,43 @@ const openWidget = () => {
   widget.open()
 }
 
+const errors = ref({})
+
+const validateField = (field) => {
+  if (field === 'title') {
+    if (!editData.value.title?.trim()) {
+      errors.value.title = t('admin.validation.required')
+      return false
+    }
+    delete errors.value.title
+  }
+  
+  if (field === 'nameEn') {
+    if (!editData.value.name?.en?.trim()) {
+      errors.value.nameEn = t('admin.validation.required')
+      return false
+    }
+    delete errors.value.nameEn
+  }
+
+  if (field === 'namePl') {
+    if (!editData.value.name?.pl?.trim()) {
+      errors.value.namePl = t('admin.validation.required')
+      return false
+    }
+    delete errors.value.namePl
+  }
+  
+  return true
+}
+
+const validateForm = () => {
+  const v1 = validateField('title')
+  const v2 = validateField('nameEn')
+  const v3 = validateField('namePl')
+  return v1 && v2 && v3
+}
+
 const getThumbnail = (publicId) => {
   return `https://res.cloudinary.com/${cloudName}/image/upload/c_thumb,w_200,h_200,g_face/${publicId}`
 }
@@ -189,6 +247,11 @@ const goBack = () => {
 }
 
 const saveChanges = async () => {
+  if (!validateForm()) {
+    alert(t('admin.save-error'))
+    return
+  }
+
   saving.value = true
   try {
     // Automatically set cover if not selected
@@ -316,6 +379,20 @@ const saveChanges = async () => {
     border-color: #0066cc;
     box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
   }
+
+  &.is-invalid {
+    border-color: #dc3545;
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    }
+  }
+}
+
+.error-msg {
+  color: #dc3545;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: -0.4rem;
 }
 
 .gallery-manager {

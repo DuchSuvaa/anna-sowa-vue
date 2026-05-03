@@ -22,18 +22,37 @@
             v-if="field.type === 'text'" 
             type="text" 
             :value="getNested(editData, field.key)" 
-            @input="setNested(editData, field.key, $event.target.value)"
+            @input="handleInput(field, $event.target.value)"
+            @blur="validateField(field, getNested(editData, field.key))"
             class="form-control"
+            :class="{ 'is-invalid': errors[field.key] }"
           />
           
           <!-- Textarea -->
           <textarea 
             v-else-if="field.type === 'textarea'" 
             :value="getNested(editData, field.key)" 
-            @input="setNested(editData, field.key, $event.target.value)"
+            @input="handleInput(field, $event.target.value)"
+            @blur="validateField(field, getNested(editData, field.key))"
             class="form-control"
+            :class="{ 'is-invalid': errors[field.key] }"
             rows="5"
           ></textarea>
+
+          <!-- Select Input -->
+          <select 
+            v-else-if="field.type === 'select'" 
+            :value="getNested(editData, field.key)" 
+            @change="handleInput(field, $event.target.value)"
+            @blur="validateField(field, getNested(editData, field.key))"
+            class="form-control"
+            :class="{ 'is-invalid': errors[field.key] }"
+          >
+            <option value="" disabled>{{ t('admin.select-option') }}</option>
+            <option v-for="opt in field.options" :key="opt" :value="opt">
+              {{ opt }}
+            </option>
+          </select>
 
           <!-- Text Array (e.g. bio paragraphs) -->
           <div v-else-if="field.type === 'text-array'" class="array-container">
@@ -48,6 +67,8 @@
             </div>
             <button type="button" class="action-btn add-btn" @click="addArrayItem(field.key)">+ {{ $t('admin.add-another') }}</button>
           </div>
+
+          <span v-if="errors[field.key]" class="error-msg">{{ errors[field.key] }}</span>
         </div>
 
         <div class="editor-actions">
@@ -92,40 +113,40 @@ let originalDataString = ''
 // Definition of form fields per collection
 const schemas = computed(() => ({
   biography: [
-    { key: 'en.title', label: `${t('admin.fields.title')} (EN)`, type: 'text' },
-    { key: 'pl.title', label: `${t('admin.fields.title')} (PL)`, type: 'text' },
-    { key: 'en.text', label: `${t('admin.fields.content')} (EN)`, type: 'text-array' },
-    { key: 'pl.text', label: `${t('admin.fields.content')} (PL)`, type: 'text-array' },
+    { key: 'en.title', label: `${t('admin.fields.title')} (EN)`, type: 'text', required: true },
+    { key: 'pl.title', label: `${t('admin.fields.title')} (PL)`, type: 'text', required: true },
+    { key: 'en.text', label: `${t('admin.fields.content')} (EN)`, type: 'text-array', required: true },
+    { key: 'pl.text', label: `${t('admin.fields.content')} (PL)`, type: 'text-array', required: true },
   ],
   compositions: [
-    { key: 'name.en', label: `${t('admin.fields.name')} (EN)`, type: 'text' },
-    { key: 'name.pl', label: `${t('admin.fields.name')} (PL)`, type: 'text' },
-    { key: 'year', label: t('admin.fields.year'), type: 'text' },
+    { key: 'name.en', label: `${t('admin.fields.name')} (EN)`, type: 'text', required: true },
+    { key: 'name.pl', label: `${t('admin.fields.name')} (PL)`, type: 'text', required: true },
+    { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
     { key: 'instrumentation.en', label: `${t('admin.fields.instrumentation')} (EN)`, type: 'text' },
     { key: 'instrumentation.pl', label: `${t('admin.fields.instrumentation')} (PL)`, type: 'text' },
-    { key: 'type', label: t('admin.fields.type'), type: 'text' },
+    { key: 'type', label: t('admin.fields.type'), type: 'select', options: ['Orchestral', 'Chamber', 'Solo', 'Installations', 'Dance', 'Children'], required: true },
   ],
   news: [
     { key: 'time.en', label: `${t('admin.fields.time')} (EN)`, type: 'text' },
     { key: 'time.pl', label: `${t('admin.fields.time')} (PL)`, type: 'text' },
     { key: 'venue.en', label: `${t('admin.fields.venue')} (EN)`, type: 'text' },
     { key: 'venue.pl', label: `${t('admin.fields.venue')} (PL)`, type: 'text' },
-    { key: 'description.en', label: `${t('admin.fields.description')} (EN)`, type: 'textarea' },
-    { key: 'description.pl', label: `${t('admin.fields.description')} (PL)`, type: 'textarea' },
+    { key: 'description.en', label: `${t('admin.fields.description')} (EN)`, type: 'textarea', required: true },
+    { key: 'description.pl', label: `${t('admin.fields.description')} (PL)`, type: 'textarea', required: true },
     { key: 'performed.en', label: `${t('admin.fields.performed')} (EN)`, type: 'textarea' },
     { key: 'performed.pl', label: `${t('admin.fields.performed')} (PL)`, type: 'textarea' },
   ],
   media: [
-    { key: 'mediumText.en', label: `${t('admin.fields.mediumText')} (EN)`, type: 'text' },
-    { key: 'mediumText.pl', label: `${t('admin.fields.mediumText')} (PL)`, type: 'text' },
-    { key: 'mediumLink', label: t('admin.fields.link'), type: 'text' }
+    { key: 'mediumText.en', label: `${t('admin.fields.mediumText')} (EN)`, type: 'text', required: true },
+    { key: 'mediumText.pl', label: `${t('admin.fields.mediumText')} (PL)`, type: 'text', required: true },
+    { key: 'mediumLink', label: t('admin.fields.link'), type: 'text', pattern: 'url' }
   ],
   works: [
-    { key: 'name', label: t('admin.fields.name'), type: 'text' },
-    { key: 'year', label: t('admin.fields.year'), type: 'text' },
-    { key: 'media-type', label: t('admin.fields.media-type'), type: 'text' },
-    { key: 'music-type', label: t('admin.fields.music-type'), type: 'text' },
-    { key: 'link', label: t('admin.fields.link'), type: 'text' },
+    { key: 'name', label: t('admin.fields.name'), type: 'text', required: true },
+    { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
+    { key: 'media-type', label: t('admin.fields.media-type'), type: 'select', options: ['audio', 'video'], required: true },
+    { key: 'music-type', label: t('admin.fields.music-type'), type: 'select', options: ['Chamber', 'Installation', 'Orchestral'], required: true },
+    { key: 'link', label: t('admin.fields.link'), type: 'text', pattern: 'url' },
     { key: 'info', label: t('admin.fields.info'), type: 'textarea' },
     { key: 'description', label: t('admin.fields.description'), type: 'textarea' },
   ]
@@ -165,6 +186,51 @@ const setNested = (obj, path, value) => {
     current = current[p]
   }
   current[last] = value
+}
+
+const errors = ref({})
+
+const validateField = (field, value) => {
+  if (field.required && (!value || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.trim() === ''))) {
+    errors.value[field.key] = t('admin.validation.required')
+    return false
+  }
+  
+  if (value && field.pattern === 'url') {
+    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/
+    if (!urlPattern.test(value)) {
+      errors.value[field.key] = t('admin.validation.invalid-url')
+      return false
+    }
+  }
+
+  if (value && field.pattern === 'number') {
+    if (isNaN(value)) {
+      errors.value[field.key] = t('admin.validation.invalid-number')
+      return false
+    }
+  }
+
+  delete errors.value[field.key]
+  return true
+}
+
+const handleInput = (field, value) => {
+  setNested(editData.value, field.key, value)
+  
+  // Auto-detect media-type for works
+  if (props.collectionName === 'works' && field.key === 'link') {
+    const v = value.toLowerCase()
+    if (v.includes('vimeo.com') || v.includes('youtube.com') || v.includes('youtu.be')) {
+      setNested(editData.value, 'media-type', 'video')
+    } else if (v.includes('/audio/') || v.includes('.mp3') || v.includes('.wav')) {
+      setNested(editData.value, 'media-type', 'audio')
+    }
+  }
+
+  if (errors.value[field.key]) {
+    validateField(field, value)
+  }
 }
 
 // Array handlers
@@ -210,6 +276,20 @@ const goBack = () => {
 }
 
 const saveChanges = async () => {
+  // Validate all fields
+  let isValid = true
+  currentSchema.value.forEach(field => {
+    const value = getNested(editData.value, field.key)
+    if (!validateField(field, value)) {
+      isValid = false
+    }
+  })
+
+  if (!isValid) {
+    alert(t('admin.save-error') + ' ' + Object.values(errors.value)[0])
+    return
+  }
+
   saving.value = true
   try {
     let docRef
@@ -352,6 +432,20 @@ const saveChanges = async () => {
     border-color: #0066cc;
     box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
   }
+
+  &.is-invalid {
+    border-color: #dc3545;
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    }
+  }
+}
+
+.error-msg {
+  color: #dc3545;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: -0.4rem;
 }
 
 textarea.form-control {
