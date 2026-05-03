@@ -26,6 +26,7 @@
             <span class="item-title">{{ getIdentifier(element) }}</span>
             <div class="post-tools">
               <button class="edit-btn" @click="$emit('edit-item', element)">Edit</button>
+              <button class="delete-btn" @click="deleteItem(element)">Delete</button>
             </div>
           </div>
         </template>
@@ -38,7 +39,7 @@
 import { ref, onMounted, watch } from 'vue'
 import draggable from 'vuedraggable'
 import { db } from '../../firebase/config'
-import { collection, getDocs, query, orderBy, doc, writeBatch } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy, doc, writeBatch, deleteDoc } from 'firebase/firestore'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
@@ -84,7 +85,26 @@ watch(() => props.collectionName, () => {
 })
 
 const getIdentifier = (item) => {
-  return item.title || item.name || item.id
+  if (item.title) return item.title
+  if (item.name) {
+    if (typeof item.name === 'string') return item.name
+    return item.name.en || item.name.pl || Object.values(item.name)[0]
+  }
+  return item.id
+}
+
+const deleteItem = async (item) => {
+  if (confirm(`Are you sure you want to delete "${getIdentifier(item)}"?`)) {
+    try {
+      await deleteDoc(doc(db, props.collectionName, item.id))
+      // Local update
+      items.value = items.value.filter(i => i.id !== item.id)
+      alert('Item deleted successfully')
+    } catch (error) {
+      console.error('Error deleting item:', error)
+      alert('Error deleting item')
+    }
+  }
 }
 
 const onDragEnd = async () => {
@@ -233,6 +253,22 @@ const onDragEnd = async () => {
     
     &:hover {
       background-color: #0052a3;
+    }
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    
+    &:hover {
+      background-color: #c82333;
     }
   }
 }

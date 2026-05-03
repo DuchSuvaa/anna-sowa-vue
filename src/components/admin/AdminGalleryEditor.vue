@@ -40,12 +40,26 @@
             handle=".drag-handle"
           >
             <template #item="{ element, index }">
-              <div class="photo-item">
+              <div class="photo-item" :class="{ 'is-cover': editData.coverPhotoId === element.public_id }">
                 <span class="drag-handle">☰</span>
-                <img :src="getThumbnail(element.public_id)" :alt="'Photo ' + index" />
+                <div v-if="editData.coverPhotoId === element.public_id" class="cover-badge">
+                  FOLDER PHOTO
+                </div>
+                <img :src="getThumbnail(element.public_id)" :alt="'Photo ' + index" @click="setAsCover(element.public_id)" />
                 <div class="photo-info">
                   <span>{{ element.width }}x{{ element.height }}</span>
-                  <button type="button" class="remove-btn" @click="removePhoto(index)">Remove</button>
+                  <div class="photo-item-actions">
+                    <button 
+                      type="button" 
+                      class="cover-btn" 
+                      :class="{ 'active': editData.coverPhotoId === element.public_id }"
+                      @click="setAsCover(element.public_id)"
+                      title="Set as folder photo"
+                    >
+                      {{ editData.coverPhotoId === element.public_id ? '★' : '☆' }}
+                    </button>
+                    <button type="button" class="remove-btn" @click="removePhoto(index, element.public_id)">Remove</button>
+                  </div>
                 </div>
               </div>
             </template>
@@ -87,7 +101,8 @@ const editData = ref({
   title: '',
   name: { en: '', pl: '' },
   order: 0,
-  photos: []
+  photos: [],
+  coverPhotoId: null
 })
 
 let originalDataString = ''
@@ -97,6 +112,7 @@ onMounted(() => {
   const baseData = JSON.parse(JSON.stringify(props.item))
   if (!baseData.name) baseData.name = { en: '', pl: '' }
   if (!baseData.photos) baseData.photos = []
+  if (!baseData.coverPhotoId) baseData.coverPhotoId = null
   
   editData.value = baseData
   originalDataString = JSON.stringify(editData.value)
@@ -134,9 +150,20 @@ const getThumbnail = (publicId) => {
   return `https://res.cloudinary.com/${cloudName}/image/upload/c_thumb,w_200,h_200,g_face/${publicId}`
 }
 
-const removePhoto = (index) => {
+const removePhoto = (index, publicId) => {
   if(confirm("Are you sure you want to remove this photo from the gallery?")) {
     editData.value.photos.splice(index, 1)
+    if (editData.value.coverPhotoId === publicId) {
+      editData.value.coverPhotoId = null
+    }
+  }
+}
+
+const setAsCover = (publicId) => {
+  if (editData.value.coverPhotoId === publicId) {
+    editData.value.coverPhotoId = null // toggle off if already set
+  } else {
+    editData.value.coverPhotoId = publicId
   }
 }
 
@@ -153,6 +180,11 @@ const goBack = () => {
 const saveChanges = async () => {
   saving.value = true
   try {
+    // Automatically set cover if not selected
+    if (!editData.value.coverPhotoId && editData.value.photos.length > 0) {
+      editData.value.coverPhotoId = editData.value.photos[0].public_id
+    }
+
     let docRef
     if (editData.value.id) {
       docRef = doc(db, 'galleries', editData.value.id)
@@ -303,6 +335,25 @@ const saveChanges = async () => {
   display: flex;
   flex-direction: column;
 
+  &.is-cover {
+    border: 2px solid #ffc107;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+  }
+
+  .cover-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ffc107;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    z-index: 2;
+    border-bottom-left-radius: 4px;
+    text-transform: uppercase;
+  }
+
   .drag-handle {
     position: absolute;
     top: 0.5rem;
@@ -318,6 +369,7 @@ const saveChanges = async () => {
     width: 100%;
     height: 15rem;
     object-fit: cover;
+    cursor: pointer;
   }
 
   .photo-info {
@@ -327,6 +379,39 @@ const saveChanges = async () => {
     align-items: center;
     font-size: 1.2rem;
     background: #f4f4f4;
+
+    .photo-item-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .cover-btn {
+      background: #fff;
+      border: 1px solid #ccc;
+      color: #777;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.6rem;
+      transition: all 0.2s;
+      padding: 0;
+
+      &:hover {
+        border-color: #ffc107;
+        color: #ffc107;
+      }
+
+      &.active {
+        background: #ffc107;
+        color: #fff;
+        border-color: #ffc107;
+      }
+    }
 
     .remove-btn {
       background: #dc3545;

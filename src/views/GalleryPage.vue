@@ -15,7 +15,7 @@
           <div class="album-cover">
             <ResponsiveImage 
               v-if="album.photos && album.photos.length > 0"
-              :publicId="album.photos[0].public_id"
+              :publicId="album.coverPhotoId || album.photos[0].public_id"
               :alt="album.name[locale] || album.title"
               sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
