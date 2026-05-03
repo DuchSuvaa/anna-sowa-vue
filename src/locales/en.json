@@ -1,6 +1,8 @@
 {
   "general": {
-    "load-more": "Load more"
+    "load-more": "Load more",
+    "sort-asc": "Latest first",
+    "sort-desc": "Oldest first"
   },
   "sections": {
     "bio": "Bio",

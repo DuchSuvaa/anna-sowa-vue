@@ -3,7 +3,7 @@
     <div class="content">
       <div class="sort-controls" v-if="compositions && compositions.length">
         <button class="sort-btn" @click="toggleSort">
-          Sort: {{ sortDirection === 'asc' ? 'Latest first' : 'Oldest first' }}
+          Sort: {{ sortDirection === 'asc' ? $t('general.sort-asc') : $t('general.sort-desc') }}
         </button>
       </div>
       <ul class="compositions-list" v-if="compositions && compositions.length">

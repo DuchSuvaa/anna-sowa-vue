@@ -27,13 +27,13 @@
           <AdminGalleryEditor 
             v-if="currentCollectionId === 'galleries'"
             :item="editingItem" 
-            @back="editingItem = null" 
+            @back="onEditorBack" 
           />
           <AdminEditor 
             v-else
             :item="editingItem" 
             :collectionName="currentCollectionId" 
-            @back="editingItem = null" 
+            @back="onEditorBack" 
           />
         </div>
         
@@ -46,6 +46,7 @@
         
         <div v-else class="collection-view">
           <AdminListItems 
+            ref="listRef"
             :collectionName="currentCollectionId" 
             :title="currentCollectionTitle" 
             @edit-item="onEditItem"
@@ -57,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { useStore } from '../pinia/store'
 import { useI18n } from 'vue-i18n'
 import AdminListItems from '../components/admin/AdminListItems.vue'
@@ -91,6 +92,16 @@ const currentCollectionTitle = computed(() => currentNavItem.value?.label)
 
 const onEditItem = (item) => {
   editingItem.value = item
+}
+
+const listRef = ref(null)
+
+const onEditorBack = () => {
+  editingItem.value = null
+  // Reload list so new/reordered items appear correctly
+  nextTick(() => {
+    listRef.value?.reload()
+  })
 }
 
 const logout = () => {

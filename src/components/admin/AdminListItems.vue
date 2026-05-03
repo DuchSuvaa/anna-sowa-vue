@@ -2,7 +2,12 @@
   <div class="admin-list">
     <div class="list-title-bar">
       <h2>{{ title }}</h2>
-      <button class="add-new-btn" @click="$emit('edit-item', {})">+ {{ $t('admin.add-new') }}</button>
+      <div class="title-bar-actions">
+        <button class="sort-btn" @click="toggleSort">
+          Sort: {{ sortDir === 'asc' ? $t('general.sort-asc') : $t('general.sort-desc') }}
+        </button>
+        <button class="add-new-btn" @click="$emit('edit-item', {})">+ {{ $t('admin.add-new') }}</button>
+      </div>
     </div>
     <div v-if="loading">{{ $t('admin.loading') }}</div>
     <div v-else-if="items.length === 0">{{ $t('admin.no-items') }}</div>
@@ -58,11 +63,12 @@ const emit = defineEmits(['edit-item'])
 const { locale, t } = useI18n()
 const items = ref([])
 const loading = ref(true)
+const sortDir = ref('asc')
 
 const loadItems = async () => {
   loading.value = true
   try {
-    const q = query(collection(db, props.collectionName), orderBy('order', 'asc'))
+    const q = query(collection(db, props.collectionName), orderBy('order', sortDir.value))
     const querySnapshot = await getDocs(q)
     const fetchedItems = []
     querySnapshot.forEach((doc) => {
@@ -74,6 +80,11 @@ const loadItems = async () => {
   } finally {
     loading.value = false
   }
+}
+
+const toggleSort = () => {
+  sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
+  loadItems()
 }
 
 onMounted(() => {
@@ -132,6 +143,8 @@ const onDragEnd = async () => {
     console.error('Error updating order:', error)
   }
 }
+
+defineExpose({ reload: loadItems })
 </script>
 
 <style lang="scss" scoped>
@@ -148,6 +161,28 @@ const onDragEnd = async () => {
       margin: 0;
       font-size: 2.4rem;
       color: #333;
+    }
+
+    .title-bar-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .sort-btn {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 1rem 1.6rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #5a6268;
+      }
     }
 
     .add-new-btn {

@@ -5,6 +5,9 @@
         <span class="arrow">←</span> {{ $t('admin.back-to-list') }}
       </button>
       <h2>{{ $t('admin.editing-gallery') }}: {{ editData.title || editData.name?.en || ($t('admin.add-new') + ' ' + $t('sections.gallery')) }}</h2>
+      <div class="meta-info" v-if="editData.timestamp">
+        <p class="timestamp">{{ $t('admin.date-added') }}: {{ formatDate(editData.timestamp) }}</p>
+      </div>
     </div>
 
     <div class="editor-content">
@@ -152,6 +155,12 @@ const getThumbnail = (publicId) => {
   return `https://res.cloudinary.com/${cloudName}/image/upload/c_thumb,w_200,h_200,g_face/${publicId}`
 }
 
+const formatDate = (ts) => {
+  if (!ts) return ''
+  const date = ts.toDate ? ts.toDate() : new Date(ts._seconds ? ts._seconds * 1000 : ts)
+  return date.toLocaleString()
+}
+
 const removePhoto = (index, publicId) => {
   if(confirm(t('admin.remove-photo-confirm'))) {
     editData.value.photos.splice(index, 1)
@@ -192,9 +201,10 @@ const saveChanges = async () => {
       docRef = doc(db, 'galleries', editData.value.id)
     } else {
       docRef = doc(collection(db, 'galleries'))
-      editData.value.id = docRef.id // ensure new document has ID
-      // Set to high order so it goes to bottom by default
-      editData.value.order = 999 
+      editData.value.id = docRef.id
+      // Use negative timestamp to put new items at the very top (asc order)
+      editData.value.order = -Date.now()
+      editData.value.timestamp = new Date()
     }
     
     const payload = { ...editData.value }

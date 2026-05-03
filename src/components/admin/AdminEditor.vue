@@ -218,7 +218,8 @@ const saveChanges = async () => {
     if (isNew) {
       docRef = doc(collection(db, props.collectionName))
       editData.value.id = docRef.id
-      editData.value.order = 999 // Default to end of list
+      editData.value.order = -1      // appear at top (list sorted asc)
+      editData.value.timestamp = new Date()
     } else {
       docRef = doc(db, props.collectionName, props.item.id)
     }
