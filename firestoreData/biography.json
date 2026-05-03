@@ -1,29 +1,8 @@
 [
   {
-    "order": 1,
+    "id": "72OCZtpL5hQtXmXQjRK3",
     "en": {
-      "title": "Education",
-      "text": [
-        "Anna Sowa is a Polish, in Basel-based experimental composer and artist, mainly focused on exploring electronic music and fields of performing arts. She is interested in the intersection of movement, gesture and theatricality in relation to electronic and instrumental music.",
-        "Born in Tymbark (Poland) in 1987, she studied eurhythmics with Szábolcs Esztényi and Elżbieta Aleksandrowicz at the Academy of Music in Łódź (graduated with distinction in 2011).",
-        "She continued her studies in composition under the supervision of Zygmunt Krauze. Between 2014 - 2015 she was an Erasmus+ student with Dietrich Hahne at the Folkwang University of the Arts in Essen (Germany) as a KAAD scholarship holder. She obtained a Chinese governmental scholarship to study in Shanghai Conservatory of Music (2017 - 2018) and Witold Lutosławski scholarship (2019) - founded by the Lutosławski's family and Nicati-de Luze Foundation Scholarship (CH). In 2021 she graduated with distinction Master Special Program in Musik Akademie Basel (Switzerland) in prof. Johannes Kreidler and prof. Caspar Johannes Walter at the Music Academy in Basel.",
-        "She has taken part in different courses at the International Summer Courses for Composers Synthetis in Radziejowice (2014-2016) and at the Donauechingen Musiktage (2015). In 2017, Anna was an artist-in-residence in Tondela (Portugal)."
-      ]
-    },
-    "pl": {
-      "title": "Edukacja",
-      "text": [
-        "Anna Sowa jest polską kompozytorką i artystką eksperymentalną rezydującą w Bazylei (Szwajcaria) skupiającą się na eksploracji muzyki elektronicznej i dziedzin sztuk performatywnych. Interesuje się połączeniem tańca, ruchu, gestu i teatralności w odniesieniu do muzyki elektronicznej i instrumentalnej.",
-        "Anna Sowa (ur. 1987 r.) — pochodzi z Tymbarku. W latach 2006-2016 studiowała w Akademii Muzycznej im. G. i K. Bacewiczów w Łodzi rytmikę u Szabolcsa Esztenyiego i Elżbiety Aleksandrowicz (dyplom z wyróżnieniem) oraz kompozycję u Zygmunta Krauze.",
-        "W 2014 w ramach projektu Erasmus +, a następnie jako stypendystka KAAD studiowała w Folkwang Universität der Künste w Essen w klasie kompozycji i wizualizacji Dietricha Hahne. W latach 2014 - 2016 uczestniczyła w kolejnych edycjach Międzynarodowych Letnich Kursów Kompozytorskich Synthetis w Radziejowicach. Ponadto była uczestnikiem Międzynarodowych Kursów Kompozytorskich w Donaueschingen (Next Generation 2015) oraz Europejskiego Kongresu Rytmiki w Wiedniu (2009). Z wyróżnieniem ukończyła program Master Special pod kierunkiem prof. Caspra Johannesa Waltera i prof. Johannesa Kreidlera na Akademii Muzycznej w Bazylei.",
-        "W latach 2017-2018 jako stypendystka Rządu Ludowej Republiki Chińskiej studiowała w Shanghai Conservatory of Music. W 2019 roku otrzymała stypendium im. Witolda Lutosławskiego, a w 2020 roku Nicati-de Luze Foundation (Szwajcaria)."
-      ]
-    }
-  },
-  {
-    "order": 2,
-    "en": {
-      "title": "Work",
+      "header": "Work",
       "text": [
         "Her works have been performed at the festivals: Warsaw Autumn (PL), ECLAT Festival in Stuttgart, Transit Festival (BE), Biennale Aktuelle Musik in Bremen, Sacrum Profanum (PL), Ad Libitum (PL), Pergine Festival (IT), Musica Moderna (PL), Musica Privata (PL), Experimental Tuesdays (PL), Polifonie (PL), Neo Arte. Syntezator Sztuki (PL), Controlled Festival (PL), Touch the Theatre Festival (PL), Fru Improvisation Contact Festival (PL), C.A.R. contemporary art ruhr in Essen (DE), BETON Brut & Bruits in Cologne (DE), International Festival of Accordion Music in Przemysl (PL), Bauhaus/Dessau Kurt Weil Festival (DE), Arkady Kubickiego at Royal Castle in Warsaw (PL), Sao Paulo Contemporary Composers Festival (BR), Theather Basel (CH).",
         "In 2021 she won, together with the association Anomalia, the 3rd edition of the Fringe competition of the Foundatione Haydn Stiftung. As part of the prize, Anna Sowa's opera Silenzio/Silence will be premiered in March 2022 as part of the Festival Oper 2022 in Bolzano. She received scholarships such as: Witold Lutosławski Scholarship 2019 (PL) founded by composer's family members and Nicati-de Luze Foundation Scholarship 2020 and 2021 (CH).",
@@ -34,8 +13,10 @@
         "In the years 2011 – 2017 she worked as a teacher at the Oskar Kolberg Music School in Radom. Between 2016-2017 she worked at the Academy of Music in Łódź as a piano improvisation lecturer."
       ]
     },
+    "order": 0,
+    "title": "Work",
     "pl": {
-      "title": "Twórczość",
+      "header": "Twórczość",
       "text": [
         "Utwory kompozytorki były prezentowane na Festiwalach: ECLAT w Stuttgarcie (DE), Warszawska Jesień, Transit Festival w Belgii, Biennale Aktuelle Musik w Bremie, Sacrum Profanum, Ad Libitum, Musica Polonica Nova, Neo Arte. Syntezator Sztuki, Eksperymentalne Wtorki, Polifonie, Periferien Concert Serie (NO), Pergine Festival (IT), Musica Privata, Dotknij Teatru, Fru Improvisation Contact Festival, C.A.R. contemporary art ruhr (DE), BETON Brut & Bruits in Cologne (DE), Bauhaus/Dessau Kurt Weil Festival (DE), Sao Paulo Contemporary Composers Festival (BR), XXV Festiwalu Muzyki Akordeonowej w Przemyślu, V Piotrkowskim Biennale Sztuki.",
         "W 2020 roku multimedialny teatr instrumentalny na 7 performerów, audio playback, video Anny Sowy It's Only the End of the World miał swoją premierę w Theather Basel, w ramach projektu Im Flow der Apokalypse, a w 2022 teatr Leiber. Eine Nichtkammer Oper w Bruchwerk Theather Siegen (DE).",
@@ -46,5 +27,28 @@
         "Anna Sowa w 2017 roku skomponowała Wariacje na temat Trenów Feliksa Nowowiejskiego na kwartet smyczkowy dla dzieci oraz zaaranżowała pieśni kompozytora, które zostały wykonane podczas Festiwalu Nowowiejski na Nowo w Radomiu."
       ]
     }
+  },
+  {
+    "id": "cRQM2RKLQwbNTIeLgj6B",
+    "en": {
+      "header": "Education",
+      "text": [
+        "Anna Sowa is a Polish, in Basel-based experimental composer and artist, mainly focused on exploring electronic music and fields of performing arts. She is interested in the intersection of movement, gesture and theatricality in relation to electronic and instrumental music.",
+        "Born in Tymbark (Poland) in 1987, she studied eurhythmics with Szábolcs Esztényi and Elżbieta Aleksandrowicz at the Academy of Music in Łódź (graduated with distinction in 2011).",
+        "She continued her studies in composition under the supervision of Zygmunt Krauze. Between 2014 - 2015 she was an Erasmus+ student with Dietrich Hahne at the Folkwang University of the Arts in Essen (Germany) as a KAAD scholarship holder. She obtained a Chinese governmental scholarship to study in Shanghai Conservatory of Music (2017 - 2018) and Witold Lutosławski scholarship (2019) - founded by the Lutosławski's family and Nicati-de Luze Foundation Scholarship (CH). In 2021 she graduated with distinction Master Special Program in Musik Akademie Basel (Switzerland) in prof. Johannes Kreidler and prof. Caspar Johannes Walter at the Music Academy in Basel.",
+        "She has taken part in different courses at the International Summer Courses for Composers Synthetis in Radziejowice (2014-2016) and at the Donauechingen Musiktage (2015). In 2017, Anna was an artist-in-residence in Tondela (Portugal)."
+      ]
+    },
+    "pl": {
+      "header": "Edukacja",
+      "text": [
+        "Anna Sowa jest polską kompozytorką i artystką eksperymentalną rezydującą w Bazylei (Szwajcaria) skupiającą się na eksploracji muzyki elektronicznej i dziedzin sztuk performatywnych. Interesuje się połączeniem tańca, ruchu, gestu i teatralności w odniesieniu do muzyki elektronicznej i instrumentalnej.",
+        "Anna Sowa (ur. 1987 r.) — pochodzi z Tymbarku. W latach 2006-2016 studiowała w Akademii Muzycznej im. G. i K. Bacewiczów w Łodzi rytmikę u Szabolcsa Esztenyiego i Elżbiety Aleksandrowicz (dyplom z wyróżnieniem) oraz kompozycję u Zygmunta Krauze.",
+        "W 2014 w ramach projektu Erasmus +, a następnie jako stypendystka KAAD studiowała w Folkwang Universität der Künste w Essen w klasie kompozycji i wizualizacji Dietricha Hahne. W latach 2014 - 2016 uczestniczyła w kolejnych edycjach Międzynarodowych Letnich Kursów Kompozytorskich Synthetis w Radziejowicach. Ponadto była uczestnikiem Międzynarodowych Kursów Kompozytorskich w Donaueschingen (Next Generation 2015) oraz Europejskiego Kongresu Rytmiki w Wiedniu (2009). Z wyróżnieniem ukończyła program Master Special pod kierunkiem prof. Caspra Johannesa Waltera i prof. Johannesa Kreidlera na Akademii Muzycznej w Bazylei.",
+        "W latach 2017-2018 jako stypendystka Rządu Ludowej Republiki Chińskiej studiowała w Shanghai Conservatory of Music. W 2019 roku otrzymała stypendium im. Witolda Lutosławskiego, a w 2020 roku Nicati-de Luze Foundation (Szwajcaria)."
+      ]
+    },
+    "title": "Education",
+    "order": 1
   }
 ]
