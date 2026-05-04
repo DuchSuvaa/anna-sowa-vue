@@ -236,7 +236,7 @@ const handleSwipe = () => {
   }
 }
 
-@media (max-width: 100rem) {
+@media (max-width: 1100px) {
   .home__slider {
     .arrow {
       display: none;
