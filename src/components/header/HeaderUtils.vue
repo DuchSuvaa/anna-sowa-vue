@@ -9,7 +9,7 @@
     <a href="https://www.instagram.com/sowaanna67/" target="_blank">
       <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/instagram.png" alt="Instagram - link">
     </a>
-    <a href="mailto:sowaanna67@gmail.com" target="_blank">
+    <a :href="'mailto:' + (store.globalSettings.contactEmail || 'sowaanna67@gmail.com')" target="_blank">
       <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/mail.png" alt="Napisz do Anny">
     </a>
     <a class="lang"> 
@@ -27,8 +27,10 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import { useStore } from '../../pinia/store'
 
 const { locale } = useI18n()
+const store = useStore()
 
 const setLocale = (lang) => {
   console.log(lang);

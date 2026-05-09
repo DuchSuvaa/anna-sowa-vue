@@ -4,7 +4,22 @@
       <h2>{{ $t('admin.settings') }}</h2>
     </div>
 
+    <!-- General Settings Form -->
     <form @submit.prevent="save" class="settings-form">
+      <h3 class="section-subtitle">General</h3>
+      
+      <div class="form-group">
+        <label for="contactEmail">Contact Email (Header icon)</label>
+        <input 
+          id="contactEmail"
+          type="email" 
+          v-model="settingsForm.contactEmail" 
+          class="form-control"
+          required
+        />
+        <p class="help-text">This email will be used for the envelope icon in the site header.</p>
+      </div>
+
       <div class="form-group">
         <label for="itemsPerPage">Items loaded per page (Pagination limit)</label>
         <input 
@@ -25,6 +40,39 @@
         </button>
       </div>
     </form>
+
+    <!-- Security Settings Form -->
+    <form @submit.prevent="updatePwd" class="settings-form security-section">
+      <h3 class="section-subtitle">Security</h3>
+      
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input 
+          id="newPassword"
+          type="password" 
+          v-model="passwordForm.newPassword" 
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm New Password</label>
+        <input 
+          id="confirmPassword"
+          type="password" 
+          v-model="passwordForm.confirmPassword" 
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="save-btn" :disabled="pwdSaving">
+          {{ pwdSaving ? $t('admin.saving') : 'Change Password' }}
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -38,12 +86,20 @@ const { t } = useI18n()
 
 const saving = ref(false)
 const settingsForm = ref({
-  itemsPerPage: 10
+  itemsPerPage: 10,
+  contactEmail: ''
+})
+
+const pwdSaving = ref(false)
+const passwordForm = ref({
+  newPassword: '',
+  confirmPassword: ''
 })
 
 onMounted(async () => {
   const currentSettings = await store.loadSettings()
   settingsForm.value.itemsPerPage = currentSettings.itemsPerPage || 10
+  settingsForm.value.contactEmail = currentSettings.contactEmail || 'sowaanna67@gmail.com'
 })
 
 const save = async () => {
@@ -58,6 +114,31 @@ const save = async () => {
     saving.value = false
   }
 }
+
+const updatePwd = async () => {
+  if (passwordForm.value.newPassword !== passwordForm.value.confirmPassword) {
+    alert("Passwords do not match!")
+    return
+  }
+  
+  if (passwordForm.value.newPassword.length < 6) {
+    alert("Password should be at least 6 characters.")
+    return
+  }
+
+  pwdSaving.value = true
+  try {
+    await store.changePassword(passwordForm.value.newPassword)
+    passwordForm.value.newPassword = ''
+    passwordForm.value.confirmPassword = ''
+    alert("Password updated successfully!")
+  } catch (error) {
+    console.error(error)
+    alert("Failed to update password. You may need to log out and log in again to perform this action.")
+  } finally {
+    pwdSaving.value = false
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -68,7 +149,7 @@ const save = async () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     
     h2 {
       margin: 0;
@@ -82,6 +163,15 @@ const save = async () => {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-bottom: 4rem;
+
+  .section-subtitle {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+  }
 
   .form-group {
     display: flex;
@@ -96,7 +186,7 @@ const save = async () => {
     
     .form-control {
       width: 100%;
-      max-width: 20rem;
+      max-width: 40rem;
       padding: 1.2rem;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -150,5 +240,12 @@ const save = async () => {
       }
     }
   }
+}
+
+.security-section {
+  background-color: #fff9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #ffebeb;
 }
 </style>

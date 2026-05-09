@@ -2,7 +2,7 @@
   <div class="admin-editor">
     <div class="editor-header">
       <button class="back-btn" @click="goBack">
-        <span class="arrow">←</span> {{ $t('admin.back-to-list') }}
+        <span class="arrow">←</span> {{ $t('admin.back') }}
       </button>
       <h2>{{ $t('admin.editing-gallery') }}: {{ editData.title || editData.name?.en || ($t('admin.add-new') + ' ' + $t('sections.gallery')) }}</h2>
       <div class="meta-info" v-if="editData.timestamp">
@@ -318,21 +318,21 @@ const saveChanges = async () => {
   align-self: flex-start;
   background: none;
   border: none;
-  color: #0066cc;
+  color: #666;
   font-size: 1.6rem;
-  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.2s;
   
   .arrow {
     margin-right: 0.5rem;
-    font-size: 2rem;
   }
   
   &:hover {
-    color: #004999;
+    color: #333;
     text-decoration: underline;
   }
 }

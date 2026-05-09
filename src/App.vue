@@ -6,12 +6,17 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { useStore } from './pinia/store'
 import AppHeader from './components/header/AppHeader.vue'
 import NotificationBox from './components/NotificationBox.vue'
 import ErrorBox from './components/ErrorBox.vue'
 
 const store = useStore()
+
+onMounted(() => {
+  store.loadSettings()
+})
 
 </script>
 

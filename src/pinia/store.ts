@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import router from '../router/index.js'
 import { db, auth } from '../firebase/config.js'
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { signInWithEmailAndPassword, signOut, updatePassword } from 'firebase/auth'
 import { collection, doc, getDoc, getDocs, setDoc, query, orderBy, limit, startAfter } from 'firebase/firestore'
 
 export const useStore = defineStore('main', () => {
@@ -43,6 +43,17 @@ export const useStore = defineStore('main', () => {
       router.push('/login')
     } catch (err) {
       setError(err)
+    }
+  }
+
+  const changePassword = async (newPassword: string) => {
+    try {
+      if (!auth.currentUser) throw new Error('Not authenticated')
+      await updatePassword(auth.currentUser, newPassword)
+      setNotification('Password updated successfully')
+    } catch (err: any) {
+      setError(err.message || 'Error updating password')
+      throw err
     }
   }
 
@@ -132,6 +143,6 @@ export const useStore = defineStore('main', () => {
   }
 
   return {
-    error, notification, things, user, globalSettings, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate, loadSettings, saveSettings
+    error, notification, things, user, globalSettings, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate, loadSettings, saveSettings, changePassword
   }
 })
