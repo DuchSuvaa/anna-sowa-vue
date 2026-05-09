@@ -1,12 +1,12 @@
 <template>
-  <li class="medium">
-    <div class="medium-text">
-      <div class="medium-text-icon"></div>
-      <div class="medium-text-text" v-html="item.mediumText?.[locale]"></div>
+  <li class="press-item">
+    <div class="press-item__text">
+      <div class="press-item__text-icon"></div>
+      <div class="press-item__text-text" v-html="item.mediumText?.[locale]"></div>
     </div>
-    <div class="medium-link" v-if="item.mediumLink">
-      <div class="medium-link-icon"></div>
-      <div class="medium-link-link">
+    <div class="press-item__link" v-if="item.mediumLink">
+      <div class="press-item__link-icon"></div>
+      <div class="press-item__link-link">
         <a :href="item.mediumLink" target="_blank">Link</a>
       </div>
     </div>
@@ -27,18 +27,18 @@ const { locale } = useI18n()
 </script>
 
 <style lang="scss" scoped>
-.medium {
+.press-item {
   font-size: 2.4rem;
   margin-bottom: 4rem;
   color: #222;
 
-  .medium-text {
+  .press-item__text {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 1rem;
 
-    .medium-text-icon {
+    .press-item__text-icon {
       width: 2.5rem;
       height: 2.5rem;
       background: no-repeat center url("/magazine.svg");
@@ -47,19 +47,19 @@ const { locale } = useI18n()
       flex-shrink: 0;
     }
 
-    .medium-text-text {
+    .press-item__text-text {
       :deep(span) {
         font-style: italic;
       }
     }
   }
 
-  .medium-link {
+  .press-item__link {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 
-    .medium-link-icon {
+    .press-item__link-icon {
       width: 2.5rem;
       height: 2.5rem;
       background: no-repeat center url("/link.svg");
@@ -68,7 +68,7 @@ const { locale } = useI18n()
       flex-shrink: 0;
     }
 
-    .medium-link-link {
+    .press-item__link-link {
       a {
         color: #9d6044;
         text-decoration: none;
@@ -82,12 +82,12 @@ const { locale } = useI18n()
 }
 
 @media (max-width: 768px) {
-  .medium {
+  .press-item {
     font-size: 1.8rem;
     margin-bottom: 3rem;
     
-    .medium-text .medium-text-icon,
-    .medium-link .medium-link-icon {
+    .press-item__text .press-item__text-icon,
+    .press-item__link .press-item__link-icon {
       width: 2rem;
       height: 2rem;
       margin-right: 1.5rem;

@@ -1,21 +1,15 @@
 <template>
-  <li class="compItem">
-    <h3 class="compTitle">{{ composition.name?.[locale] }}</h3>
-    
-    <div class="dateInstru">
-      <div class="dateInstruItem" v-if="composition.year">
-        <img src="/date.png" alt="Date" />
-        {{ composition.year }}
-      </div>
-      <div class="dateInstruItem" v-if="composition.instrumentation?.[locale]">
-        <img src="/instrument.png" alt="Instrument" />
-        {{ composition.instrumentation?.[locale] }}
-      </div>
-    </div>
-    
-    <div class="compText" v-if="composition.performed?.[locale]">
-      <div>{{ composition.performed?.[locale] }}</div>
-    </div>
+  <li class="composition-item">
+    <h3 class="composition-item__title">{{ composition.name?.[locale] }}</h3>
+    <span v-if="composition.year">
+      <img src="/date.png" alt="Date" />
+      {{ composition.year }}
+    </span>
+    <span v-if="composition.instrumentation?.[locale]">
+      <img src="/instrument.png" alt="Instrument" />
+      {{ composition.instrumentation?.[locale] }}
+    </span>
+    <div>{{ composition.performed?.[locale] }}</div>
   </li>
 </template>
 
@@ -33,76 +27,95 @@ const { locale } = useI18n()
 </script>
 
 <style lang="scss" scoped>
-.compItem {
-  display: flex;
-  flex-flow: column nowrap;
+.composition-item {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 1rem;
   font-size: 2.4rem;
   margin: 4rem auto;
   padding-bottom: 4rem;
   border-bottom: 1px solid black;
-  color: #222;
-
-  .compTitle {
+  color: $black;
+  .composition-item__title {
     width: 100%;
     font-size: 2.8rem !important;
-    font-weight: normal;
+    font-weight: 700;
     margin: 0;
+    grid-column: span 6;
   }
-
-  .dateInstru {
-    width: 100%;
+  span {
+    width: auto;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    .dateInstruItem {
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    margin-right: 9rem;
+    img {
+      display: block;
+      margin-right: 3rem;
       width: auto;
-      display: flex;
-      flex-flow: row nowrap;
-      margin-top: 4rem;
-      margin-bottom: 4rem;
-      margin-right: 9rem;
-      align-items: flex-start;
-
-      img {
-        display: block;
-        margin-right: 3rem;
-        width: auto;
-        height: auto;
-      }
+      height: auto;
+    }
+    &:first-of-type {
+      grid-column: span 1;
+    }
+    &:nth-of-type(2) {
+      grid-column: span 5;
     }
   }
-
-  .compText {
-    width: 100%;
+  div {
+    grid-column: span 6;
   }
 }
 
 @media (max-width: 1100px) {
-  .compItem {
-    .dateInstru {
-      flex-flow: column nowrap;
-
-      .dateInstruItem {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        margin-right: 0;
+.composition-item {
+    span {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      margin-right: 0;
+      &:first-of-type {
+        grid-column: span 2;
+      }
+      &:nth-of-type(2) {
+        grid-column: span 4;
       }
     }
   }
 }
 
+
 @media (max-width: 768px) {
-  .compItem {
+  .composition-item {
     font-size: 1.8rem;
-    .compTitle {
+    .composition-item__title {
       font-size: 2.2rem !important;
     }
-    
-    .dateInstru .dateInstruItem img {
-      margin-right: 1.5rem;
-      max-width: 3rem;
+    span {
+      grid-column: span 6;
+      margin-bottom: 0;
+      img {
+        margin-right: 1.5rem;
+        max-width: 3rem;
+      }
+    }
+    div {
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .composition-item {
+    span {
+      &:first-of-type {
+        grid-column: span 6;
+      }
+      &:nth-of-type(2) {
+        grid-column: span 6;
+      }
     }
   }
 }
