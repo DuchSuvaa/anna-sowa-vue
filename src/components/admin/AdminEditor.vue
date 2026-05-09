@@ -10,76 +10,19 @@
     <div class="editor-content">
       <!-- Read-only Timestamp Display -->
       <div class="meta-info" v-if="item.timestamp">
-        <p class="timestamp">{{ $t('admin.date-added') }}: {{ formatDate(item.timestamp) }}</p>
+        <p class="timestamp">{{ $t('admin.date-added') }}: {{ store.formatDate(item.timestamp) }}</p>
       </div>
 
-      <form @submit.prevent="saveChanges" class="edit-form" v-if="currentSchema">
-        <div class="form-group" v-for="field in currentSchema" :key="field.key">
-          <label>{{ field.label }}</label>
-          
-          <!-- Text Input -->
-          <input 
-            v-if="field.type === 'text'" 
-            type="text" 
-            :value="getNested(editData, field.key)" 
-            @input="handleInput(field, $event.target.value)"
-            @blur="validateField(field, getNested(editData, field.key))"
-            class="form-control"
-            :class="{ 'is-invalid': errors[field.key] }"
-          />
-
-          <p v-if="field.help" class="help-text">{{ field.help }}</p>
-          
-          <!-- Textarea -->
-          <textarea 
-            v-else-if="field.type === 'textarea'" 
-            :value="getNested(editData, field.key)" 
-            @input="handleInput(field, $event.target.value)"
-            @blur="validateField(field, getNested(editData, field.key))"
-            class="form-control"
-            :class="{ 'is-invalid': errors[field.key] }"
-            rows="5"
-          ></textarea>
-
-          <!-- Select Input -->
-          <select 
-            v-else-if="field.type === 'select'" 
-            :value="getNested(editData, field.key)" 
-            @change="handleInput(field, $event.target.value)"
-            @blur="validateField(field, getNested(editData, field.key))"
-            class="form-control"
-            :class="{ 'is-invalid': errors[field.key] }"
-          >
-            <option value="" disabled>{{ t('admin.select-option') }}</option>
-            <option v-for="opt in field.options" :key="opt" :value="opt">
-              {{ opt }}
-            </option>
-          </select>
-
-          <!-- Text Array (e.g. bio paragraphs) -->
-          <div v-else-if="field.type === 'text-array'" class="array-container">
-            <div v-for="(paragraph, index) in getArray(editData, field.key)" :key="index" class="array-item">
-              <textarea 
-                :value="paragraph" 
-                @input="updateArrayItem(field.key, index, $event.target.value)"
-                class="form-control"
-                rows="4"
-              ></textarea>
-              <button type="button" class="action-btn remove-btn" @click="removeArrayItem(field.key, index)">{{ $t('admin.remove-paragraph') }}</button>
-            </div>
-            <button type="button" class="action-btn add-btn" @click="addArrayItem(field.key)">+ {{ $t('admin.add-another') }}</button>
-          </div>
-
-          <span v-if="errors[field.key]" class="error-msg">{{ errors[field.key] }}</span>
-        </div>
-
-        <div class="editor-actions">
-          <button type="button" class="cancel-btn" @click="goBack">{{ $t('admin.cancel') }}</button>
-          <button type="submit" class="save-btn" :disabled="saving">
-            {{ saving ? $t('admin.saving') : $t('admin.save-changes') }}
-          </button>
-        </div>
-      </form>
+      <AdminForm 
+        v-if="currentSchema"
+        :schema="currentSchema"
+        v-model="editData"
+        :errors="errors"
+        :saving="saving"
+        @submit="saveChanges"
+        @cancel="goBack"
+        @validate="validateField"
+      />
       
       <div v-else class="no-schema">
         <p>No schema defined for this collection type.</p>
@@ -89,10 +32,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useStore } from '../../pinia/store'
 import { db } from '../../firebase/config'
 import { doc, updateDoc, collection, setDoc } from 'firebase/firestore'
+import AdminForm from './AdminForm.vue'
 
 const props = defineProps({
   item: {
@@ -108,6 +53,7 @@ const props = defineProps({
 const emit = defineEmits(['back'])
 
 const { t } = useI18n()
+const store = useStore()
 const saving = ref(false)
 const editData = ref({})
 let originalDataString = ''
@@ -193,22 +139,10 @@ const getNested = (obj, path) => {
   return path.split('.').reduce((acc, part) => acc && acc[part], obj) || ''
 }
 
-const setNested = (obj, path, value) => {
-  const parts = path.split('.')
-  const last = parts.pop()
-  let current = obj
-  for (const p of parts) {
-    if (typeof current[p] !== 'object' || current[p] === null) {
-      current[p] = {}
-    }
-    current = current[p]
-  }
-  current[last] = value
-}
-
 const errors = ref({})
 
-const validateField = (field, value) => {
+const validateField = (field) => {
+  const value = getNested(editData.value, field.key)
   if (field.required && (!value || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.trim() === ''))) {
     errors.value[field.key] = t('admin.validation.required')
     return false
@@ -233,54 +167,17 @@ const validateField = (field, value) => {
   return true
 }
 
-const handleInput = (field, value) => {
-  setNested(editData.value, field.key, value)
-  
-  // Auto-detect media-type for works
-  if (props.collectionName === 'works' && field.key === 'link') {
-    const v = value.toLowerCase()
+// Auto-detect media-type for works
+watch(() => editData.value.link, (newLink) => {
+  if (props.collectionName === 'works' && newLink) {
+    const v = newLink.toLowerCase()
     if (v.includes('vimeo.com') || v.includes('youtube.com') || v.includes('youtu.be')) {
-      setNested(editData.value, 'media-type', 'video')
+      editData.value['media-type'] = 'video'
     } else if (v.includes('/audio/') || v.includes('.mp3') || v.includes('.wav')) {
-      setNested(editData.value, 'media-type', 'audio')
+      editData.value['media-type'] = 'audio'
     }
   }
-
-  if (errors.value[field.key]) {
-    validateField(field, value)
-  }
-}
-
-// Array handlers
-const getArray = (obj, path) => {
-  const arr = getNested(obj, path)
-  return Array.isArray(arr) ? arr : []
-}
-
-const updateArrayItem = (path, index, value) => {
-  const arr = [...getArray(editData.value, path)]
-  arr[index] = value
-  setNested(editData.value, path, arr)
-}
-
-const addArrayItem = (path) => {
-  const arr = [...getArray(editData.value, path)]
-  arr.push('')
-  setNested(editData.value, path, arr)
-}
-
-const removeArrayItem = (path, index) => {
-  const arr = [...getArray(editData.value, path)]
-  arr.splice(index, 1)
-  setNested(editData.value, path, arr)
-}
-
-// Date formatter
-const formatDate = (ts) => {
-  if (!ts) return ''
-  const date = ts.toDate ? ts.toDate() : new Date(ts._seconds ? ts._seconds * 1000 : ts)
-  return date.toLocaleString()
-}
+})
 
 // Actions
 const goBack = () => {
@@ -297,8 +194,7 @@ const saveChanges = async () => {
   // Validate all fields
   let isValid = true
   currentSchema.value.forEach(field => {
-    const value = getNested(editData.value, field.key)
-    if (!validateField(field, value)) {
+    if (!validateField(field)) {
       isValid = false
     }
   })
@@ -325,9 +221,6 @@ const saveChanges = async () => {
     const payload = { ...editData.value }
     delete payload.id
     
-    // title/identifier is now part of the payload from schemas, 
-    // so it doesn't need to be manually assigned here anymore.
-
     if (isNew) {
       await setDoc(docRef, payload)
     } else {
@@ -408,148 +301,10 @@ const saveChanges = async () => {
   }
 }
 
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  
-  label {
-    font-weight: 600;
-    color: #444;
-    font-size: 1.5rem;
-  }
-  
-  .help-text {
-    font-size: 1.2rem;
-    color: #666;
-    margin: 0;
-  }
-}
-
-.form-control {
-  width: 100%;
-  padding: 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1.5rem;
-  font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  
-  &:focus {
-    outline: none;
-    border-color: #0066cc;
-    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
-  }
-
-  &.is-invalid {
-    border-color: #dc3545;
-    &:focus {
-      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-    }
-  }
-}
-
-.error-msg {
-  color: #dc3545;
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-top: -0.4rem;
-}
-
-textarea.form-control {
-  resize: vertical;
-}
-
-.array-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background-color: #f9f9f9;
-  border-radius: 6px;
-  border: 1px dashed #ccc;
-}
-
-.array-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.action-btn {
-  align-self: flex-start;
-  padding: 0.6rem 1.2rem;
-  font-size: 1.3rem;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: opacity 0.2s;
-  
-  &:hover {
-    opacity: 0.8;
-  }
-  
-  &.add-btn {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  &.remove-btn {
-    background-color: #dc3545;
-    color: white;
-  }
-}
-
-.editor-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #eee;
-  
-  button {
-    padding: 1.2rem 2.4rem;
-    font-size: 1.6rem;
-    font-weight: bold;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.1s, background-color 0.2s;
-    
-    &:active {
-      transform: scale(0.98);
-    }
-  }
-  
-  .cancel-btn {
-    background-color: #e0e0e0;
-    color: #333;
-    
-    &:hover {
-      background-color: #ccc;
-    }
-  }
-  
-  .save-btn {
-    background-color: #0066cc;
-    color: white;
-    
-    &:hover {
-      background-color: #0052a3;
-    }
-    
-    &:disabled {
-      background-color: #80b3e6;
-      cursor: not-allowed;
-    }
-  }
+.no-schema {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+  font-size: 1.6rem;
 }
 </style>

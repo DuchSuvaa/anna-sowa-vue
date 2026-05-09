@@ -100,7 +100,13 @@ export const useStore = defineStore('main', () => {
     return { docs: processedDocs, lastVisible }
   }
 
+  const formatDate = (ts: any) => {
+    if (!ts) return ''
+    const date = ts.toDate ? ts.toDate() : new Date(ts._seconds ? ts._seconds * 1000 : ts)
+    return date.toLocaleString()
+  }
+
   return {
-    error, notification, things, user, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection
+    error, notification, things, user, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate
   }
 })

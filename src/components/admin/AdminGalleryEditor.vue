@@ -6,7 +6,7 @@
       </button>
       <h2>{{ $t('admin.editing-gallery') }}: {{ editData.title || editData.name?.en || ($t('admin.add-new') + ' ' + $t('sections.gallery')) }}</h2>
       <div class="meta-info" v-if="editData.timestamp">
-        <p class="timestamp">{{ $t('admin.date-added') }}: {{ formatDate(editData.timestamp) }}</p>
+        <p class="timestamp">{{ $t('admin.date-added') }}: {{ store.formatDate(editData.timestamp) }}</p>
       </div>
     </div>
 
@@ -104,6 +104,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useStore } from '../../pinia/store'
 import draggable from 'vuedraggable'
 import { db } from '../../firebase/config'
 import { doc, updateDoc, setDoc, collection } from 'firebase/firestore'
@@ -118,6 +119,7 @@ const props = defineProps({
 const emit = defineEmits(['back'])
 
 const { t } = useI18n()
+const store = useStore()
 const saving = ref(false)
 const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
 const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
@@ -211,12 +213,6 @@ const validateForm = () => {
 
 const getThumbnail = (publicId) => {
   return `https://res.cloudinary.com/${cloudName}/image/upload/c_thumb,w_200,h_200,g_face/${publicId}`
-}
-
-const formatDate = (ts) => {
-  if (!ts) return ''
-  const date = ts.toDate ? ts.toDate() : new Date(ts._seconds ? ts._seconds * 1000 : ts)
-  return date.toLocaleString()
 }
 
 const removePhoto = (index, publicId) => {
@@ -338,53 +334,6 @@ const saveChanges = async () => {
   &:hover {
     color: #004999;
     text-decoration: underline;
-  }
-}
-
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  
-  label {
-    font-weight: 600;
-    color: #444;
-    font-size: 1.5rem;
-  }
-  
-  .help-text {
-    font-size: 1.2rem;
-    color: #666;
-    margin: 0;
-  }
-}
-
-.form-control {
-  width: 100%;
-  padding: 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1.5rem;
-  font-family: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  
-  &:focus {
-    outline: none;
-    border-color: #0066cc;
-    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
-  }
-
-  &.is-invalid {
-    border-color: #dc3545;
-    &:focus {
-      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-    }
   }
 }
 
