@@ -87,13 +87,13 @@ const schemas = computed(() => ({
     { key: 'performed.en', label: `${t('admin.fields.performed')} (EN)`, type: 'textarea' },
     { key: 'performed.pl', label: `${t('admin.fields.performed')} (PL)`, type: 'textarea' },
   ],
-  media: [
+  press: [
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'mediumText.en', label: `${t('admin.fields.mediumText')} (EN)`, type: 'text', required: true },
     { key: 'mediumText.pl', label: `${t('admin.fields.mediumText')} (PL)`, type: 'text', required: true },
     { key: 'mediumLink', label: t('admin.fields.link'), type: 'text', pattern: 'url' }
   ],
-  works: [
+  multimedia: [
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'name', label: t('admin.fields.name'), type: 'text', required: true },
     { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
@@ -127,8 +127,8 @@ onMounted(() => {
     if (props.collectionName === 'biography') data.title = getNested(data, 'en.header') || getNested(data, 'en.title')
     else if (props.collectionName === 'compositions') data.title = getNested(data, 'name.en')
     else if (props.collectionName === 'news') data.title = getNested(data, 'description.en')
-    else if (props.collectionName === 'media') data.title = getNested(data, 'mediumText.en')
-    else if (props.collectionName === 'works') data.title = data.name
+    else if (props.collectionName === 'press') data.title = getNested(data, 'mediumText.en')
+    else if (props.collectionName === 'multimedia') data.title = data.name
   }
 
   editData.value = data
@@ -167,9 +167,9 @@ const validateField = (field) => {
   return true
 }
 
-// Auto-detect media-type for works
+// Auto-detect media-type for multimedia
 watch(() => editData.value.link, (newLink) => {
-  if (props.collectionName === 'works' && newLink) {
+  if (props.collectionName === 'multimedia' && newLink) {
     const v = newLink.toLowerCase()
     if (v.includes('vimeo.com') || v.includes('youtube.com') || v.includes('youtu.be')) {
       editData.value['media-type'] = 'video'

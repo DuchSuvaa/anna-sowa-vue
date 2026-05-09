@@ -3,8 +3,8 @@ import Home from '../views/HomePage.vue'
 import BioPage from '../views/BioPage.vue'
 import CompositionsPage from '../views/CompositionsPage.vue'
 import NewsPage from '../views/NewsPage.vue'
-import MediaPage from '../views/MediaPage.vue'
-import WorksPage from '../views/WorksPage.vue'
+import PressPage from '../views/PressPage.vue'
+import MultimediaPage from '../views/MultimediaPage.vue'
 import GalleryPage from '../views/GalleryPage.vue'
 import GalleryAlbumPage from '../views/GalleryAlbumPage.vue'
 import Login from '../views/LoginPage.vue'
@@ -51,14 +51,14 @@ const routes = [
     component: NewsPage
   },
   {
-    path: '/media',
-    name: 'Media',
-    component: MediaPage
+    path: '/press',
+    name: 'Press',
+    component: PressPage
   },
   {
-    path: '/works',
-    name: 'Works',
-    component: WorksPage
+    path: '/multimedia',
+    name: 'Multimedia',
+    component: MultimediaPage
   },
   {
     path: '/gallery',

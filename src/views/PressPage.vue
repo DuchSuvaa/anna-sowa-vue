@@ -1,13 +1,13 @@
 <template>
-  <section id="media">
+  <section id="press">
     <div class="content">
-      <div class="sort-controls" v-if="media && media.length">
+      <div class="sort-controls" v-if="press && press.length">
         <button class="sort-btn" @click="toggleSort">
           Sort: {{ sortDirection === 'asc' ? $t('general.sort-asc') : $t('general.sort-desc') }}
         </button>
       </div>
-      <ul class="media-list" v-if="media && media.length">
-        <li v-for="item in media" :key="item.id" class="medium">
+      <ul class="press-list" v-if="press && press.length">
+        <li v-for="item in press" :key="item.id" class="medium">
           <div class="medium-text">
             <div class="medium-text-icon"></div>
             <div class="medium-text-text" v-html="item.mediumText?.[locale]"></div>
@@ -20,8 +20,8 @@
           </div>
         </li>
       </ul>
-      <p v-else>No media found</p>
-      <button v-if="hasMore && media.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
+      <p v-else>No press items found</p>
+      <button v-if="hasMore && press.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
     </div>
   </section>
 </template>
@@ -33,14 +33,14 @@ import { useStore } from '../pinia/store'
 
 const { locale } = useI18n()
 const store = useStore()
-const media = ref([])
+const press = ref([])
 const lastDoc = ref(null)
 const hasMore = ref(true)
 const sortDirection = ref('asc')
 
 const toggleSort = async () => {
   sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
-  media.value = []
+  press.value = []
   lastDoc.value = null
   hasMore.value = true
   await loadMore()
@@ -48,9 +48,9 @@ const toggleSort = async () => {
 
 const loadMore = async () => {
   const limitCount = store.globalSettings?.itemsPerPage || 10
-  const result = await store.getPaginatedCollection('media', lastDoc.value, limitCount, 'order', sortDirection.value)
+  const result = await store.getPaginatedCollection('press', lastDoc.value, limitCount, 'order', sortDirection.value)
   if (result.docs.length > 0) {
-    media.value.push(...result.docs)
+    press.value.push(...result.docs)
     lastDoc.value = result.lastVisible
   }
   if (result.docs.length < limitCount) {
@@ -65,7 +65,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-#media {
+#press {
   background-image: url('/bg-media.jpg');
 }
 
@@ -90,7 +90,7 @@ onMounted(async () => {
   }
 }
 
-.media-list {
+.press-list {
   list-style: none;
   padding: 0;
   margin: 0;

@@ -1,7 +1,7 @@
 <template>
-  <section id="works">
+  <section id="multimedia">
     <div class="content">
-      <div v-if="works && works.length">
+      <div v-if="multimedia && multimedia.length">
         <h2>Chamber Music</h2>
         <ul>
           <WorkItem :work="work" v-for="work in chamberWorks" :key="work.id"/>
@@ -15,8 +15,8 @@
           <WorkItem :work="work" v-for="work in orchestralWorks" :key="work.id"/>
         </ul>
       </div>
-      <p v-else>No works found</p>
-      <button v-if="hasMore && works.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
+      <p v-else>No multimedia found</p>
+      <button v-if="hasMore && multimedia.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
     </div>
   </section>
 </template>
@@ -27,19 +27,19 @@ import { useStore } from '../pinia/store'
 import WorkItem from '../components/WorkItem.vue'
 
 const store = useStore()
-const works = ref([])
+const multimedia = ref([])
 
-const chamberWorks = computed(() => works.value.filter(w => w['music-type'] === 'Chamber' || w['music-type'] === 'chamber'))
-const installationWorks = computed(() => works.value.filter(w => w['music-type'] === 'Installation' || w['music-type'] === 'Installations'))
-const orchestralWorks = computed(() => works.value.filter(w => w['music-type'] === 'Orchestral' || w['music-type'] === 'orchestral'))
+const chamberWorks = computed(() => multimedia.value.filter(w => w['music-type'] === 'Chamber' || w['music-type'] === 'chamber'))
+const installationWorks = computed(() => multimedia.value.filter(w => w['music-type'] === 'Installation' || w['music-type'] === 'Installations'))
+const orchestralWorks = computed(() => multimedia.value.filter(w => w['music-type'] === 'Orchestral' || w['music-type'] === 'orchestral'))
 
 onMounted(async () => {
-  works.value = await store.getCollection('works')
+  multimedia.value = await store.getCollection('multimedia')
 })
 </script>
 
 <style lang="scss" scoped>
-#works {
+#multimedia {
   background-image: url('/bg-works.jpg');
   .content {
     div {

@@ -3,8 +3,8 @@
     <RouterLink to="/bio">{{ t('sections.bio') }}</RouterLink>
     <RouterLink to="/compositions">{{ t('sections.compositions') }}</RouterLink>
     <RouterLink to="/news">{{ t('sections.news') }}</RouterLink>
-    <RouterLink to="/media">{{ t('sections.media') }}</RouterLink>
-    <RouterLink to="/works">{{ t('sections.works') }}</RouterLink>
+    <RouterLink to="/press">{{ t('sections.press') }}</RouterLink>
+    <RouterLink to="/multimedia">{{ t('sections.multimedia') }}</RouterLink>
     <RouterLink to="/gallery">{{ t('sections.gallery') }}</RouterLink>
   </nav>
 </template>

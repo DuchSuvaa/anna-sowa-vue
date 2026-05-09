@@ -80,8 +80,8 @@ const navItems = computed(() => [
   { id: 'biography', label: t('sections.bio'), collection: true },
   { id: 'compositions', label: t('sections.compositions'), collection: true },
   { id: 'news', label: t('sections.news'), collection: true },
-  { id: 'media', label: t('sections.media'), collection: true },
-  { id: 'works', label: t('sections.works'), collection: true },
+  { id: 'press', label: t('sections.press'), collection: true },
+  { id: 'multimedia', label: t('sections.multimedia'), collection: true },
   { id: 'galleries', label: t('sections.gallery'), collection: true }
 ])
 
