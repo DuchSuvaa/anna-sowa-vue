@@ -344,6 +344,53 @@ const saveChanges = async () => {
   margin-top: -0.4rem;
 }
 
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  
+  label {
+    font-weight: 600;
+    color: #444;
+    font-size: 1.5rem;
+  }
+  
+  .help-text {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.form-control {
+  width: 100%;
+  padding: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  
+  &:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  }
+
+  &.is-invalid {
+    border-color: #dc3545;
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    }
+  }
+}
+
 .gallery-manager {
   background: #f8f9fa;
   border: 1px solid #ddd;

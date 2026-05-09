@@ -193,7 +193,7 @@ const removeArrayItem = (path, index) => {
         }
       }
 
-      &textarea {
+      textarea {
         resize: vertical;
       }
     }

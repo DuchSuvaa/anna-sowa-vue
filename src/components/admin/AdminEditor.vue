@@ -64,8 +64,8 @@ const schemas = computed(() => ({
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'en.header', label: `${t('admin.fields.header')} (EN)`, type: 'text', required: true },
     { key: 'pl.header', label: `${t('admin.fields.header')} (PL)`, type: 'text', required: true },
-    { key: 'en.text', label: `${t('admin.fields.content')} (EN)`, type: 'text-array', required: true },
-    { key: 'pl.text', label: `${t('admin.fields.content')} (PL)`, type: 'text-array', required: true },
+    { key: 'en.text', label: `${t('admin.fields.content')} (EN)`, type: 'textarea', required: true },
+    { key: 'pl.text', label: `${t('admin.fields.content')} (PL)`, type: 'textarea', required: true },
   ],
   compositions: [
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },

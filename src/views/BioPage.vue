@@ -4,7 +4,7 @@
       <div v-if="sections.length" class="bio-sections">
         <div v-for="section in sections" :key="section.id" class="bio-section">
           <h2>{{ section[locale]?.header }}</h2>
-          <p v-for="(para, i) in section[locale]?.text" :key="i">{{ para }}</p>
+          <div class="bio-paragraphs" v-html="formatText(section[locale]?.text)"></div>
         </div>
       </div>
       <p v-else>No content found.</p>
@@ -25,6 +25,16 @@ onMounted(async () => {
   const result = await store.getPaginatedCollection('biography', null, 50, 'order', 'asc')
   sections.value = result.docs
 })
+
+const formatText = (text) => {
+  if (!text) return ''
+  // Handle double newlines as separate paragraphs
+  return text
+    .split(/\n\s*\n/)
+    .filter(p => p.trim() !== '')
+    .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+    .join('')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -45,7 +55,7 @@ onMounted(async () => {
     font-weight: 700;
   }
 
-  p {
+  p, :deep(p) {
     margin-bottom: 1.2rem;
     line-height: 1.8;
     font-size: 1.5rem;

@@ -246,6 +246,10 @@ defineExpose({ reload: loadItems })
   
   &:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    .post-tools {
+      opacity: 1;
+    }
   }
   
   .drag-handle {
@@ -274,12 +278,14 @@ defineExpose({ reload: loadItems })
     justify-content: flex-end;
     gap: 1rem;
     padding-right: 1rem;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+
     svg {
       font-size: 1.7rem; 
       &:hover {
         cursor: pointer;
-        color: $grey;
-        transition: 0.2s;
+        color: #666;
       }
     }
   }

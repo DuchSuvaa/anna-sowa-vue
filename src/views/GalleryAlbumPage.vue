@@ -34,10 +34,11 @@
 
     <!-- Very basic lightbox -->
     <div v-if="lightboxOpen" class="lightbox" @click="closeLightbox">
+      <button class="close-btn" @click="closeLightbox">×</button>
+      
+      <button class="nav-btn prev" @click.stop="prevPhoto" v-if="currentPhotoIndex > 0">‹</button>
+      
       <div class="lightbox-content" @click.stop>
-        <button class="close-btn" @click="closeLightbox">×</button>
-        <button class="nav-btn prev" @click="prevPhoto" v-if="currentPhotoIndex > 0">‹</button>
-        
         <ResponsiveImage 
           v-if="currentPhoto"
           :publicId="currentPhoto.public_id"
@@ -45,9 +46,9 @@
           sizes="100vw"
           class="lightbox-img"
         />
-        
-        <button class="nav-btn next" @click="nextPhoto" v-if="currentPhotoIndex < album.photos.length - 1">›</button>
       </div>
+      
+      <button class="nav-btn next" @click.stop="nextPhoto" v-if="currentPhotoIndex < album.photos.length - 1">›</button>
     </div>
   </section>
 </template>
@@ -211,16 +212,19 @@ const handleKeydown = (e) => {
 
 .close-btn {
   position: absolute;
-  top: -4rem;
-  right: -2rem;
+  top: 2rem;
+  right: 2rem;
   background: none;
   border: none;
   color: white;
-  font-size: 4rem;
+  font-size: 5rem;
   cursor: pointer;
   line-height: 1;
-  @media (max-width: 768px) {
-    right: 0;
+  z-index: 2001;
+  transition: opacity 0.3s;
+  
+  &:hover {
+    opacity: 0.7;
   }
 }
 
@@ -228,19 +232,31 @@ const handleKeydown = (e) => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.1);
+  background: none;
   border: none;
   color: white;
-  font-size: 5rem;
+  font-size: 8rem;
   cursor: pointer;
-  padding: 1rem 2rem;
-  transition: background 0.3s;
+  padding: 2rem;
+  transition: color 0.3s, transform 0.2s;
+  z-index: 2001;
   
   &:hover {
-    background: rgba(255,255,255,0.3);
+    color: #ccc;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(1.1);
   }
   
-  &.prev { left: -6rem; @media (max-width: 768px) { left: 0; } }
-  &.next { right: -6rem; @media (max-width: 768px) { right: 0; } }
+  &.prev { left: 1rem; }
+  &.next { right: 1rem; }
+
+  @media (max-width: 768px) {
+    font-size: 5rem;
+    padding: 1rem;
+    &.prev { left: 0; }
+    &.next { right: 0; }
+  }
 }
 </style>
