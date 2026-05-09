@@ -1,15 +1,15 @@
 <template>
   <li class="composition-item">
     <h3 class="composition-item__title">{{ composition.name?.[locale] }}</h3>
-    <span v-if="composition.year">
+    <span v-if="composition.year" class="composition-item__year">
       <img src="/date.png" alt="Date" />
       {{ composition.year }}
     </span>
-    <span v-if="composition.instrumentation?.[locale]">
+    <span v-if="composition.instrumentation?.[locale]" class="composition-item__instrumentation">
       <img src="/instrument.png" alt="Instrument" />
       {{ composition.instrumentation?.[locale] }}
     </span>
-    <div>{{ composition.performed?.[locale] }}</div>
+    <div class="composition-item__performed">{{ composition.performed?.[locale] }}</div>
   </li>
 </template>
 
@@ -44,7 +44,9 @@ const { locale } = useI18n()
     margin: 0;
     grid-column: span 6;
   }
-  span {
+  
+  .composition-item__year,
+  .composition-item__instrumentation {
     width: auto;
     display: flex;
     flex-flow: row nowrap;
@@ -58,30 +60,34 @@ const { locale } = useI18n()
       width: auto;
       height: auto;
     }
-    &:first-of-type {
-      grid-column: span 1;
-    }
-    &:nth-of-type(2) {
-      grid-column: span 5;
-    }
   }
-  div {
+
+  .composition-item__year {
+    grid-column: span 1;
+  }
+
+  .composition-item__instrumentation {
+    grid-column: span 5;
+  }
+
+  .composition-item__performed {
     grid-column: span 6;
   }
 }
 
 @media (max-width: 1100px) {
-.composition-item {
-    span {
+  .composition-item {
+    .composition-item__year,
+    .composition-item__instrumentation {
       margin-top: 2rem;
       margin-bottom: 2rem;
       margin-right: 0;
-      &:first-of-type {
-        grid-column: span 2;
-      }
-      &:nth-of-type(2) {
-        grid-column: span 4;
-      }
+    }
+    .composition-item__year {
+      grid-column: span 2;
+    }
+    .composition-item__instrumentation {
+      grid-column: span 4;
     }
   }
 }
@@ -93,7 +99,8 @@ const { locale } = useI18n()
     .composition-item__title {
       font-size: 2.2rem !important;
     }
-    span {
+    .composition-item__year,
+    .composition-item__instrumentation {
       grid-column: span 6;
       margin-bottom: 0;
       img {
@@ -101,7 +108,7 @@ const { locale } = useI18n()
         max-width: 3rem;
       }
     }
-    div {
+    .composition-item__performed {
       margin-top: 2rem;
     }
   }
@@ -109,13 +116,9 @@ const { locale } = useI18n()
 
 @media (max-width: 500px) {
   .composition-item {
-    span {
-      &:first-of-type {
-        grid-column: span 6;
-      }
-      &:nth-of-type(2) {
-        grid-column: span 6;
-      }
+    .composition-item__year,
+    .composition-item__instrumentation {
+      grid-column: span 6;
     }
   }
 }
