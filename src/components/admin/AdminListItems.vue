@@ -30,8 +30,8 @@
             <span class="drag-handle">☰</span>
             <span class="item-title">{{ getIdentifier(element) }}</span>
             <div class="post-tools">
-              <button class="edit-btn" @click="$emit('edit-item', element)">Edit</button>
-              <button class="delete-btn" @click="deleteItem(element)">Delete</button>
+              <EditIcon @click="$emit('edit-item', element)" />
+              <DeleteIcon @click="deleteItem(element)" />
             </div>
           </div>
         </template>
@@ -46,6 +46,8 @@ import draggable from 'vuedraggable'
 import { db } from '../../firebase/config'
 import { collection, getDocs, query, orderBy, doc, writeBatch, deleteDoc } from 'firebase/firestore'
 import { useI18n } from 'vue-i18n'
+import EditIcon from '@/components/icons/EditIcon.vue'
+import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 
 const props = defineProps({
   collectionName: {
@@ -160,7 +162,6 @@ defineExpose({ reload: loadItems })
     h2 {
       margin: 0;
       font-size: 2.4rem;
-      color: #333;
     }
 
     .title-bar-actions {
@@ -273,37 +274,13 @@ defineExpose({ reload: loadItems })
     justify-content: flex-end;
     gap: 1rem;
     padding-right: 1rem;
-  }
-  
-  .edit-btn {
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.4rem;
-    transition: background-color 0.2s;
-    white-space: nowrap;
-    
-    &:hover {
-      background-color: #0052a3;
-    }
-  }
-
-  .delete-btn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.4rem;
-    transition: background-color 0.2s;
-    white-space: nowrap;
-    
-    &:hover {
-      background-color: #c82333;
+    svg {
+      font-size: 1.7rem; 
+      &:hover {
+        cursor: pointer;
+        color: $grey;
+        transition: 0.2s;
+      }
     }
   }
 }
