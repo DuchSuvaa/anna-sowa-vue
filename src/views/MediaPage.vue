@@ -41,17 +41,19 @@ const toggleSort = async () => {
 }
 
 const loadMore = async () => {
-  const result = await store.getPaginatedCollection('media', lastDoc.value, 10, 'order', sortDirection.value)
+  const limitCount = store.globalSettings?.itemsPerPage || 10
+  const result = await store.getPaginatedCollection('media', lastDoc.value, limitCount, 'order', sortDirection.value)
   if (result.docs.length > 0) {
     media.value.push(...result.docs)
     lastDoc.value = result.lastVisible
   }
-  if (result.docs.length < 10) {
+  if (result.docs.length < limitCount) {
     hasMore.value = false
   }
 }
 
 onMounted(async () => {
+  await store.loadSettings()
   await loadMore()
 })
 </script>

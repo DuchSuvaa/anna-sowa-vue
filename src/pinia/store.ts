@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import router from '../router/index.js'
 import { db, auth } from '../firebase/config.js'
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { collection, doc, getDoc, getDocs, query, orderBy, limit, startAfter } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, setDoc, query, orderBy, limit, startAfter } from 'firebase/firestore'
 
 export const useStore = defineStore('main', () => {
   // State
@@ -11,6 +11,7 @@ export const useStore = defineStore('main', () => {
   const notification = ref(null)
   const things = ref([])
   const user = ref(null)
+  const globalSettings = ref({ itemsPerPage: 10 })
 
   // Actions
   const setError = (err) => {
@@ -106,7 +107,31 @@ export const useStore = defineStore('main', () => {
     return date.toLocaleString()
   }
 
+  const loadSettings = async () => {
+    try {
+      const docRef = doc(db, 'settings', 'general')
+      const docSnap = await getDoc(docRef)
+      if (docSnap.exists()) {
+        globalSettings.value = { ...globalSettings.value, ...docSnap.data() }
+      }
+    } catch (err) {
+      console.error(err)
+    }
+    return globalSettings.value
+  }
+
+  const saveSettings = async (newSettings: any) => {
+    try {
+      const docRef = doc(db, 'settings', 'general')
+      await setDoc(docRef, newSettings, { merge: true })
+      globalSettings.value = { ...globalSettings.value, ...newSettings }
+    } catch (err) {
+      setError(err)
+      throw err
+    }
+  }
+
   return {
-    error, notification, things, user, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate
+    error, notification, things, user, globalSettings, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate, loadSettings, saveSettings
   }
 })

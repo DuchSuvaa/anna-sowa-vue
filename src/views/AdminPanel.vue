@@ -39,9 +39,7 @@
         
         <!-- List View -->
         <div v-else-if="currentView === 'settings'" class="settings-view">
-          <h2>Settings</h2>
-          <p>Welcome to the admin panel. Select a post type from the sidebar to manage its content.</p>
-          <!-- Future settings components go here -->
+          <AdminSettings />
         </div>
         
         <div v-else class="collection-view">
@@ -64,6 +62,7 @@ import { useI18n } from 'vue-i18n'
 import AdminListItems from '../components/admin/AdminListItems.vue'
 import AdminEditor from '../components/admin/AdminEditor.vue'
 import AdminGalleryEditor from '../components/admin/AdminGalleryEditor.vue'
+import AdminSettings from '../components/admin/AdminSettings.vue'
 
 const store = useStore()
 const { t } = useI18n()
