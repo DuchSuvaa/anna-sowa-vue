@@ -149,7 +149,7 @@ const validateField = (field) => {
   }
   
   if (value && field.pattern === 'url') {
-    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/
+    const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})(.*)$/
     if (!urlPattern.test(value)) {
       errors.value[field.key] = t('admin.validation.invalid-url')
       return false

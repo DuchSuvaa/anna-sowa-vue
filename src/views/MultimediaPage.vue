@@ -4,15 +4,15 @@
       <div v-if="multimedia && multimedia.length">
         <h2>Chamber Music</h2>
         <ul>
-          <WorkItem :work="work" v-for="work in chamberWorks" :key="work.id"/>
+          <MultimediaItem :work="work" v-for="work in chamberWorks" :key="work.id"/>
         </ul>
         <h2>Installation</h2>
         <ul>
-          <WorkItem :work="work" v-for="work in installationWorks" :key="work.id"/>
+          <MultimediaItem :work="work" v-for="work in installationWorks" :key="work.id"/>
         </ul>
         <h2>Orchestral Music</h2>
         <ul>
-          <WorkItem :work="work" v-for="work in orchestralWorks" :key="work.id"/>
+          <MultimediaItem :work="work" v-for="work in orchestralWorks" :key="work.id"/>
         </ul>
       </div>
       <p v-else>No multimedia found</p>
@@ -24,7 +24,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useStore } from '../pinia/store'
-import WorkItem from '../components/WorkItem.vue'
+import MultimediaItem from '../components/MultimediaItem.vue'
 
 const store = useStore()
 const multimedia = ref([])
@@ -53,7 +53,7 @@ onMounted(async () => {
         width: 100%;
         display: flex;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-start;
         flex-flow: row wrap;
       }
     }

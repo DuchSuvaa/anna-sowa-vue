@@ -1,6 +1,7 @@
 <template>
   <li class="work-item">
-    <img :src="work.image" alt="">
+    <MediaPlayer v-if="work.link" :url="work.link" />
+    <img v-else-if="work.image" :src="work.image" alt="">
     <h3>{{ work.title }}</h3>
     <span>{{ work.year }}</span>
     <span>{{ work.info }}</span>
@@ -9,6 +10,8 @@
 </template>
 
 <script setup>
+import MediaPlayer from './MediaPlayer.vue'
+
 const props = defineProps([ 'work' ])
 
 </script>
@@ -16,7 +19,6 @@ const props = defineProps([ 'work' ])
 <style lang="scss" scoped>
 li.work-item {
   width: 49%;
-  border-left: 2px solid $black;
   font-size: 2.4rem;
   padding-left: 3rem;
   margin-bottom: 4rem;

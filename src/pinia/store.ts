@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import router from '../router/index.js'
 import { db, auth } from '../firebase/config.js'
 import { signInWithEmailAndPassword, signOut, updatePassword } from 'firebase/auth'
-import { collection, doc, getDoc, getDocs, setDoc, query, orderBy, limit, startAfter } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, setDoc, query, orderBy, limit, startAfter, where } from 'firebase/firestore'
 
 export const useStore = defineStore('main', () => {
   // State
@@ -77,7 +77,7 @@ export const useStore = defineStore('main', () => {
     return processedDocs
   }
 
-  const getPaginatedCollection = async (colName: string, lastVisibleDoc: any = null, limitCount: number = 10, sortField: string | null = 'timestamp', sortDir: 'asc' | 'desc' = 'desc', ...otherLevels: any[]) => {
+  const getPaginatedCollection = async (colName: string, lastVisibleDoc: any = null, limitCount: number = 10, sortField: string | null = 'timestamp', sortDir: 'asc' | 'desc' = 'desc', filterField: string | null = null, filterValue: any = null, ...otherLevels: any[]) => {
     const processedDocs: any[] = []
     let lastVisible = null
     try {
@@ -87,6 +87,10 @@ export const useStore = defineStore('main', () => {
       let queryConstraints = []
       if (sortField) {
         queryConstraints.push(orderBy(sortField, sortDir))
+      }
+      
+      if (filterField && filterValue) {
+        queryConstraints.push(where(filterField, '==', filterValue))
       }
       
       if (lastVisibleDoc) {

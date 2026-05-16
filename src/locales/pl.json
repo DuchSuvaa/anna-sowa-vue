@@ -2,7 +2,16 @@
   "general": {
     "load-more": "Załaduj więcej",
     "sort-asc": "Od najnowszych",
-    "sort-desc": "Od najstarszych"
+    "sort-desc": "Od najstarszych",
+    "filtering": {
+      "all": "Wszystkie",
+      "orchestral": "Muzyka Orkiestrowa",
+      "chamber": "Muzyka Kameralna",
+      "solo": "Solo",
+      "installations": "Instalacje",
+      "dance": "Teatr i Taniec",
+      "children": "Muzyka dla Dzieci"
+    }
   },
   "sections": {
     "bio": "Bio",

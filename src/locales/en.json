@@ -2,7 +2,16 @@
   "general": {
     "load-more": "Load more",
     "sort-asc": "Latest first",
-    "sort-desc": "Oldest first"
+    "sort-desc": "Oldest first",
+    "filtering": {
+      "all": "All",
+      "orchestral": "Orchestral Music",
+      "chamber": "Chamber Music",
+      "solo": "Solo",
+      "installations": "Installations",
+      "dance": "Theatre and Dance",
+      "children": "Music for Children"
+    }
   },
   "sections": {
     "bio": "Bio",
