@@ -77,5 +77,10 @@
       "name-en": "Name (EN)",
       "name-pl": "Name (PL)"
     }
+  },
+  "login": {
+    "email-required": "Please enter your email",
+    "password-required": "Please enter your password",
+    "invalid-email": "Please enter a valid email address"
   }
 }

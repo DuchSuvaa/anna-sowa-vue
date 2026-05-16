@@ -15,7 +15,7 @@ export const useStore = defineStore('main', () => {
 
   // Actions
   const setError = (err) => {
-    error.value = err
+    error.value = typeof err === 'string' ? err : (err && err.message ? err.message : 'An unknown error occurred')
     setTimeout(() => { error.value = null }, 8000)
   }
 
