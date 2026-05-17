@@ -200,7 +200,7 @@ const saveChanges = async () => {
   })
 
   if (!isValid) {
-    alert(t('admin.save-error') + ' ' + Object.values(errors.value)[0])
+    store.setError(t('admin.save-error') + ' ' + Object.values(errors.value)[0])
     return
   }
 
@@ -231,11 +231,11 @@ const saveChanges = async () => {
     Object.assign(props.item, editData.value)
     originalDataString = JSON.stringify(editData.value)
     
-    alert(t('admin.save-success'))
+    store.setNotification(t('admin.save-success'))
     emit('back')
   } catch (error) {
     console.error("Error saving document: ", error)
-    alert(t('admin.save-error'))
+    store.setError(t('admin.save-error'))
   } finally {
     saving.value = false
   }

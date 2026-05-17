@@ -160,7 +160,7 @@ const openWidget = () => {
       },
       (error, result) => {
         if (!error && result && result.event === 'success') {
-          console.log('Done! Here is the image info: ', result.info)
+          store.setNotification('Image uploaded successfully')
           editData.value.photos.push({
             public_id: result.info.public_id,
             url: result.info.secure_url,
@@ -244,7 +244,7 @@ const goBack = () => {
 
 const saveChanges = async () => {
   if (!validateForm()) {
-    alert(t('admin.save-error'))
+    store.setError(t('admin.save-error'))
     return
   }
 
@@ -282,11 +282,11 @@ const saveChanges = async () => {
     Object.assign(props.item, editData.value)
     originalDataString = JSON.stringify(editData.value)
     
-    alert(t('admin.save-success'))
+    store.setNotification(t('admin.save-success'))
     emit('back')
   } catch (error) {
     console.error("Error saving document: ", error)
-    alert(t('admin.save-error'))
+    store.setError(t('admin.save-error'))
   } finally {
     saving.value = false
   }

@@ -7,21 +7,27 @@ import { collection, doc, getDoc, getDocs, setDoc, query, orderBy, limit, startA
 
 export const useStore = defineStore('main', () => {
   // State
-  const error = ref(null)
-  const notification = ref(null)
+  const toasts = ref([])
   const things = ref([])
   const user = ref(null)
   const globalSettings = ref({ itemsPerPage: 10 })
 
   // Actions
+  const removeToast = (id) => {
+    toasts.value = toasts.value.filter(t => t.id !== id)
+  }
+
   const setError = (err) => {
-    error.value = typeof err === 'string' ? err : (err && err.message ? err.message : 'An unknown error occurred')
-    setTimeout(() => { error.value = null }, 8000)
+    const msg = typeof err === 'string' ? err : (err && err.message ? err.message : 'An unknown error occurred')
+    const id = Date.now() + Math.random()
+    toasts.value.push({ id, message: msg, type: 'error' })
+    setTimeout(() => removeToast(id), 8000)
   }
 
   const setNotification = (notif) => {
-    notification.value = notif
-    setTimeout(() => { notification.value = null }, 8000)
+    const id = Date.now() + Math.random()
+    toasts.value.push({ id, message: notif, type: 'success' })
+    setTimeout(() => removeToast(id), 8000)
   }
 
   const login = async (email, password) => {
@@ -147,6 +153,6 @@ export const useStore = defineStore('main', () => {
   }
 
   return {
-    error, notification, things, user, globalSettings, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate, loadSettings, saveSettings, changePassword
+    toasts, removeToast, things, user, globalSettings, setError, setNotification, login, logout, getDocument, getCollection, getPaginatedCollection, formatDate, loadSettings, saveSettings, changePassword
   }
 })

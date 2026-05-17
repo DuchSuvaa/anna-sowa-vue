@@ -106,10 +106,10 @@ const save = async () => {
   saving.value = true
   try {
     await store.saveSettings(settingsForm.value)
-    alert(t('admin.save-success'))
+    store.setNotification(t('admin.save-success'))
   } catch (error) {
     console.error(error)
-    alert(t('admin.save-error'))
+    store.setError(t('admin.save-error'))
   } finally {
     saving.value = false
   }
@@ -117,12 +117,12 @@ const save = async () => {
 
 const updatePwd = async () => {
   if (passwordForm.value.newPassword !== passwordForm.value.confirmPassword) {
-    alert("Passwords do not match!")
+    store.setError("Passwords do not match!")
     return
   }
   
   if (passwordForm.value.newPassword.length < 6) {
-    alert("Password should be at least 6 characters.")
+    store.setError("Password should be at least 6 characters.")
     return
   }
 
@@ -131,10 +131,10 @@ const updatePwd = async () => {
     await store.changePassword(passwordForm.value.newPassword)
     passwordForm.value.newPassword = ''
     passwordForm.value.confirmPassword = ''
-    alert("Password updated successfully!")
+    store.setNotification("Password updated successfully!")
   } catch (error) {
     console.error(error)
-    alert("Failed to update password. You may need to log out and log in again to perform this action.")
+    store.setError("Failed to update password. You may need to log out and log in again to perform this action.")
   } finally {
     pwdSaving.value = false
   }

@@ -46,6 +46,7 @@ import draggable from 'vuedraggable'
 import { db } from '../../firebase/config'
 import { collection, getDocs, query, orderBy, doc, writeBatch, deleteDoc } from 'firebase/firestore'
 import { useI18n } from 'vue-i18n'
+import { useStore } from '../../pinia/store'
 import EditIcon from '@/components/icons/EditIcon.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 
@@ -63,6 +64,7 @@ const props = defineProps({
 const emit = defineEmits(['edit-item'])
 
 const { locale, t } = useI18n()
+const store = useStore()
 const items = ref([])
 const loading = ref(true)
 const sortDir = ref('asc')
@@ -78,6 +80,7 @@ const loadItems = async () => {
     })
     items.value = fetchedItems
   } catch (error) {
+    store.setError("Error loading items: " + error.message)
     console.error("Error loading items:", error)
   } finally {
     loading.value = false
@@ -112,10 +115,10 @@ const deleteItem = async (item) => {
       await deleteDoc(doc(db, props.collectionName, item.id))
       // Local update
       items.value = items.value.filter(i => i.id !== item.id)
-      alert(t('admin.item-deleted'))
+      store.setNotification(t('admin.item-deleted'))
     } catch (error) {
       console.error('Error deleting item:', error)
-      alert('Error deleting item')
+      store.setError('Error deleting item')
     }
   }
 }
@@ -139,10 +142,10 @@ const onDragEnd = async () => {
     })
     
     await batch.commit()
-    alert(t('admin.order-success'))
-    console.log('Order updated successfully')
+    store.setNotification(t('admin.order-success'))
   } catch (error) {
     console.error('Error updating order:', error)
+    store.setError('Error updating order')
   }
 }
 
