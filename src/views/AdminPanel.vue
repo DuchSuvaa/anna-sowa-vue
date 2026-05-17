@@ -76,7 +76,7 @@ watch(currentView, () => {
 
 // Updated order based on user feedback
 const navItems = computed(() => [
-  { id: 'settings', label: t('admin.settings'), collection: false },
+  { id: 'settings', label: t('admin.settings.section-name'), collection: false },
   { id: 'biography', label: t('sections.bio'), collection: true },
   { id: 'compositions', label: t('sections.compositions'), collection: true },
   { id: 'news', label: t('sections.news'), collection: true },

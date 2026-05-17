@@ -28,7 +28,20 @@
   },
   "admin": {
     "admin-panel": "Panel Admina",
-    "settings": "Ustawienia",
+    "settings": {
+      "section-name": "Ustawienia",
+      "general": "Ogólne",
+      "contact-email": "Email kontaktowy",
+      "items-per-page": "Liczba elementów na stronę",
+      "items-per-page-help": "Liczba elementów ładowanych na stronę przy kliknięciu 'Załaduj więcej' w Aktualnościach, Mediach i Twórczości.",
+      "contact-email-help": "Ten adres email będzie używany dla ikony koperty w nagłówku strony.",
+      "security": "Bezpieczeństwo",
+      "new-password": "Nowe hasło",
+      "confirm-password": "Potwierdź nowe hasło",
+      "change-password": "Zmień hasło",
+      "password-updated": "Hasło zostało pomyślnie zaktualizowane!",
+      "password-error": "Wystąpił błąd podczas aktualizacji hasła. Aby dokonać tej operacji, być może będziesz musiał się wylogować i zalogować ponownie."
+    },
     "logout": "Wyloguj",
     "title": "Tytuł",
     "move": "Przesuń",
