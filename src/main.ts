@@ -15,7 +15,7 @@ let app: object
 const i18n = createI18n({
   legacy: false,
   messages: { en, pl },
-  locale: 'en',
+  locale: localStorage.getItem('lang') || 'en',
   fallbackLocale: 'en',
   localeDir: 'locales',
   globalInjection: true
