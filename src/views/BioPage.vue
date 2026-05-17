@@ -49,19 +49,43 @@ const formatText = (text) => {
 }
 
 .bio-section {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 2rem;
+  line-height: 1.5;
   h2 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    font-weight: 700;
+    color: #9d6044;
+    font-weight: bold;
+    width: 16.6666%;
+    margin-right: 1.6129%;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: inherit;
   }
 
-  p, :deep(p) {
-    margin-bottom: 1.2rem;
-    line-height: 1.8;
-    font-size: 1.5rem;
+  .bio-paragraphs {
+    width: 83.3335%;
 
-    &:last-child {
-      margin-bottom: 0;
+    :deep(p) {
+      margin-bottom: 2rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media (max-width: 1000px) {
+    flex-flow: column nowrap;
+
+    h2 {
+      margin-bottom: 1.5rem;
+      width: 100%;
+      margin-right: 0;
+    }
+
+    .bio-paragraphs {
+      width: 100%;
     }
   }
 }
