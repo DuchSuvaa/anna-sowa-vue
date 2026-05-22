@@ -37,6 +37,14 @@
         </template>
       </draggable>
     </div>
+    
+    <ConfirmModal
+      :show="showConfirmModal"
+      :title="confirmModalTitle"
+      :message="confirmModalMessage"
+      @confirm="onConfirmAction"
+      @cancel="onCancelAction"
+    />
   </div>
 </template>
 
@@ -49,6 +57,7 @@ import { useI18n } from 'vue-i18n'
 import { useStore } from '../../pinia/store'
 import EditIcon from '@/components/icons/EditIcon.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
+import ConfirmModal from './ConfirmModal.vue'
 
 const props = defineProps({
   collectionName: {
@@ -109,44 +118,71 @@ const getIdentifier = (item) => {
   return item.id
 }
 
-const deleteItem = async (item) => {
-  if (confirm(t('admin.delete-confirm') + ` "${getIdentifier(item)}"?`)) {
-    try {
-      await deleteDoc(doc(db, props.collectionName, item.id))
-      // Local update
-      items.value = items.value.filter(i => i.id !== item.id)
-      store.setNotification(t('admin.item-deleted'))
-    } catch (error) {
-      console.error('Error deleting item:', error)
-      store.setError('Error deleting item')
-    }
+const showConfirmModal = ref(false)
+const confirmModalMessage = ref('')
+const confirmModalTitle = ref('')
+const onConfirmAction = ref(null)
+const onCancelAction = ref(null)
+
+const showConfirm = (title, message, onConfirm, onCancel = null) => {
+  confirmModalTitle.value = title
+  confirmModalMessage.value = message
+  onConfirmAction.value = () => {
+    onConfirm()
+    showConfirmModal.value = false
   }
+  onCancelAction.value = () => {
+    if (onCancel) onCancel()
+    showConfirmModal.value = false
+  }
+  showConfirmModal.value = true
 }
 
-const onDragEnd = async () => {
-  const confirmed = window.confirm(t('admin.order-question'))
-  if (!confirmed) {
-    loadItems()
-    return
-  }
+const deleteItem = (item) => {
+  showConfirm(
+    t('admin.delete-confirm') + '?',
+    t('admin.delete-confirm') + ` "${getIdentifier(item)}"?`,
+    async () => {
+      try {
+        await deleteDoc(doc(db, props.collectionName, item.id))
+        // Local update
+        items.value = items.value.filter(i => i.id !== item.id)
+        store.setNotification(t('admin.item-deleted'))
+      } catch (error) {
+        console.error('Error deleting item:', error)
+        store.setError('Error deleting item')
+      }
+    }
+  )
+}
 
-  try {
-    const batch = writeBatch(db)
-    
-    // Update the 'order' field for each item based on its new index in the array
-    items.value.forEach((item, index) => {
-      const docRef = doc(db, props.collectionName, item.id)
-      batch.update(docRef, { order: index })
-      // Update local state as well
-      item.order = index
-    })
-    
-    await batch.commit()
-    store.setNotification(t('admin.order-success'))
-  } catch (error) {
-    console.error('Error updating order:', error)
-    store.setError('Error updating order')
-  }
+const onDragEnd = () => {
+  showConfirm(
+    t('admin.move'),
+    t('admin.order-question'),
+    async () => {
+      try {
+        const batch = writeBatch(db)
+        
+        // Update the 'order' field for each item based on its new index in the array
+        items.value.forEach((item, index) => {
+          const docRef = doc(db, props.collectionName, item.id)
+          batch.update(docRef, { order: index })
+          // Update local state as well
+          item.order = index
+        })
+        
+        await batch.commit()
+        store.setNotification(t('admin.order-success'))
+      } catch (error) {
+        console.error('Error updating order:', error)
+        store.setError('Error updating order')
+      }
+    },
+    () => {
+      loadItems()
+    }
+  )
 }
 
 defineExpose({ reload: loadItems })
