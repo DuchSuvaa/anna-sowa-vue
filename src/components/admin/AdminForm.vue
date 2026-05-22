@@ -293,4 +293,33 @@ const removeArrayItem = (path, index) => {
     }
   }
 }
+
+/* --- Responsive Styles (RWD) --- */
+@media (max-width: 768px) {
+  .edit-form {
+    gap: 1.5rem;
+    
+    .editor-actions {
+      flex-direction: column-reverse; /* Cancel below Save on mobile */
+      gap: 1rem;
+      margin-top: 2rem;
+      
+      button {
+        width: 100%;
+        padding: 1.4rem; /* larger touch target */
+      }
+    }
+
+    .form-group {
+      .array-container {
+        padding: 1rem;
+        
+        .action-btn {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
 </style>

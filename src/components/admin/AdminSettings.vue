@@ -181,4 +181,30 @@ const save = async () => {
     }
   }
 }
+
+/* --- Responsive Styles (RWD) --- */
+@media (max-width: 768px) {
+  .admin-settings {
+    padding: 1rem;
+    
+    .settings-title-bar h2 {
+      font-size: 2rem;
+    }
+  }
+  
+  .settings-form {
+    .form-actions {
+      flex-direction: column;
+      
+      .save-btn {
+        width: 100%;
+        padding: 1.4rem;
+      }
+    }
+    
+    .form-group .form-control {
+      max-width: 100%;
+    }
+  }
+}
 </style>

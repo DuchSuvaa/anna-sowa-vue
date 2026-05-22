@@ -337,4 +337,57 @@ defineExpose({ reload: loadItems })
     }
   }
 }
+
+/* --- Responsive Styles (RWD) --- */
+@media (max-width: 768px) {
+  .admin-list {
+    padding: 1rem;
+    
+    .list-title-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      
+      .title-bar-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .sort-btn, .add-new-btn {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  }
+
+  .list-header {
+    grid-template-columns: 4rem 1fr auto;
+    font-size: 1.3rem;
+    padding: 0.8rem 0.5rem;
+    
+    .item-title-header {
+      padding-left: 0.5rem;
+    }
+  }
+
+  .list-item {
+    grid-template-columns: 4rem 1fr auto;
+    padding: 1.2rem 0.5rem;
+    
+    .item-title {
+      font-size: 1.4rem;
+      padding-left: 0.5rem;
+    }
+    
+    .post-tools {
+      opacity: 1; /* Always visible on mobile, no hover needed */
+      padding-right: 0.5rem;
+      
+      svg {
+        font-size: 2rem; /* Larger touch targets */
+        padding: 0.5rem; /* More spacing for fat fingers */
+      }
+    }
+  }
+}
 </style>

@@ -307,4 +307,19 @@ const saveChanges = async () => {
   color: #666;
   font-size: 1.6rem;
 }
+
+/* --- Responsive Styles (RWD) --- */
+@media (max-width: 768px) {
+  .admin-editor {
+    padding: 1rem;
+  }
+  
+  .editor-header h2 {
+    font-size: 2rem;
+  }
+  
+  .meta-info {
+    padding: 0.8rem;
+  }
+}
 </style>

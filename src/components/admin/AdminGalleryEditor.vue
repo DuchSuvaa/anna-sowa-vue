@@ -579,4 +579,46 @@ const saveChanges = async () => {
     }
   }
 }
+
+/* --- Responsive Styles (RWD) --- */
+@media (max-width: 768px) {
+  .admin-editor {
+    padding: 1rem;
+  }
+  
+  .editor-header h2 {
+    font-size: 2rem;
+  }
+
+  .gallery-manager {
+    padding: 1rem;
+  }
+  
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 1rem;
+  }
+  
+  .photo-tools {
+    .tool-btn {
+      padding: 0.8rem;
+      font-size: 1.4rem;
+    }
+    
+    .remove-btn {
+      padding: 0.6rem 1rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  .editor-actions {
+    flex-direction: column-reverse; /* Cancel below Save on mobile */
+    gap: 1rem;
+    
+    button {
+      width: 100%;
+      padding: 1.4rem;
+    }
+  }
+}
 </style>
