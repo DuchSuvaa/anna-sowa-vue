@@ -17,8 +17,10 @@
           />
         </template>
       </ul>
-      <p v-else>No news found</p>
-      <button v-if="hasMore && news.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
+      <LoadingSpinner v-if="isLoading" />
+      <p v-else-if="!news || news.length === 0">No news found</p>
+      
+      <button v-if="hasMore && !isLoading && news.length > 0" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
     </div>
   </section>
 </template>
@@ -29,6 +31,7 @@ import { useStore } from '../pinia/store'
 import { useI18n } from 'vue-i18n'
 import NewsItem from '../components/NewsItem.vue'
 import SectionSortControls from '../components/SectionSortControls.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const { locale } = useI18n()
 const store = useStore()
@@ -36,6 +39,7 @@ const news = ref([])
 const lastDoc = ref(null)
 const hasMore = ref(true)
 const sortDirection = ref('asc')
+const isLoading = ref(true)
 
 const extractYear = (item) => {
   const timeStr = item.time?.en || item.time?.pl
@@ -77,14 +81,19 @@ const toggleSort = async () => {
 }
 
 const loadMore = async () => {
-  const limitCount = store.globalSettings?.itemsPerPage || 10
-  const result = await store.getPaginatedCollection('news', lastDoc.value, limitCount, 'order', sortDirection.value)
-  if (result.docs.length > 0) {
-    news.value.push(...result.docs)
-    lastDoc.value = result.lastVisible
-  }
-  if (result.docs.length < limitCount) {
-    hasMore.value = false
+  isLoading.value = true
+  try {
+    const limitCount = store.globalSettings?.itemsPerPage || 10
+    const result = await store.getPaginatedCollection('news', lastDoc.value, limitCount, 'order', sortDirection.value)
+    if (result.docs.length > 0) {
+      news.value.push(...result.docs)
+      lastDoc.value = result.lastVisible
+    }
+    if (result.docs.length < limitCount) {
+      hasMore.value = false
+    }
+  } finally {
+    isLoading.value = false
   }
 }
 

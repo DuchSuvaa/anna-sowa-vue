@@ -2,7 +2,7 @@
   <section id="gallery-page">
     <div class="content">
 
-      <div v-if="loading" class="loading">Loading...</div>
+      <LoadingSpinner v-if="loading" />
       <div v-else-if="galleries.length === 0" class="empty">No galleries found.</div>
       
       <div v-else class="albums-grid">
@@ -37,6 +37,7 @@ import { useI18n } from 'vue-i18n'
 import { db } from '../firebase/config'
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import ResponsiveImage from '../components/ResponsiveImage.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const { t, locale } = useI18n()
 const galleries = ref([])

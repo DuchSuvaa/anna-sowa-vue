@@ -1,13 +1,14 @@
 <template>
   <section id="biography">
     <div class="content">
-      <div v-if="sections.length" class="bio-sections">
+      <LoadingSpinner v-if="isLoading" />
+      <div v-else-if="sections.length" class="bio-sections">
         <div v-for="section in sections" :key="section.id" class="bio-section">
           <h2>{{ section[locale]?.header }}</h2>
           <div class="bio-paragraphs" v-html="formatText(section[locale]?.text)"></div>
         </div>
       </div>
-      <p v-else>No content found.</p>
+      <p v-else-if="!isLoading">No content found.</p>
     </div>
   </section>
 </template>
@@ -16,14 +17,21 @@
 import { ref, onMounted } from 'vue'
 import { useStore } from '../pinia/store'
 import { useI18n } from 'vue-i18n'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const { locale } = useI18n()
 const store = useStore()
 const sections = ref([])
+const isLoading = ref(true)
 
 onMounted(async () => {
-  const result = await store.getPaginatedCollection('biography', null, 50, 'order', 'asc')
-  sections.value = result.docs
+  isLoading.value = true
+  try {
+    const result = await store.getPaginatedCollection('biography', null, 50, 'order', 'asc')
+    sections.value = result.docs
+  } finally {
+    isLoading.value = false
+  }
 })
 
 const formatText = (text) => {

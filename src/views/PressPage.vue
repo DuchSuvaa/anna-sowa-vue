@@ -13,8 +13,10 @@
           :item="item" 
         />
       </ul>
-      <p v-else>No press items found</p>
-      <button v-if="hasMore && press.length" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
+      <LoadingSpinner v-if="isLoading" />
+      <p v-else-if="!press || press.length === 0">No press items found</p>
+      
+      <button v-if="hasMore && !isLoading && press.length > 0" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }} </button>
     </div>
   </section>
 </template>
@@ -25,6 +27,7 @@ import { useI18n } from 'vue-i18n'
 import { useStore } from '../pinia/store'
 import PressItem from '../components/PressItem.vue'
 import SectionSortControls from '../components/SectionSortControls.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const { locale } = useI18n()
 const store = useStore()
@@ -32,6 +35,7 @@ const press = ref([])
 const lastDoc = ref(null)
 const hasMore = ref(true)
 const sortDirection = ref('asc')
+const isLoading = ref(true)
 
 const toggleSort = async () => {
   sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
@@ -42,14 +46,19 @@ const toggleSort = async () => {
 }
 
 const loadMore = async () => {
-  const limitCount = store.globalSettings?.itemsPerPage || 10
-  const result = await store.getPaginatedCollection('press', lastDoc.value, limitCount, 'order', sortDirection.value)
-  if (result.docs.length > 0) {
-    press.value.push(...result.docs)
-    lastDoc.value = result.lastVisible
-  }
-  if (result.docs.length < limitCount) {
-    hasMore.value = false
+  isLoading.value = true
+  try {
+    const limitCount = store.globalSettings?.itemsPerPage || 10
+    const result = await store.getPaginatedCollection('press', lastDoc.value, limitCount, 'order', sortDirection.value)
+    if (result.docs.length > 0) {
+      press.value.push(...result.docs)
+      lastDoc.value = result.lastVisible
+    }
+    if (result.docs.length < limitCount) {
+      hasMore.value = false
+    }
+  } finally {
+    isLoading.value = false
   }
 }
 

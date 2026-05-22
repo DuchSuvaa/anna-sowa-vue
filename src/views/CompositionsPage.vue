@@ -26,8 +26,10 @@
           :composition="composition" 
         />
       </ul>
-      <p v-else>No compositions found</p>
-      <button v-if="hasMore" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }}</button>
+      <LoadingSpinner v-if="isLoading" />
+      <p v-else-if="!displayedCompositions || displayedCompositions.length === 0">No compositions found</p>
+      
+      <button v-if="hasMore && !isLoading && displayedCompositions && displayedCompositions.length > 0" @click="loadMore" class="load-more-btn">{{ $t('general.load-more') }}</button>
     </div>
   </section>
 </template>
@@ -38,6 +40,7 @@ import { useStore } from '../pinia/store'
 import { useI18n } from 'vue-i18n'
 import CompositionItem from '../components/CompositionItem.vue'
 import SectionSortControls from '../components/SectionSortControls.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const { locale } = useI18n()
 const store = useStore()
@@ -45,6 +48,7 @@ const store = useStore()
 const filterTypes = ['All', 'Orchestral', 'Chamber', 'Solo', 'Installations', 'Dance', 'Children']
 const sortDirection = ref('asc')
 const currentFilter = ref('All')
+const isLoading = ref(true)
 
 // Initialize Cache
 const cache = ref({})
@@ -106,23 +110,29 @@ const loadMore = async () => {
   const filterField = filter === 'All' ? null : 'type'
   const filterValue = filter === 'All' ? null : filter
   
-  const result = await store.getPaginatedCollection(
-    'compositions', 
-    cache.value[filter].lastDoc, 
-    limitCount, 
-    'order', 
-    'asc', // Always fetch ascending from Firebase
-    filterField,
-    filterValue
-  )
+  isLoading.value = true
   
-  if (result.docs.length > 0) {
-    cache.value[filter].docs.push(...result.docs)
-    cache.value[filter].lastDoc = result.lastVisible
-  }
-  
-  if (result.docs.length < limitCount) {
-    cache.value[filter].hasMore = false
+  try {
+    const result = await store.getPaginatedCollection(
+      'compositions', 
+      cache.value[filter].lastDoc, 
+      limitCount, 
+      'order', 
+      'asc', // Always fetch ascending from Firebase
+      filterField,
+      filterValue
+    )
+    
+    if (result.docs.length > 0) {
+      cache.value[filter].docs.push(...result.docs)
+      cache.value[filter].lastDoc = result.lastVisible
+    }
+    
+    if (result.docs.length < limitCount) {
+      cache.value[filter].hasMore = false
+    }
+  } finally {
+    isLoading.value = false
   }
 }
 

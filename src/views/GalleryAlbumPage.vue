@@ -5,7 +5,7 @@
         <RouterLink to="/gallery" class="back-link">← {{ locale === 'pl' ? 'Wróć' : 'Back' }}</RouterLink>
       </div>
 
-      <div v-if="loading" class="loading">Loading...</div>
+      <LoadingSpinner v-if="loading" />
       <div v-else-if="!album" class="error">Album not found.</div>
       
       <div v-else>
@@ -60,6 +60,7 @@ import { useI18n } from 'vue-i18n'
 import { db } from '../firebase/config'
 import { doc, getDoc } from 'firebase/firestore'
 import ResponsiveImage from '../components/ResponsiveImage.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const { locale } = useI18n()
 const route = useRoute()

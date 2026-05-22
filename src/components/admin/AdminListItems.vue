@@ -42,6 +42,8 @@
       :show="showConfirmModal"
       :title="confirmModalTitle"
       :message="confirmModalMessage"
+      :confirmText="confirmModalConfirmText"
+      :cancelText="confirmModalCancelText"
       @confirm="onConfirmAction"
       @cancel="onCancelAction"
     />
@@ -121,12 +123,16 @@ const getIdentifier = (item) => {
 const showConfirmModal = ref(false)
 const confirmModalMessage = ref('')
 const confirmModalTitle = ref('')
+const confirmModalConfirmText = ref('')
+const confirmModalCancelText = ref('')
 const onConfirmAction = ref(null)
 const onCancelAction = ref(null)
 
-const showConfirm = (title, message, onConfirm, onCancel = null) => {
+const showConfirm = (title, message, onConfirm, onCancel = null, confirmText = '', cancelText = '') => {
   confirmModalTitle.value = title
   confirmModalMessage.value = message
+  confirmModalConfirmText.value = confirmText
+  confirmModalCancelText.value = cancelText
   onConfirmAction.value = () => {
     onConfirm()
     showConfirmModal.value = false
@@ -152,7 +158,9 @@ const deleteItem = (item) => {
         console.error('Error deleting item:', error)
         store.setError('Error deleting item')
       }
-    }
+    },
+    null,
+    t('admin.remove') // or any translated text you have for 'Delete'/'Remove'
   )
 }
 
