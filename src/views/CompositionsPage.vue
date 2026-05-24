@@ -194,4 +194,16 @@ onMounted(async () => {
     justify-content: space-between;
   }
 }
+
+@media (max-width: 900px) {
+  .content {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+    padding: 2rem;
+  }
+}
 </style>
