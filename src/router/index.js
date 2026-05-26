@@ -7,6 +7,7 @@ import PressPage from '../views/PressPage.vue'
 import MultimediaPage from '../views/MultimediaPage.vue'
 import GalleryPage from '../views/GalleryPage.vue'
 import GalleryAlbumPage from '../views/GalleryAlbumPage.vue'
+import ContactPage from '../views/ContactPage.vue'
 import Login from '../views/LoginPage.vue'
 import Admin from '../views/AdminPanel.vue'
 import { auth } from '../firebase/config.js'
@@ -14,7 +15,7 @@ import { auth } from '../firebase/config.js'
 const requireAuth = (to, from, next) => {
   const user = auth.currentUser
   if (!user) {
-    next( '/login' )
+    next('/login')
   } else {
     next()
   }
@@ -23,7 +24,7 @@ const requireAuth = (to, from, next) => {
 const requireNoAuth = (to, from, next) => {
   let user = auth.currentUser
   if (user) {
-    next( '/admin' )
+    next('/admin')
   } else {
     next()
   }
@@ -69,6 +70,11 @@ const routes = [
     path: '/gallery/:id',
     name: 'GalleryAlbum',
     component: GalleryAlbumPage
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: ContactPage
   },
   {
     path: '/login',

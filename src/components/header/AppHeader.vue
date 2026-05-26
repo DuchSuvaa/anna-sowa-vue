@@ -105,7 +105,7 @@ header {
       align-items: center;
       margin-left: 0;
       gap: 3rem;
-      
+
       /* Hidden state by default */
       opacity: 0;
       visibility: hidden;

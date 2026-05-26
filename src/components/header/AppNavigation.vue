@@ -6,6 +6,7 @@
     <RouterLink to="/press">{{ t('sections.press') }}</RouterLink>
     <RouterLink to="/multimedia">{{ t('sections.multimedia') }}</RouterLink>
     <RouterLink to="/gallery">{{ t('sections.gallery') }}</RouterLink>
+    <RouterLink to="/contact">{{ t('sections.contact') }}</RouterLink>
   </nav>
 </template>
 
@@ -41,6 +42,7 @@ nav {
   nav {
     a {
       margin-right: 0;
+      font-size: 2.2rem;
     }
   }
 }
