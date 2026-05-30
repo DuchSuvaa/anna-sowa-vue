@@ -28,7 +28,33 @@
         <template #item="{ element }">
           <div class="list-item">
             <span class="drag-handle">☰</span>
-            <span class="item-title">{{ getIdentifier(element) }}</span>
+            <div class="item-content">
+              <span class="item-title">
+                {{ getIdentifier(element) }}
+                <span v-if="collectionName === 'galleries'" class="photo-count">
+                  ({{ element.photos?.length || 0 }})
+                </span>
+              </span>
+              <div class="item-meta">
+                <!-- Compositions specific info -->
+                <template v-if="collectionName === 'compositions'">
+                  <span class="meta-tag">{{ element.year }}</span>
+                  <span class="meta-tag type-tag">{{ element.type }}</span>
+                </template>
+
+                <!-- News specific info -->
+                <template v-else-if="collectionName === 'news'">
+                  <span class="meta-tag">{{ element.time?.en }}</span>
+                </template>
+
+                <!-- Multimedia specific info -->
+                <template v-else-if="collectionName === 'multimedia'">
+                  <span class="meta-tag">{{ element.year }}</span>
+                  <span class="meta-tag media-tag">{{ element['media-type'] }}</span>
+                  <span class="meta-tag type-tag">{{ element['music-type'] }}</span>
+                </template>
+              </div>
+            </div>
             <div class="post-tools">
               <EditIcon @click="$emit('edit-item', element)" />
               <DeleteIcon @click="deleteItem(element)" />
@@ -309,17 +335,67 @@ defineExpose({ reload: loadItems })
       cursor: grabbing;
     }
   }
+
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    overflow: hidden;
+  }
   
   .item-title {
-    padding-left: 1rem;
     font-size: 1.6rem;
     color: #333;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
+
+    .photo-count {
+      font-size: 1.3rem;
+      color: #888;
+      font-weight: 400;
+      margin-left: 0.5rem;
+    }
   }
-  
+
+  .item-meta {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+    flex-wrap: wrap;
+
+    .meta-tag {
+      font-size: 1.1rem;
+      padding: 0.2rem 0.6rem;
+      background-color: #f0f0f0;
+      color: #666;
+      border-radius: 3px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      max-width: 25rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.media-tag {
+        background-color: #e3f2fd;
+        color: #1976d2;
+      }
+
+      &.type-tag {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+      }
+
+      &.venue-tag {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        text-transform: none;
+      }
+    }
+  }  
   .post-tools {
     display: flex;
     justify-content: flex-end;
@@ -373,10 +449,14 @@ defineExpose({ reload: loadItems })
   .list-item {
     grid-template-columns: 4rem 1fr auto;
     padding: 1.2rem 0.5rem;
+
+    .item-content {
+      padding-left: 0.5rem;
+    }
     
     .item-title {
       font-size: 1.4rem;
-      padding-left: 0.5rem;
+      padding-left: 0;
     }
     
     .post-tools {
