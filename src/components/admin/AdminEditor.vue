@@ -96,7 +96,7 @@ const schemas = computed(() => ({
   multimedia: [
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'name', label: t('admin.fields.name'), type: 'text', required: true },
-    { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
+    { key: 'year', label: t('admin.fields.year'), type: 'text' },
     { key: 'media-type', label: t('admin.fields.media-type'), type: 'select', options: ['audio', 'video'], required: true },
     { key: 'music-type', label: t('admin.fields.music-type'), type: 'select', options: ['Chamber', 'Installation', 'Orchestral'], required: true },
     { key: 'link', label: t('admin.fields.link'), type: 'text', pattern: 'url' },

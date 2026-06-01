@@ -274,13 +274,13 @@ const handleSwipe = () => {
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 480px) {
   .welcome-content {
     h1 {
-      font-size: 2.8rem;
+      font-size: 3.2rem;
     }
     p {
-      font-size: 1.3rem;
+      font-size: 1.8rem;
       letter-spacing: 0.1rem;
     }
   }

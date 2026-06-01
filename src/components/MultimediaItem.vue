@@ -35,4 +35,10 @@ li.work-item {
   }
 }
 
+@media (max-width: 750px) {
+  li.work-item {
+    width: 95%;
+  }
+}
+
 </style>

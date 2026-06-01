@@ -2,7 +2,7 @@
 <div class="slider-item">
   <slot>
     <div class="slider-item__content">
-      <h2>{{ t('nav.' + name) }}</h2>
+      <h2>{{ t('sections.' + name) }}</h2>
       <RouterLink :to="'/' + name">{{ t('home.button-more') }}</RouterLink>
     </div>
   </slot>
@@ -49,6 +49,17 @@ const bgImage = computed(() => `url('/bg-${props.name}.jpg')`)
       line-height: 6rem;
       font-size: 2.2rem;
       margin: auto;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .slider-item__content {
+    h2 {
+      font-size: 4.5rem !important;
+    }
+    a {
+      font-size: 2.2rem !important;
     }
   }
 }

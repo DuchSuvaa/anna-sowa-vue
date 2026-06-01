@@ -70,7 +70,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 #press {
-  background-image: url('/bg-media.jpg');
+  background-image: url('/bg-press.jpg');
 }
 
 .press-list {

@@ -1,16 +1,16 @@
 <template>
   <div class="social">
     <a href="https://soundcloud.com/user-288051599" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/soundcloud.png" alt="SoundCloud - link">
+      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/soundcloud.png" alt="SoundCloud">
     </a>
     <a href="https://vimeo.com/user65772597" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/vimeo.png" alt="Vimeo - link">
+      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/vimeo.png" alt="Vimeo">
     </a>
     <a href="https://www.instagram.com/sowaanna67/" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/instagram.png" alt="Instagram - link">
+      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/instagram.png" alt="Instagram">
     </a>
     <a :href="'mailto:' + (store.globalSettings.contactEmail || 'sowaanna67@gmail.com')" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/mail.png" alt="Napisz do Anny">
+      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/mail.png" alt="Mail">
     </a>
     <a class="lang"> 
       <div> 

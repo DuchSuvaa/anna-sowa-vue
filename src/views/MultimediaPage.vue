@@ -139,7 +139,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 #multimedia {
-  background-image: url('/bg-works.jpg');
+  background-image: url('/bg-multimedia.jpg');
 }
 
 .multimedia-list {
