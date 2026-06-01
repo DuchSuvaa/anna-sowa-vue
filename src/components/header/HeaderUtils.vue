@@ -1,16 +1,16 @@
 <template>
   <div class="social">
     <a href="https://soundcloud.com/user-288051599" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/soundcloud.png" alt="SoundCloud">
+      <SoundCloud type="outline"/>
     </a>
     <a href="https://vimeo.com/user65772597" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/vimeo.png" alt="Vimeo">
+      <VimeoIcon type="outline"/>
     </a>
     <a href="https://www.instagram.com/sowaanna67/" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/instagram.png" alt="Instagram">
+      <InstagramIcon type="outline"/>
     </a>
     <a :href="'mailto:' + (store.globalSettings.contactEmail || 'sowaanna67@gmail.com')" target="_blank">
-      <img src="https://annasowa.pl/wp-content/themes/anna-sowa/img/mail.png" alt="Mail">
+      <MailIcon type="outline"/>
     </a>
     <a class="lang"> 
       <div> 
@@ -28,8 +28,12 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { useStore } from '../../pinia/store'
+import SoundCloud from '../icons/SoundCloud.vue'
+import VimeoIcon from '../icons/VimeoIcon.vue'
+import InstagramIcon from '../icons/InstagramIcon.vue'
+import MailIcon from '../icons/MailIcon.vue'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const store = useStore()
 
 const setLocale = (lang) => {
@@ -47,8 +51,9 @@ div.social {
     text-decoration: none;
     margin-right: 1.6rem;
     width: 3rem;
-    img {
+    img, svg {
       width: 100%;
+      height: auto;
     }
     &:last-child {
       margin-right: 0;
@@ -62,7 +67,7 @@ div.social {
     width: 3.2rem;
   }
   a:hover {
-    img {
+    img, svg {
       opacity: .75;
     }
   }
