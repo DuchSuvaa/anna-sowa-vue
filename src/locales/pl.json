@@ -36,6 +36,8 @@
       "items-per-page": "Liczba elementów na stronę",
       "items-per-page-help": "Liczba elementów ładowanych na stronę przy kliknięciu 'Załaduj więcej' w Aktualnościach, Mediach i Twórczości.",
       "contact-email-help": "Ten adres email będzie używany dla ikony koperty w nagłówku strony.",
+      "social-links": "Linki społecznościowe",
+      "hide-link": "Ukryj",
       "security": "Bezpieczeństwo",
       "new-password": "Nowe hasło",
       "confirm-password": "Potwierdź nowe hasło",

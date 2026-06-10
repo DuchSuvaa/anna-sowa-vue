@@ -10,7 +10,16 @@ export const useStore = defineStore('main', () => {
   const toasts = ref([])
   const things = ref([])
   const user = ref(null)
-  const globalSettings = ref({ itemsPerPage: 10 })
+  const globalSettings = ref({
+    itemsPerPage: 10,
+    contactEmail: 'sowaanna67@gmail.com',
+    soundcloudUrl: 'https://soundcloud.com/user-288051599',
+    vimeoUrl: 'https://vimeo.com/user65772597',
+    instagramUrl: 'https://www.instagram.com/sowaanna67/',
+    hideSoundcloud: false,
+    hideVimeo: false,
+    hideInstagram: false
+  })
 
   // Actions
   const removeToast = (id) => {

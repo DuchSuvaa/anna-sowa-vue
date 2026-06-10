@@ -50,6 +50,8 @@
       "items-per-page": "Items per page",
       "items-per-page-help": "Number of items to fetch when clicking 'Load more' in News, Media, and Works.",
       "contact-email-help": "This email will be used for the envelope icon in the site header.",
+      "social-links": "Social links",
+      "hide-link": "Hide",
       "security": "Security",
       "new-password": "New Password",
       "confirm-password": "Confirm New Password",

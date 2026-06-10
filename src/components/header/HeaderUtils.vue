@@ -1,15 +1,15 @@
 <template>
   <div class="social">
-    <a href="https://soundcloud.com/user-288051599" target="_blank">
+    <a v-if="!store.globalSettings.hideSoundcloud" class="social-link soundcloud-link" :href="socialLinks.soundcloud" target="_blank" rel="noopener noreferrer">
       <SoundCloud type="outline"/>
     </a>
-    <a href="https://vimeo.com/user65772597" target="_blank">
+    <a v-if="!store.globalSettings.hideVimeo" class="social-link vimeo-link" :href="socialLinks.vimeo" target="_blank" rel="noopener noreferrer">
       <VimeoIcon type="outline"/>
     </a>
-    <a href="https://www.instagram.com/sowaanna67/" target="_blank">
+    <a v-if="!store.globalSettings.hideInstagram" class="social-link instagram-link" :href="socialLinks.instagram" target="_blank" rel="noopener noreferrer">
       <InstagramIcon type="outline"/>
     </a>
-    <a :href="'mailto:' + (store.globalSettings.contactEmail || 'sowaanna67@gmail.com')" target="_blank">
+    <a class="social-link mail-link" :href="'mailto:' + (store.globalSettings.contactEmail || 'sowaanna67@gmail.com')" target="_blank" rel="noopener noreferrer">
       <MailIcon type="outline"/>
     </a>
     <a class="lang"> 
@@ -26,6 +26,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from '../../pinia/store'
 import SoundCloud from '../icons/SoundCloud.vue'
@@ -35,6 +36,12 @@ import MailIcon from '../icons/MailIcon.vue'
 
 const { locale, t } = useI18n()
 const store = useStore()
+
+const socialLinks = computed(() => ({
+  soundcloud: store.globalSettings.soundcloudUrl || 'https://soundcloud.com/user-288051599',
+  vimeo: store.globalSettings.vimeoUrl || 'https://vimeo.com/user65772597',
+  instagram: store.globalSettings.instagramUrl || 'https://www.instagram.com/sowaanna67/'
+}))
 
 const setLocale = (lang) => {
   locale.value = lang
@@ -55,17 +62,21 @@ div.social {
       width: 100%;
       height: auto;
     }
-    &:last-child {
-      margin-right: 0;
-      padding-bottom: 0.5rem;
-    }
-    &:nth-child(3) {
-      width: 2.8rem;
-    }
   }
-  a:last-child {
+
+  .instagram-link {
+    width: 2.8rem;
+  }
+
+  .mail-link {
     width: 3.2rem;
   }
+
+  .lang {
+    margin-right: 0;
+    padding-bottom: 0.5rem;
+  }
+
   a:hover {
     img, svg {
       opacity: .75;

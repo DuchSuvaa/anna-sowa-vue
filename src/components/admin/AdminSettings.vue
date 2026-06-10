@@ -34,6 +34,68 @@
         <p class="help-text">{{ t('admin.settings.items-per-page-help') }}</p>
       </div>
 
+      <h3 class="section-subtitle">{{ t('admin.settings.social-links') }}</h3>
+
+      <div class="form-group social-link-group">
+        <div class="social-link-header">
+          <label for="soundcloudUrl">SoundCloud</label>
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              v-model="settings.hideSoundcloud"
+            />
+            {{ t('admin.settings.hide-link') }}
+          </label>
+        </div>
+        <input
+          id="soundcloudUrl"
+          type="url"
+          v-model="settings.soundcloudUrl"
+          class="form-control"
+          :disabled="settings.hideSoundcloud"
+        />
+      </div>
+
+      <div class="form-group social-link-group">
+        <div class="social-link-header">
+          <label for="vimeoUrl">Vimeo</label>
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              v-model="settings.hideVimeo"
+            />
+            {{ t('admin.settings.hide-link') }}
+          </label>
+        </div>
+        <input
+          id="vimeoUrl"
+          type="url"
+          v-model="settings.vimeoUrl"
+          class="form-control"
+          :disabled="settings.hideVimeo"
+        />
+      </div>
+
+      <div class="form-group social-link-group">
+        <div class="social-link-header">
+          <label for="instagramUrl">Instagram</label>
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              v-model="settings.hideInstagram"
+            />
+            {{ t('admin.settings.hide-link') }}
+          </label>
+        </div>
+        <input
+          id="instagramUrl"
+          type="url"
+          v-model="settings.instagramUrl"
+          class="form-control"
+          :disabled="settings.hideInstagram"
+        />
+      </div>
+
       <div class="form-actions">
         <button type="submit" class="save-btn" :disabled="saving">
           {{ saving ? $t('admin.saving') : $t('admin.save-changes') }}
@@ -57,13 +119,25 @@ const { t } = useI18n()
 const saving = ref(false)
 const settings = ref({
   itemsPerPage: 10,
-  contactEmail: ''
+  contactEmail: '',
+  soundcloudUrl: 'https://soundcloud.com/user-288051599',
+  vimeoUrl: 'https://vimeo.com/user65772597',
+  instagramUrl: 'https://www.instagram.com/sowaanna67/',
+  hideSoundcloud: false,
+  hideVimeo: false,
+  hideInstagram: false
 })
 
 onMounted(async () => {
   const currentSettings = await store.loadSettings()
   settings.value.itemsPerPage = currentSettings.itemsPerPage || 10
   settings.value.contactEmail = currentSettings.contactEmail || 'sowaanna67@gmail.com'
+  settings.value.soundcloudUrl = currentSettings.soundcloudUrl || 'https://soundcloud.com/user-288051599'
+  settings.value.vimeoUrl = currentSettings.vimeoUrl || 'https://vimeo.com/user65772597'
+  settings.value.instagramUrl = currentSettings.instagramUrl || 'https://www.instagram.com/sowaanna67/'
+  settings.value.hideSoundcloud = Boolean(currentSettings.hideSoundcloud)
+  settings.value.hideVimeo = Boolean(currentSettings.hideVimeo)
+  settings.value.hideInstagram = Boolean(currentSettings.hideInstagram)
 })
 
 const save = async () => {
@@ -146,6 +220,34 @@ const save = async () => {
       color: #777;
       margin: 0;
     }
+
+    .social-link-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.6rem;
+      max-width: 40rem;
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #555;
+      cursor: pointer;
+
+      input {
+        margin: 0;
+      }
+    }
+
+    .form-control:disabled {
+      background-color: #f5f5f5;
+      color: #888;
+      cursor: not-allowed;
+    }
   }
 
   .form-actions {
@@ -203,6 +305,13 @@ const save = async () => {
     }
     
     .form-group .form-control {
+      max-width: 100%;
+    }
+
+    .form-group .social-link-header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.8rem;
       max-width: 100%;
     }
   }
