@@ -38,7 +38,7 @@ import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 const store = useStore()
 
-const filterTypes = ['All', 'Orchestral', 'Chamber', 'Installations']
+const filterTypes = ['All', 'Orchestral', 'Chamber', 'Installations', 'Solo']
 const currentFilter = ref('All')
 const isLoading = ref(true)
 

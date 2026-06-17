@@ -98,6 +98,10 @@
       "media-type": "Media Type",
       "info": "Info",
       "identifier": "Title / Identifier",
+      "info-en": "Info (EN)",
+      "info-pl": "Info (PL)",
+      "description-en": "Description (EN)",
+      "description-pl": "Description (PL)",
       "identifier-help": "Internal identifier, used for sorting and admin display.",
       "name-en": "Name (EN)",
       "name-pl": "Name (PL)"

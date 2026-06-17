@@ -98,10 +98,12 @@ const schemas = computed(() => ({
     { key: 'name', label: t('admin.fields.name'), type: 'text', required: true },
     { key: 'year', label: t('admin.fields.year'), type: 'text' },
     { key: 'media-type', label: t('admin.fields.media-type'), type: 'select', options: ['audio', 'video'], required: true },
-    { key: 'music-type', label: t('admin.fields.music-type'), type: 'select', options: ['Chamber', 'Installation', 'Orchestral'], required: true },
+    { key: 'music-type', label: t('admin.fields.music-type'), type: 'select', options: ['Chamber', 'Installation', 'Orchestral', 'Solo'], required: true },
     { key: 'link', label: t('admin.fields.link'), type: 'text', pattern: 'url' },
-    { key: 'info', label: t('admin.fields.info'), type: 'textarea' },
-    { key: 'description', label: t('admin.fields.description'), type: 'textarea' },
+    { key: 'info.en', label: t('admin.fields.info-en'), type: 'textarea' },
+    { key: 'info.pl', label: t('admin.fields.info-pl'), type: 'textarea' },
+    { key: 'description.en', label: t('admin.fields.description-en'), type: 'textarea' },
+    { key: 'description.pl', label: t('admin.fields.description-pl'), type: 'textarea' },
   ]
 }))
 

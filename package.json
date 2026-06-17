@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "firebase": "^9.13.0",
-    "firebase-admin": "^13.8.0",
+    "firebase-admin": "^13.10.0",
     "pinia": "^2.0.23",
     "vue": "^3.2.41",
     "vue-i18n": "^11.4.0",

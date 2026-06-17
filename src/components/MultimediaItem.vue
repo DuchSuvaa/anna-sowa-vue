@@ -4,15 +4,18 @@
     <img v-else-if="work.image" :src="work.image" alt="">
     <h3>{{ work.title }}</h3>
     <span>{{ work.year }}</span>
-    <span>{{ work.info }}</span>
-    <span>{{ work.description }}</span>
+    <span>{{ work.info?.[locale] }}</span>
+    <span>{{ work.description?.[locale] }}</span>
   </li>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
 import MediaPlayer from './MediaPlayer.vue'
 
 const props = defineProps([ 'work' ])
+
+const { locale } = useI18n()
 
 </script>
 
