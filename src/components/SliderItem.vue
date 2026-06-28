@@ -1,5 +1,5 @@
 <template>
-<div class="slider-item">
+<div class="slider-item" :class="{ 'slider-item--home': name === 'home' }">
   <slot>
     <div class="slider-item__content">
       <h2>{{ t('sections.' + name) }}</h2>
@@ -16,6 +16,7 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const props = defineProps([ 'name' ])
 const bgImage = computed(() => `url('/bg-${props.name}.jpg')`)
+
 
 </script>
 
@@ -54,6 +55,10 @@ const bgImage = computed(() => `url('/bg-${props.name}.jpg')`)
 }
 
 @media (max-width: 1100px) {
+  .slider-item--home {
+    background-position: calc(50% - 15rem) center;
+  }
+
   .slider-item__content {
     h2 {
       font-size: 4.5rem !important;

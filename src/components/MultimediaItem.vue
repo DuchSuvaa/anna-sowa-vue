@@ -35,6 +35,7 @@ li.work-item {
   span {
     display: block;
     font-size: 2rem;
+    margin-top: 1rem;
   }
 }
 
