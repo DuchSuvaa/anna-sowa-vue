@@ -86,6 +86,7 @@ const schemas = computed(() => ({
     { key: 'description.pl', label: `${t('admin.fields.description')} (PL)`, type: 'textarea', required: true },
     { key: 'performed.en', label: `${t('admin.fields.performed')} (EN)`, type: 'textarea' },
     { key: 'performed.pl', label: `${t('admin.fields.performed')} (PL)`, type: 'textarea' },
+    { key: 'link', label: t('admin.fields.link') || 'Link', type: 'text', pattern: 'url' },
   ],
   press: [
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },

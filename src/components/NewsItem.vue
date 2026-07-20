@@ -10,6 +10,9 @@
     </div>
     <div v-if="item.description?.[locale]" class="news-item__description">{{ item.description?.[locale] }}</div>
     <div v-if="item.performed?.[locale]" class="news-item__performed">{{ item.performed?.[locale] }}</div>
+    <div v-if="item.link" class="news-item__link">
+      <a :href="item.link" target="_blank" rel="noopener noreferrer" class="work-link">Link</a>
+    </div>
   </li>
 </template>
 
@@ -49,11 +52,23 @@ const { locale } = useI18n()
   .news-item__date,
   .news-item__place,
   .news-item__description,
-  .news-item__performed {
+  .news-item__performed,
+  .news-item__link {
     display: flex;
     align-items: center;
     gap: 2rem;
     grid-column: span 3;
+  }
+  
+  .news-item__link {
+    .work-link {
+      color: #9d6044;
+      text-decoration: underline;
+      transition: opacity 0.2s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }
 
@@ -62,7 +77,8 @@ const { locale } = useI18n()
     .news-item__date,
     .news-item__place,
     .news-item__description,
-    .news-item__performed {
+    .news-item__performed,
+    .news-item__link {
       grid-column: span 6;
     }
   }
@@ -75,7 +91,8 @@ const { locale } = useI18n()
     .news-item__date,
     .news-item__place,
     .news-item__description,
-    .news-item__performed {
+    .news-item__performed,
+    .news-item__link {
       grid-column: span 6;
       img {
         height: 2rem;
