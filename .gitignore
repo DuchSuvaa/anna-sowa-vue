@@ -9,10 +9,12 @@ lerna-debug.log*
 serviceAccountKey.json
 anna-sowa-firebase-adminsdk-fbsvc-9d14fff9c6.json
 
+
 node_modules
 dist
 dist-ssr
 *.local
+db-backup
 
 # Editor directories and files
 .vscode/*

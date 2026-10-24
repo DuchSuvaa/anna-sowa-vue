@@ -9,7 +9,7 @@
       <img src="/instrument.png" alt="Instrument" />
       {{ composition.instrumentation?.[locale] }}
     </span>
-    <div class="composition-item__performed">{{ composition.performed?.[locale] }}</div>
+    <div v-if="composition.performed?.[locale]" class="composition-item__performed">{{ composition.performed?.[locale] }}</div>
   </li>
 </template>
 
@@ -63,11 +63,12 @@ const { locale } = useI18n()
   }
 
   .composition-item__year {
-    grid-column: span 1;
+    grid-column: span 2;
+    margin-right: 2rem;
   }
 
   .composition-item__instrumentation {
-    grid-column: span 5;
+    grid-column: span 4;
   }
 
   .composition-item__performed {

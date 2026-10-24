@@ -13,8 +13,6 @@
         class="form-control"
         :class="{ 'is-invalid': errors[field.key] }"
       />
-
-      <p v-if="field.help" class="help-text">{{ field.help }}</p>
       
       <!-- Textarea -->
       <textarea 
@@ -56,6 +54,7 @@
         <button type="button" class="action-btn add-btn" @click="addArrayItem(field.key)">+ {{ $t('admin.add-another') }}</button>
       </div>
 
+      <p v-if="field.help" class="help-text">{{ field.help }}</p>
       <span v-if="errors[field.key]" class="error-msg">{{ errors[field.key] }}</span>
     </div>
 

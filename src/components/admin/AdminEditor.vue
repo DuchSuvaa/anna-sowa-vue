@@ -71,9 +71,11 @@ const schemas = computed(() => ({
     { key: 'title', label: t('admin.fields.identifier'), type: 'text', required: true, help: t('admin.fields.identifier-help') },
     { key: 'name.en', label: `${t('admin.fields.name')} (EN)`, type: 'text', required: true },
     { key: 'name.pl', label: `${t('admin.fields.name')} (PL)`, type: 'text', required: true },
-    { key: 'year', label: t('admin.fields.year'), type: 'text', pattern: 'number' },
+    { key: 'year', label: t('admin.fields.year'), type: 'text' },
     { key: 'instrumentation.en', label: `${t('admin.fields.instrumentation')} (EN)`, type: 'text' },
     { key: 'instrumentation.pl', label: `${t('admin.fields.instrumentation')} (PL)`, type: 'text' },
+    { key: 'performed.en', label: `${t('admin.fields.premiere')} (EN)`, type: 'textarea' },
+    { key: 'performed.pl', label: `${t('admin.fields.premiere')} (PL)`, type: 'textarea' },
     { key: 'type', label: t('admin.fields.type'), type: 'select', options: ['Orchestral', 'Chamber', 'Solo', 'Installations', 'Dance', 'Children'], required: true },
   ],
   news: [
